@@ -1,13 +1,107 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ChattingFragment">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".FriendsFragment">
 
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Friends" />
+        android:orientation="vertical">
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?colorPrimary"
+            app:title="친구"
+            app:titleTextColor="@color/white"
+            app:menu="@menu/fragment_friends_opt"/>
 
-</FrameLayout>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            android:orientation="vertical"/>
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/bs_detail"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        app:behavior_peekHeight="300dp"
+        android:background="@drawable/bg_bottomsheet"
+        app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
+
+        <View
+            android:layout_width="60dp"
+            android:layout_height="4dp"
+            android:background="?colorPrimary"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="12dp"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:background="#FFffee99"
+            android:layout_marginTop="30dp"/>
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/civ_profile_img"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@drawable/urnc"
+            android:layout_marginTop="50dp"
+            android:layout_marginStart="20dp"/>
+
+        <TextView
+            android:id="@+id/tv_nickname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="래더 루크사트"
+            android:textStyle="bold"
+            android:textSize="26sp"
+            android:textColor="@color/black"
+            android:layout_below="@+id/civ_profile_img"
+            android:layout_alignStart="@+id/civ_profile_img"
+            android:layout_marginTop="10dp"/>
+
+        <TextView
+            android:id="@+id/tv_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="#8572"
+            android:textStyle="bold"
+            android:textSize="26sp"
+            android:textColor="@color/gray"
+            android:layout_alignTop="@+id/tv_nickname"
+            android:layout_toEndOf="@+id/tv_nickname"
+            android:layout_marginStart="8dp"/>
+
+        <TextView
+            android:id="@+id/tv_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="자리비움"
+            android:textColor="@color/black"
+            android:layout_alignBottom="@id/civ_profile_img"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="20dp"/>
+
+        <TextView
+            android:id="@+id/btn_send_msg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" 메시지 보내기"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:drawableStart="@drawable/ic_chat_bubble_24"
+            android:layout_below="@+id/tv_nickname"
+            android:layout_alignStart="@+id/tv_nickname"
+            android:layout_marginTop="20dp"/>
+
+    </RelativeLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -1,13 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ChattingFragment">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".MentionFragment">
 
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Mention" />
+        android:orientation="vertical">
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?colorPrimary"
+            app:title="최근 멘션"
+            app:titleTextColor="@color/white"
+            app:menu="@menu/fragment_mention_opt"/>
 
-</FrameLayout>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_mention"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            android:orientation="vertical"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/bs_filter"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        app:behavior_peekHeight="300dp"
+        android:background="@drawable/bg_bottomsheet"
+        android:orientation="vertical"
+        app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
+
+        <View
+            android:layout_width="60dp"
+            android:layout_height="4dp"
+            android:background="?colorPrimary"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="12dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="필터 옵션"
+            android:textSize="20sp"
+            android:textColor="@color/black"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="16dp"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_filter"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            android:orientation="vertical"
+            android:paddingHorizontal="20dp"
+            android:layout_marginTop="10dp"/>
+
+    </LinearLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
