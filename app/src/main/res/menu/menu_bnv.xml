@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/fragment_chatting" android:title="채팅"/>
+    <item android:id="@+id/fragment_friends" android:title="친구"/>
+    <item android:id="@+id/fragment_mention" android:title="멘션"/>
+    <item android:id="@+id/fragment_setting" android:title="세팅"/>
+</menu>
