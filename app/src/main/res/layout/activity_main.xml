@@ -8,6 +8,7 @@
     tools:context=".MainActivity">
 
     <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/container"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
@@ -17,6 +18,8 @@
         android:id="@+id/bnv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="?colorPrimary"/>
+        android:background="?colorOnPrimary"
+        app:labelVisibilityMode="unlabeled"
+        app:menu="@menu/menu_bnv"/>
 
 </LinearLayout>

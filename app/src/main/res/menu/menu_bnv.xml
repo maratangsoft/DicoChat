@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:id="@+id/fragment_chatting" android:title="채팅"/>
-    <item android:id="@+id/fragment_friends" android:title="친구"/>
-    <item android:id="@+id/fragment_mention" android:title="멘션"/>
-    <item android:id="@+id/fragment_setting" android:title="세팅"/>
+    <item android:id="@+id/bnv_chatting" android:title="채팅" android:icon="@drawable/ic_chatting"/>
+    <item android:id="@+id/bnv_friends" android:title="친구" android:icon="@drawable/ic_friends"/>
+    <item android:id="@+id/bnv_mention" android:title="멘션" android:icon="@drawable/ic_mention"/>
+    <item android:id="@+id/bnv_setting" android:title="세팅" android:icon="@drawable/ic_setting"/>
 </menu>
