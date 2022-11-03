@@ -24,9 +24,11 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            android:orientation="vertical"/>
+            android:orientation="vertical"
+            android:layout_margin="10dp"/>
     </LinearLayout>
 
+<!--    Bottom Sheet -->
     <LinearLayout
         android:id="@+id/bs_filter"
         android:layout_width="match_parent"
@@ -43,7 +45,7 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="12dp"/>
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="필터 옵션"
@@ -58,8 +60,9 @@
             android:layout_height="match_parent"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             android:orientation="vertical"
-            android:paddingHorizontal="20dp"
-            android:layout_marginTop="10dp"/>
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="20dp"/>
 
     </LinearLayout>
 

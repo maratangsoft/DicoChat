@@ -16,7 +16,7 @@
         app:title="채팅방 설정"
         app:titleTextColor="@color/white" />
 
-    <TextView
+    <androidx.appcompat.widget.AppCompatTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="방 이름"
@@ -25,7 +25,7 @@
         android:layout_marginTop="30dp"
         android:layout_marginStart="30dp"/>
 
-    <EditText
+    <androidx.appcompat.widget.AppCompatEditText
         android:id="@+id/et_room_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -41,7 +41,7 @@
         android:layout_marginTop="50dp"
         android:layout_marginHorizontal="30dp"
         android:gravity="center_vertical">
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"

@@ -14,7 +14,7 @@
         android:background="?colorPrimary"
         app:navigationIcon="@drawable/ic_back" />
 
-    <TextView
+    <androidx.appcompat.widget.AppCompatTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="채팅방을 만들어 보세요"
@@ -29,7 +29,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="25dp"
         android:layout_gravity="center_horizontal">
-        <ImageView
+        <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/civ_room_img"
             android:layout_width="130dp"
             android:layout_height="130dp"
@@ -45,7 +45,7 @@
             android:layout_gravity="end"/>
     </FrameLayout>
 
-    <TextView
+    <androidx.appcompat.widget.AppCompatTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="방 이름"
@@ -54,12 +54,13 @@
         android:layout_marginStart="30dp"
         android:layout_marginTop="16dp"/>
 
-    <EditText
+    <androidx.appcompat.widget.AppCompatEditText
         android:id="@+id/et_room_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="방 이름을 입력하세요"
         android:textColorHint="@color/gray"
+        android:inputType="text"
         android:background="@drawable/bg_edittext"
         android:padding="12dp"
         android:layout_marginHorizontal="30dp"
