@@ -15,7 +15,6 @@
         android:src="@drawable/urnc"/>
 
     <ImageView
-        android:id="@+id/btn_edit_profile_img"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/ic_edit_24"
@@ -35,7 +34,6 @@
         android:layout_marginTop="18dp"/>
 
     <ImageView
-        android:id="@+id/btn_edit_nickname"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/ic_edit_24"
@@ -45,7 +43,7 @@
         android:layout_marginTop="18dp"/>
 
     <TextView
-        android:id="@+id/tv_id"
+        android:id="@+id/tv_user_id"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="#2038"
@@ -67,23 +65,27 @@
         android:layout_below="@+id/tv_nickname"
         android:layout_marginTop="50dp"/>
 
-    <TextView
-        android:id="@+id/btn_noti_all"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:id="@+id/layout_noti_all"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="모든 알림 켜기/끄기"
-        android:textColor="@color/black"
-        android:textStyle="bold"
-        android:textSize="22sp"
         android:layout_below="@+id/btn_status"
-        android:layout_marginTop="16dp"/>
-
-    <androidx.appcompat.widget.SwitchCompat
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:trackTint="?colorPrimary"
-        android:layout_alignBaseline="@+id/btn_noti_all"
-        android:layout_alignParentEnd="true"/>
+        android:layout_marginTop="16dp"
+        android:gravity="center_vertical">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="모든 알림 켜기/끄기"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:textSize="22sp"/>
+        <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/switch_noti_all"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:trackTint="?colorPrimary"/>
+    </LinearLayout>
 
     <TextView
         android:id="@+id/btn_logout"
@@ -93,8 +95,8 @@
         android:textColor="@color/black"
         android:textStyle="bold"
         android:textSize="22sp"
-        android:drawableStart="@drawable/ic_logout_24"
-        android:layout_below="@+id/btn_noti_all"
-        android:layout_marginTop="16dp"/>
+        android:layout_below="@+id/layout_noti_all"
+        android:layout_marginTop="16dp"
+        app:drawableStartCompat="@drawable/ic_logout_24" />
 
 </RelativeLayout>

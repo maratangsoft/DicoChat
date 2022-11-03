@@ -31,7 +31,7 @@
         android:id="@+id/bs_detail"
         android:layout_width="match_parent"
         android:layout_height="300dp"
-        app:behavior_peekHeight="300dp"
+        app:behavior_peekHeight="0dp"
         android:background="@drawable/bg_bottomsheet"
         app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
 
@@ -69,7 +69,7 @@
             android:layout_marginTop="10dp"/>
 
         <TextView
-            android:id="@+id/tv_id"
+            android:id="@+id/tv_user_id"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="#8572"
