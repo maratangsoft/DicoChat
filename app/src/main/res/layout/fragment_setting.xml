@@ -1,13 +1,102 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SettingFragment">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".SettingFragment"
+    android:padding="30dp"
+    android:background="?colorPrimaryVariant">
 
-    <TextView
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/civ_profile_img"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/urnc"/>
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_edit_24"
+        android:background="@color/gray"
+        android:layout_alignEnd="@+id/civ_profile_img"
+        android:layout_alignBottom="@+id/civ_profile_img"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_nickname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="밍구망구"
+        android:textSize="26sp"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:layout_below="@+id/civ_profile_img"
+        android:layout_marginTop="18dp"/>
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_edit_24"
+        android:background="@color/gray"
+        android:layout_toEndOf="@+id/tv_nickname"
+        android:layout_alignTop="@+id/tv_nickname"
+        android:layout_marginTop="18dp"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_user_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="#2038"
+        android:textColor="@color/gray"
+        android:textStyle="bold"
+        android:textSize="26sp"
+        android:layout_alignTop="@+id/tv_nickname"
+        android:layout_toEndOf="@+id/tv_nickname"
+        android:layout_marginStart="32dp"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/btn_status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="상태 설정"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:textSize="22sp"
+        android:layout_below="@+id/tv_nickname"
+        android:layout_marginTop="50dp"/>
+
+    <LinearLayout
+        android:id="@+id/layout_noti_all"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Setting" />
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btn_status"
+        android:layout_marginTop="16dp"
+        android:gravity="center_vertical">
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="모든 알림 켜기/끄기"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:textSize="22sp"/>
+        <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/switch_noti_all"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:trackTint="?colorPrimary"/>
+    </LinearLayout>
 
-</FrameLayout>
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/btn_logout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=" 로그아웃"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:textSize="22sp"
+        android:layout_below="@+id/layout_noti_all"
+        android:layout_marginTop="16dp"
+        app:drawableStartCompat="@drawable/ic_logout_24" />
+
+</RelativeLayout>

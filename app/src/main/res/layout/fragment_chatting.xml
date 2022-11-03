@@ -6,82 +6,123 @@
     android:layout_height="match_parent"
     tools:context=".ChattingFragment">
 
-    <LinearLayout
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            app:menu="@menu/fragment_chatting_opt"
-            app:title="#방 제목"
-            app:titleTextColor="@color/white"
-            android:background="?colorPrimary"/>
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycler_view"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:orientation="vertical"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
-
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="6dp"
-            android:gravity="center_vertical">
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/btn_upload_file"
-                android:layout_width="32dp"
-                android:layout_height="32dp"
-                android:src="@drawable/ic_add_24"
-                app:civ_circle_background_color="?colorPrimaryVariant"/>
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:menu="@menu/fragment_chatting_opt"
+                app:title="#방 제목"
+                app:titleTextColor="@color/white"
+                android:background="?colorPrimary"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
                 android:layout_weight="1"
-                android:background="@drawable/bg_edittext"
-                android:layout_marginStart="6dp">
-                <EditText
-                    android:id="@+id/et_msg"
-                    android:layout_width="0dp"
+                android:orientation="vertical"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                android:layout_margin="10dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="6dp"
+                android:gravity="center_vertical">
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/btn_upload_file"
+                    android:layout_width="32dp"
                     android:layout_height="32dp"
-                    android:layout_weight="1"
-                    android:hint=" 메시지를 입력하세요..."
-                    android:gravity="center_vertical"
-                    android:textSize="16sp"
-                    android:textColorHint="#FF606060"
-                    android:maxLines="5"
-                    android:paddingStart="4dp"
-                    android:background="@null"/>
-                <ImageView
-                    android:id="@+id/btn_emoji"
-                    android:layout_width="wrap_content"
+                    android:src="@drawable/ic_add_24"
+                    app:civ_circle_background_color="?colorPrimaryVariant"/>
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/ic_faces_24"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginEnd="6dp"/>
+                    android:background="@drawable/bg_edittext"
+                    android:layout_marginStart="6dp">
+                    <androidx.appcompat.widget.AppCompatEditText
+                        android:id="@+id/et_msg"
+                        android:layout_width="0dp"
+                        android:layout_height="32dp"
+                        android:layout_weight="1"
+                        android:hint=" 메시지를 입력하세요..."
+                        android:inputType="textMultiLine"
+                        android:gravity="center_vertical"
+                        android:textSize="16sp"
+                        android:textColorHint="#FF606060"
+                        android:maxLines="5"
+                        android:paddingStart="4dp"
+                        android:background="@null" />
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/btn_emoji"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_faces_24"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginEnd="6dp"/>
+                </LinearLayout>
             </LinearLayout>
         </LinearLayout>
-    </LinearLayout>
+
+<!--        Bottom Sheet -->
+        <LinearLayout
+            android:id="@+id/bs_invite"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            app:behavior_peekHeight="0dp"
+            android:background="@drawable/bg_bottomsheet"
+            android:orientation="vertical"
+            app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
+            <View
+                android:layout_width="60dp"
+                android:layout_height="4dp"
+                android:background="?colorPrimary"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="12dp"/>
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="친구 초대하기"
+                android:textSize="20sp"
+                android:textColor="@color/black"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="16dp"/>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_friends"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                android:orientation="vertical"
+                android:layout_margin="20dp"/>
+        </LinearLayout>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/drawer_left"
-        android:layout_width="80dp"
+        android:layout_width="74dp"
         android:layout_height="match_parent"
         android:layout_gravity="start"
         app:headerLayout="@layout/drawer_left_header"
+        android:background="?colorPrimaryVariant"
         android:fitsSystemWindows="true"/>
 
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/drawer_right"
-        android:layout_width="270dp"
+        android:layout_width="290dp"
         android:layout_height="match_parent"
         android:layout_gravity="end"
         app:headerLayout="@layout/drawer_right_header"
+        android:background="?colorPrimaryVariant"
         android:fitsSystemWindows="true"/>
 
 </androidx.drawerlayout.widget.DrawerLayout>
