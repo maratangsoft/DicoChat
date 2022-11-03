@@ -21,6 +21,6 @@
         android:background="?colorPrimary"
         app:labelVisibilityMode="unlabeled"
         app:itemIconTint="@drawable/selector_bnv"
-        app:menu="@menu/bnv_menu"/>
+        app:menu="@menu/activity_main_bnv"/>
 
 </LinearLayout>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_marginVertical="5dp">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/civ_user_img"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@drawable/icons8_monkey_164"
+        app:civ_circle_background_color="?colorPrimary"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_nickname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="유저닉네임"
+        android:textSize="16dp"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:layout_toEndOf="@+id/civ_user_img"
+        android:layout_marginStart="6dp"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_write_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="2022.10.21. 오후 10:35"
+        android:layout_alignBottom="@+id/tv_nickname"
+        android:layout_toEndOf="@+id/tv_nickname"
+        android:layout_marginStart="8dp"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_messsage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="코로나 양성나오는데 자가격리 끝났다고 출근하래서 어르신 케어하고 왔네"
+        android:layout_alignStart="@+id/tv_nickname"
+        android:layout_below="@+id/tv_nickname"/>
+
+</RelativeLayout>

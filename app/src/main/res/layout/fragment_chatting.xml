@@ -112,7 +112,7 @@
         android:layout_width="74dp"
         android:layout_height="match_parent"
         android:layout_gravity="start"
-        app:headerLayout="@layout/drawer_left_header"
+        app:headerLayout="@layout/fragment_chatting_drawer_left"
         android:background="?colorPrimaryVariant"
         android:fitsSystemWindows="true"/>
 
@@ -121,7 +121,7 @@
         android:layout_width="290dp"
         android:layout_height="match_parent"
         android:layout_gravity="end"
-        app:headerLayout="@layout/drawer_right_header"
+        app:headerLayout="@layout/fragment_chatting_drawer_right"
         android:background="?colorPrimaryVariant"
         android:fitsSystemWindows="true"/>
 

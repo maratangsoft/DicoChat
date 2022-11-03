@@ -51,7 +51,7 @@
             android:layout_marginTop="30dp"/>
 
         <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/civ_profile_img"
+            android:id="@+id/civ_user_img"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:src="@drawable/urnc"
@@ -66,8 +66,8 @@
             android:textStyle="bold"
             android:textSize="26sp"
             android:textColor="@color/black"
-            android:layout_below="@+id/civ_profile_img"
-            android:layout_alignStart="@+id/civ_profile_img"
+            android:layout_below="@+id/civ_user_img"
+            android:layout_alignStart="@+id/civ_user_img"
             android:layout_marginTop="10dp"/>
 
         <androidx.appcompat.widget.AppCompatTextView
@@ -88,7 +88,7 @@
             android:layout_height="wrap_content"
             android:text="자리비움"
             android:textColor="@color/black"
-            android:layout_alignBottom="@id/civ_profile_img"
+            android:layout_alignBottom="@id/civ_user_img"
             android:layout_alignParentEnd="true"
             android:layout_marginEnd="20dp"/>
 

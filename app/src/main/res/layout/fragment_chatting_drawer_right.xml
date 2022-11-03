@@ -5,10 +5,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tv_room_name"
+        android:id="@+id/tv_room_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="#방 이름"
+        android:text="#방 제목"
         android:textSize="26sp"
         android:textStyle="bold"
         android:textColor="@color/black"
@@ -18,7 +18,7 @@
         android:id="@+id/layout_buttons"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/tv_room_name">
+        android:layout_below="@id/tv_room_title">
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/btn_search"
             android:layout_width="0dp"
