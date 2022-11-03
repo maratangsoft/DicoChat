@@ -6,7 +6,7 @@
     android:layout_marginVertical="5dp">
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/room_title"
+        android:id="@+id/tv_room_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="#방 제목"
@@ -15,12 +15,12 @@
         android:textSize="18sp"/>
 
     <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/civ_room_img"
+        android:id="@+id/civ_user_img"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:src="@drawable/icons8_monkey_164"
         app:civ_circle_background_color="?colorPrimary"
-        android:layout_below="@+id/room_title"/>
+        android:layout_below="@+id/tv_room_title"/>
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tv_nickname"
@@ -30,8 +30,8 @@
         android:textColor="@color/black"
         android:textStyle="bold"
         android:textSize="20sp"
-        android:layout_alignTop="@+id/civ_room_img"
-        android:layout_toEndOf="@+id/civ_room_img"
+        android:layout_alignTop="@+id/civ_user_img"
+        android:layout_toEndOf="@+id/civ_user_img"
         android:layout_marginStart="6dp"/>
     
     <androidx.appcompat.widget.AppCompatTextView
