@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="50dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_marginVertical="5dp"
+    android:gravity="center_vertical">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/civ_user_img"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@drawable/icons8_monkey_164"
+        app:civ_circle_background_color="?colorPrimary"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_nickname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="유저 이름"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:layout_marginStart="12dp"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_user_no"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="#2345"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:textColor="@color/gray"
+        android:layout_marginStart="2dp"/>
+    
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_invite"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="초대하기"
+        android:textColor="@color/white"
+        android:background="@drawable/bg_button"
+        android:minHeight="0dp"
+        android:minWidth="0dp"
+        android:paddingHorizontal="12dp"
+        android:paddingVertical="8dp"/>
+
+</LinearLayout>

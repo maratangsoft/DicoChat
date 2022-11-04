@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="50dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_marginVertical="5dp">
+
+    <View
+        android:id="@+id/vPointer"
+        android:layout_width="8dp"
+        android:layout_height="match_parent"
+        android:background="@drawable/bg_room_pointer"
+        android:visibility="invisible"/>
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/civ_room_img"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@drawable/urnc"
+        app:civ_circle_background_color="@color/gray"
+        android:layout_gravity="center_horizontal"/>
+
+</FrameLayout>

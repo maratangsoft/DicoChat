@@ -48,17 +48,17 @@
     <androidx.appcompat.widget.AppCompatTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="방 이름"
+        android:text="방 제목"
         android:textSize="22sp"
         android:textColor="@color/black"
         android:layout_marginStart="30dp"
         android:layout_marginTop="16dp"/>
 
     <androidx.appcompat.widget.AppCompatEditText
-        android:id="@+id/et_room_name"
+        android:id="@+id/et_room_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="방 이름을 입력하세요"
+        android:hint="방 제목을 입력하세요"
         android:textColorHint="@color/gray"
         android:inputType="text"
         android:background="@drawable/bg_edittext"
