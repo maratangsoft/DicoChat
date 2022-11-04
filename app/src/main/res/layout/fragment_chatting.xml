@@ -1,144 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<com.discord.panels.OverlappingPanelsLayout
+    android:id="@+id/overlapping_panels"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".ChattingFragment">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
+    <include
+        android:id="@+id/panel_start"
+        layout="@layout/fragment_chatting_panel_start"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"/>
+
+    <include
+        android:id="@+id/panel_central"
+        layout="@layout/fragment_chatting_panel_central"
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="?colorPrimary"
-        app:menu="@menu/fragment_chatting_opt"
-        app:title="#방 제목"
-        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"/>
+        android:layout_height="match_parent"/>
 
-    <androidx.drawerlayout.widget.DrawerLayout
-        android:id="@+id/layout_drawer_left"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+    <include
+        android:id="@+id/panel_end"
+        layout="@layout/fragment_chatting_panel_end"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="end"/>
 
-        <androidx.coordinatorlayout.widget.CoordinatorLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recycler_view"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_margin="10dp"
-                    android:layout_weight="1"
-                    android:orientation="vertical"
-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
-                    android:padding="6dp">
-
-                    <de.hdodenhof.circleimageview.CircleImageView
-                        android:id="@+id/btn_upload_file"
-                        android:layout_width="32dp"
-                        android:layout_height="32dp"
-                        android:src="@drawable/ic_add_24"
-                        app:civ_circle_background_color="?colorPrimaryVariant" />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="6dp"
-                        android:background="@drawable/bg_edittext">
-
-                        <androidx.appcompat.widget.AppCompatEditText
-                            android:id="@+id/et_msg"
-                            android:layout_width="0dp"
-                            android:layout_height="32dp"
-                            android:layout_weight="1"
-                            android:background="@null"
-                            android:gravity="center_vertical"
-                            android:hint=" 메시지를 입력하세요..."
-                            android:inputType="textMultiLine"
-                            android:maxLines="5"
-                            android:paddingStart="4dp"
-                            android:textColorHint="#FF606060"
-                            android:textSize="16sp" />
-
-                        <androidx.appcompat.widget.AppCompatImageView
-                            android:id="@+id/btn_emoji"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_vertical"
-                            android:layout_marginEnd="6dp"
-                            android:src="@drawable/ic_faces_24" />
-                    </LinearLayout>
-                </LinearLayout>
-            </LinearLayout>
-
-            <!--        Bottom Sheet -->
-            <LinearLayout
-                android:id="@+id/bs_invite"
-                android:layout_width="match_parent"
-                android:layout_height="300dp"
-                android:background="@drawable/bg_bottomsheet"
-                android:orientation="vertical"
-                app:behavior_peekHeight="0dp"
-                app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
-
-                <View
-                    android:layout_width="60dp"
-                    android:layout_height="4dp"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="12dp"
-                    android:background="?colorPrimary" />
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginTop="16dp"
-                    android:text="친구 초대하기"
-                    android:textColor="@color/black"
-                    android:textSize="20sp" />
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recycler_friends"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="20dp"
-                    android:orientation="vertical"
-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
-            </LinearLayout>
-        </androidx.coordinatorlayout.widget.CoordinatorLayout>
-
-        <com.google.android.material.navigation.NavigationView
-            android:id="@+id/drawer_left"
-            android:layout_width="74dp"
-            android:layout_height="match_parent"
-            android:layout_gravity="start"
-            android:background="?colorPrimaryVariant"
-            android:fitsSystemWindows="true"
-            app:headerLayout="@layout/fragment_chatting_drawer_left" />
-
-        <com.google.android.material.navigation.NavigationView
-            android:id="@+id/drawer_right"
-            android:layout_width="290dp"
-            android:layout_height="match_parent"
-            android:layout_gravity="end"
-            android:background="?colorPrimaryVariant"
-            android:fitsSystemWindows="true"
-            app:headerLayout="@layout/fragment_chatting_drawer_right" />
-
-    </androidx.drawerlayout.widget.DrawerLayout>
-
-</LinearLayout>
+</com.discord.panels.OverlappingPanelsLayout>
