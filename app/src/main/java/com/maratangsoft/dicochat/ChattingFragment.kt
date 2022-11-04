@@ -1,10 +1,12 @@
 package com.maratangsoft.dicochat
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.*
 import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.maratangsoft.dicochat.databinding.FragmentChattingBinding
 
 class ChattingFragment : Fragment(), MenuProvider {
@@ -21,14 +23,13 @@ class ChattingFragment : Fragment(), MenuProvider {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        //메뉴프로바이더 객체 생성
+        //툴바 제어를 위한 메뉴프로바이더와 서포트액션바 지정
         requireActivity().addMenuProvider(this, viewLifecycleOwner, Lifecycle.State.RESUMED)
-        //왼쪽 패널 열기 버튼 (홈버튼) 만들기
         (activity as MainActivity).setSupportActionBar(binding.panelCentral.toolbar)
-        (activity as MainActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        (activity as MainActivity).supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_hamburger)
 
-
+        binding.panelStart.btnCreateRoom.setOnClickListener { (activity as MainActivity).startActivity(Intent(activity, NewRoomActivity::class.java)) }
+        binding.panelEnd.btnRoomSetting.setOnClickListener { (activity as MainActivity).startActivity(Intent(activity, RoomSettingActivity::class.java)) }
+        binding.panelEnd.btnShowBs.setOnClickListener { BottomSheetBehavior.from(binding.panelCentral.bsInvite).state = BottomSheetBehavior.STATE_EXPANDED }
     }
 
     //오른쪽 패널 열기 버튼 (옵션메뉴) 만들기
