@@ -85,7 +85,7 @@
             android:id="@+id/switch_noti_all"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:trackTint="?colorPrimary"/>
+            app:trackTint="@color/gray"/>
     </LinearLayout>
 
     <androidx.appcompat.widget.AppCompatTextView

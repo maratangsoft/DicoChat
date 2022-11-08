@@ -51,7 +51,7 @@
         android:id="@+id/btn_create_room"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="채팅방 만들기"
+        android:text="친구 추가하기"
         android:textSize="20sp"
         android:textColor="@color/white"
         android:background="@drawable/bg_button"

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:behavior_peekHeight="0dp"
+    android:background="@drawable/bg_bottomsheet"
+    app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <View
+        android:layout_width="60dp"
+        android:layout_height="4dp"
+        android:background="?colorPrimary"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="12dp"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:background="#FFffee99"
+        android:layout_marginTop="30dp"/>
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/civ_user_img"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/urnc"
+        android:layout_marginTop="50dp"
+        android:layout_marginStart="20dp"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_nickname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="밍구망구"
+        android:textStyle="bold"
+        android:textSize="26sp"
+        android:textColor="@color/black"
+        android:layout_below="@+id/civ_user_img"
+        android:layout_alignStart="@+id/civ_user_img"
+        android:layout_marginTop="10dp"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_user_no"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="#8572"
+        android:textStyle="bold"
+        android:textSize="26sp"
+        android:textColor="@color/gray"
+        android:layout_alignTop="@+id/tv_nickname"
+        android:layout_toEndOf="@+id/tv_nickname"
+        android:layout_marginStart="8dp"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="자리비움"
+        android:textColor="@color/black"
+        android:layout_alignBottom="@id/civ_user_img"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="20dp"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/btn_send_msg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=" 메시지 보내기"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:drawableStart="@drawable/ic_chat_bubble_24"
+        android:layout_below="@+id/tv_nickname"
+        android:layout_alignStart="@+id/tv_nickname"
+        android:layout_marginTop="20dp"/>
+
+</RelativeLayout>
