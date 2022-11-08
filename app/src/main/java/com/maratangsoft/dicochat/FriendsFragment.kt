@@ -12,6 +12,7 @@ import com.maratangsoft.dicochat.databinding.FragmentFriendsBinding
 
 class FriendsFragment : Fragment() {
     lateinit var binding: FragmentFriendsBinding
+    var friendsFragItems: MutableList<UserItem> = mutableListOf()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -27,6 +28,14 @@ class FriendsFragment : Fragment() {
             (requireActivity() as AppCompatActivity).startActivity(Intent(activity, FindFriendActivity::class.java))
             true
         }
+        binding.recyclerFriends.adapter = ChattingFragPanelEndAdapter(requireActivity(), friendsFragItems)
+
+        loadData()
     }
 
+    private fun loadData(){
+        friendsFragItems.add(UserItem(1, "jgdd", null))
+        friendsFragItems.add(UserItem(1, "jgdd", null))
+        friendsFragItems.add(UserItem(1, "jgdd", null))
+    }
 }

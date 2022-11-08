@@ -84,7 +84,7 @@ class MentionFragmentAdapter(val context:Context, var items:MutableList<ChatItem
     inner class MentionFragVH(val binding:FragmentMentionItemBinding): ViewHolder(binding.root)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MentionFragVH {
-        val itemView = LayoutInflater.from(context).inflate(R.layout.fragment_chatting_panel_end_item, parent, false)
+        val itemView = LayoutInflater.from(context).inflate(R.layout.fragment_mention_item, parent, false)
         return MentionFragVH(FragmentMentionItemBinding.bind(itemView))
     }
 
@@ -103,7 +103,7 @@ class MentionFragmentBsAdapter(val context:Context, var items:MutableList<RoomIt
     inner class MentionFragBsVH(val binding:FragmentMentionBsItemBinding): ViewHolder(binding.root)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MentionFragBsVH {
-        val itemView = LayoutInflater.from(context).inflate(R.layout.fragment_chatting_panel_end_item, parent, false)
+        val itemView = LayoutInflater.from(context).inflate(R.layout.fragment_mention_bs_item, parent, false)
         return MentionFragBsVH(FragmentMentionBsItemBinding.bind(itemView))
     }
 
