@@ -1,25 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white">
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+    android:background="@color/white"
+    android:orientation="vertical">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="?colorPrimary"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
             app:menu="@menu/fragment_chatting_opt"
             app:navigationIcon="@drawable/ic_hamburger"
-            app:title="#방 제목"
-            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"/>
+            app:title="#방 제목" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_panel_central"
@@ -35,17 +30,20 @@
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
             android:padding="6dp">
+
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/btn_upload_file"
                 android:layout_width="32dp"
                 android:layout_height="32dp"
                 android:src="@drawable/ic_add_24"
                 app:civ_circle_background_color="?colorPrimaryVariant" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="6dp"
                 android:background="@drawable/bg_edittext">
+
                 <androidx.appcompat.widget.AppCompatEditText
                     android:id="@+id/et_msg"
                     android:layout_width="0dp"
@@ -59,6 +57,7 @@
                     android:paddingStart="4dp"
                     android:textColorHint="#FF606060"
                     android:textSize="16sp" />
+
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/btn_emoji"
                     android:layout_width="wrap_content"
@@ -69,40 +68,3 @@
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
-
-    <!--        Bottom Sheet -->
-    <LinearLayout
-        android:id="@+id/bs_invite"
-        android:layout_width="match_parent"
-        android:layout_height="300dp"
-        android:background="@drawable/bg_bottomsheet"
-        android:orientation="vertical"
-        app:behavior_peekHeight="0dp"
-        app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
-
-        <View
-            android:layout_width="60dp"
-            android:layout_height="4dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="12dp"
-            android:background="?colorPrimary" />
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="16dp"
-            android:text="친구 초대하기"
-            android:textColor="@color/black"
-            android:textSize="20sp" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycler_friends"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="20dp"
-            android:orientation="vertical"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
-    </LinearLayout>
-
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
