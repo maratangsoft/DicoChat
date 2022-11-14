@@ -1,68 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
     tools:context=".MentionFragment">
 
-    <LinearLayout
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?colorPrimary"
+        app:menu="@menu/fragment_mention_opt"
+        app:title="최근 멘션"
+        app:titleTextColor="@color/white" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_mention"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="?colorPrimary"
-            app:title="최근 멘션"
-            app:titleTextColor="@color/white"/>
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycler_mention"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            android:orientation="vertical"
-            android:layout_margin="10dp"/>
-    </LinearLayout>
-
-<!--    Bottom Sheet -->
-    <LinearLayout
-        android:id="@+id/bs_filter"
-        android:layout_width="match_parent"
-        android:layout_height="300dp"
-        app:behavior_peekHeight="0dp"
-        android:background="@drawable/bg_bottomsheet"
+        android:layout_margin="10dp"
         android:orientation="vertical"
-        app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
-        <View
-            android:layout_width="60dp"
-            android:layout_height="4dp"
-            android:background="?colorPrimary"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="12dp"/>
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="필터 옵션"
-            android:textSize="20sp"
-            android:textColor="@color/black"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="16dp"/>
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycler_filter"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            android:orientation="vertical"
-            android:layout_marginHorizontal="20dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="20dp"/>
-
-    </LinearLayout>
-
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+</LinearLayout>
