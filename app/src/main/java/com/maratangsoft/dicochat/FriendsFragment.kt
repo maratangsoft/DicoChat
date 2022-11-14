@@ -5,9 +5,6 @@ import android.os.Bundle
 import android.view.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import androidx.core.view.MenuProvider
-import androidx.lifecycle.Lifecycle
-import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.maratangsoft.dicochat.databinding.FragmentFriendsBinding
 
 class FriendsFragment : Fragment() {
@@ -30,12 +27,10 @@ class FriendsFragment : Fragment() {
         }
         binding.recyclerFriends.adapter = ChattingFragPanelEndAdapter(requireActivity(), friendsFragItems)
 
-        loadData()
+        getFriend()
     }
 
-    private fun loadData(){
-        friendsFragItems.add(UserItem(1, "jgdd", null))
-        friendsFragItems.add(UserItem(1, "jgdd", null))
-        friendsFragItems.add(UserItem(1, "jgdd", null))
+    private fun getFriend(){
+        //TODO: 완성하기
     }
 }

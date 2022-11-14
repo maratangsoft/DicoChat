@@ -13,13 +13,13 @@
         android:layout_height="?attr/actionBarSize"
         android:background="?colorPrimary"
         app:navigationIcon="@drawable/ic_cancel"
-        app:title="친구 추가하기"
+        app:title="@string/add_friends"
         app:titleTextColor="@color/white"/>
 
     <androidx.appcompat.widget.AppCompatTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="아이디로 검색"
+        android:text="@string/tv_frag_ff_search"
         android:textSize="22sp"
         android:textColor="@color/black"
         android:layout_marginTop="30dp"
@@ -29,7 +29,7 @@
         android:id="@+id/et_user_no"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="# 뒤의 숫자를 입력해 주세요."
+        android:hint="@string/et_frag_ff"
         android:textColorHint="@color/gray"
         android:inputType="number"
         android:background="@drawable/bg_edittext"
@@ -48,7 +48,7 @@
         android:layout_marginHorizontal="30dp"/>
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btn_create_room"
+        android:id="@+id/btn_register_friend"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="친구 추가하기"

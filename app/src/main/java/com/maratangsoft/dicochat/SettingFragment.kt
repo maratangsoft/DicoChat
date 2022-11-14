@@ -20,5 +20,23 @@ class SettingFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        binding.civUserImg.setOnClickListener { editUserImg() }
+        binding.tvNickname.setOnClickListener { editNickname() }
+
+        getProfile()
     }
+
+    private fun getProfile(){
+        //TODO: complete
+    }
+
+    private fun editNickname(){
+        //TODO: complete
+    }
+
+    private fun editUserImg(){
+        //TODO: complete
+    }
+
 }

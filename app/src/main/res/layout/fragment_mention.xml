@@ -12,7 +12,6 @@
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="?colorPrimary"
-        app:menu="@menu/fragment_mention_opt"
         app:title="최근 멘션"
         app:titleTextColor="@color/white" />
 

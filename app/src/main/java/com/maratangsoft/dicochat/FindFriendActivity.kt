@@ -13,10 +13,16 @@ class FindFriendActivity : AppCompatActivity() {
 
         setSupportActionBar(binding.toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
+        binding.btnRegisterFriend.setOnClickListener { registerFriend() }
     }
 
     override fun onSupportNavigateUp(): Boolean {
         finish()
         return super.onSupportNavigateUp()
+    }
+
+    private fun registerFriend(){
+        //TODO: 완성하기
     }
 }

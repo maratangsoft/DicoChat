@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--Login Activity-->
+    <string name="app_name">씨코챗</string>
+    <string name="guest_login">게스트 계정으로 로그인</string>
+
+    <!--Find Friend Activity-->
+    <string name="add_friends">친구 추가하기</string>
+    <string name="tv_frag_ff_search">아이디로 검색하기</string>
+    <string name="et_frag_ff"># 뒤의 숫자를 입력해 주세요.</string>
+</resources>

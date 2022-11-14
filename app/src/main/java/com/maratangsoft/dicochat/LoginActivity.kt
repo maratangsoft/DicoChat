@@ -11,13 +11,28 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        binding.btnGoogleLogin.setOnClickListener { goToMainActivity() }
-        binding.btnKakaoLogin.setOnClickListener { goToMainActivity() }
+        binding.btnGoogleLogin.setOnClickListener { googleLogin() }
+        binding.btnKakaoLogin.setOnClickListener { kakaoLogin() }
+        binding.btnGuestLogin.setOnClickListener { guestLogin() }
+
+        getUserNo()
     }
 
-    private fun goToMainActivity(){
+    private fun googleLogin(){
+        //TODO: complete
+    }
+
+    private fun kakaoLogin(){
+        //TODO: complete
+    }
+
+    private fun guestLogin(){
         val intent = Intent(this, MainActivity::class.java)
         startActivity(intent)
         finish()
+    }
+
+    private fun getUserNo(){
+        //TODO: complete
     }
 }
