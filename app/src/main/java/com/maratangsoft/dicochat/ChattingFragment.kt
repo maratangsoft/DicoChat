@@ -70,26 +70,26 @@ class ChattingFragment : Fragment() {
     }
 
     private fun loadPanelCentralData(){
-        chattingFragItems.add(ChatItem(1, "aaa", null, "222222", 1, null, 1, "sfde", null))
-        chattingFragItems.add(ChatItem(1, "aaa", null, "222222", 1, null, 1, "sfde", null))
-        chattingFragItems.add(ChatItem(1, "aaa", null, "222222", 1, null, 1, "sfde", null))
+        chattingFragItems.add(ChatItem("1", "aaa", "2", "222222", null, null, "1", "sfde", "ff", "dd"))
+        chattingFragItems.add(ChatItem("1", "aaa", "2", "222222", null, null, "1", "sfde", "ff", "dd"))
+        chattingFragItems.add(ChatItem("1", "aaa", "2", "222222", null, null, "1", "sfde", "ff", "dd"))
     }
 
     private fun loadBsData(){
-        chattingFragBsItems.add(UserItem(1, "jgdd", null))
-        chattingFragBsItems.add(UserItem(1, "jgdd", null))
-        chattingFragBsItems.add(UserItem(1, "jgdd", null))
+        chattingFragBsItems.add(UserItem("1", "jgdd", "null"))
+        chattingFragBsItems.add(UserItem("1", "jgdd", "null"))
+        chattingFragBsItems.add(UserItem("1", "jgdd", "null"))
     }
 
     private fun loadPanelStartData(){
-        chattingFragPanelStartItems.add(RoomItem(1, "dfsfe", null, "212312"))
-        chattingFragPanelStartItems.add(RoomItem(1, "dfsfe", null, "212312"))
-        chattingFragPanelStartItems.add(RoomItem(1, "dfsfe", null, "212312"))
+        chattingFragPanelStartItems.add(RoomItem("1", "dfsfe", "null", "212312"))
+        chattingFragPanelStartItems.add(RoomItem("1", "dfsfe", "null", "212312"))
+        chattingFragPanelStartItems.add(RoomItem("1", "dfsfe", "null", "212312"))
     }
 
     private fun loadPanelEndData(){
-        chattingFragPanelEndItems.add(UserItem(1, "jgdd", null))
-        chattingFragPanelEndItems.add(UserItem(1, "jgdd", null))
-        chattingFragPanelEndItems.add(UserItem(1, "jgdd", null))
+        chattingFragPanelEndItems.add(UserItem("1", "jgdd", "null"))
+        chattingFragPanelEndItems.add(UserItem("1", "jgdd", "null"))
+        chattingFragPanelEndItems.add(UserItem("1", "jgdd", "null"))
     }
 }

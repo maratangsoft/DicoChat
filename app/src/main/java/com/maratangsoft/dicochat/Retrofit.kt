@@ -1,9 +1,11 @@
 package com.maratangsoft.dicochat
 
+import okhttp3.MultipartBody
+import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.converter.scalars.ScalarsConverterFactory
-import retrofit2.http.POST
+import retrofit2.http.*
 
 object RetrofitHelper{
     fun getInstance(baseUrl:String): Retrofit{
@@ -16,56 +18,39 @@ object RetrofitHelper{
 }
 
 interface RetrofitService {
-    //LoginFragment
-    //유저 등록 + 유저정보 받기: dicochat_users INSERT → dicochat_users SELECT / GET 데이터=>JSON
+    //GET방식, String 리스폰스
+    //register_user, get_uriendser_no, send_chat, invite_user, edit_room_title, register_friend, edit_nickname
+    @GET("DicoChatServer/GETtoPlain.php")
+    fun getToPlain(
+        @QueryMap queries: Map<String,String>
+    ): Call<String>
 
+    //POST방식, String 리스폰스
+    //send_file, register_room, edit_user_img
+    @Multipart
+    @POST("DicoChatServer/POSTtoPlain.php")
+    fun postToPlain(
+        @PartMap dataPart: Map<String,String>, @Part filePart: MultipartBody.Part
+    ): Call<String>
 
-    //ChattingFragment
-    //채팅 조회: $roomName_chats SELECT / GET 데이터=>JSON
+    //GET방식, MutableList<UserItem> 리스폰스
+    //get_room_member, get_friend, get_profile
+    @GET("DicoChatServer/GETtoJSON.php")
+    fun getToJsonUser(
+        @QueryMap queries: Map<String,String>
+    ): Call<MutableList<UserItem>>
 
+    //GET방식, MutableList<RoomItem> 리스폰스
+    //get_room
+    @GET("DicoChatServer/GETtoJSON.php")
+    fun getToJsonRoom(
+        @QueryMap queries:Map<String,String>
+    ): Call<MutableList<RoomItem>>
 
-    //일반채팅 보내기: $roomName_chats INSERT / GET 데이터=>상태메시지
-
-
-    //파일채팅 보내기: $roomName_chats INSERT / POST 데이터+파일=>상태메시지
-
-
-    //입장한 채팅방 조회: dicochat_room_member SELECT → dicochat_rooms SELECT / GET 데이터=>JSON
-
-
-    //채팅방 멤버 조회: dicochat_room_member SELECT → dicochat_users SELECT / GET 데이터=>JSON
-
-
-    //채팅방 초대+입장: dicochat_users SELECT → dicochat_room_member INSERT / GET 데이터=>JSON / FCM서버로 푸시
-
-
-    //NewRoomActivity, FriendsFragment
-    //채팅방 개설: dicochat_rooms INSERT / POST 데이터+파일=>상태메시지
-
-
-    //RoomSettingActivity
-    //채팅방 이름 수정: dicochat_rooms UPDATE / GET 데이터=>상태메시지
-
-
-    //FriendsFragment
-    //친구 조회: dicochat_friend SELECT / GET 데이터=>JSON
-
-
-    //FindFriendsActivity
-    //친구 등록: dicochat_users SELECT → dicochat_friend INSERT / GET 데이터=>상태메시지
-
-
-    //MentionActivity
-    //멘션 조회: $roomName_chats SELECT / GET 데이터=>JSON
-
-
-    //필터 목록 조회: $roomName_chats SELECT → dicochat_rooms SELECT / GET 데이터=>JSON
-
-
-    //SettingFragment
-    //프로필 조회: dicochat_users SELECT / GET 데이터=>JSON
-
-
-    //프로필 수정: dicochat_users UPDATE / POST 데이터+파일=>상태메시지
-
+    //GET방식, MutableList<ChatItem> 리스폰스
+    //get_chat, get_mention
+    @GET("DicoChatServer/GETtoJSON.php")
+    fun getToJsonChat(
+        @QueryMap queries:Map<String,String>
+    ): Call<MutableList<ChatItem>>
 }
