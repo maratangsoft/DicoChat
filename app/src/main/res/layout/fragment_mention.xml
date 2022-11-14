@@ -16,8 +16,7 @@
             android:layout_height="?attr/actionBarSize"
             android:background="?colorPrimary"
             app:title="최근 멘션"
-            app:titleTextColor="@color/white"
-            app:menu="@menu/fragment_mention_opt"/>
+            app:titleTextColor="@color/white"/>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_mention"

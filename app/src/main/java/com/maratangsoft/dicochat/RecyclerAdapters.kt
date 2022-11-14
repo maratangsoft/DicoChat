@@ -10,7 +10,6 @@ import com.maratangsoft.dicochat.databinding.FragmentChattingBsItemBinding
 import com.maratangsoft.dicochat.databinding.FragmentChattingDrawerLeftItemBinding
 import com.maratangsoft.dicochat.databinding.FragmentChattingDrawerRightItemBinding
 import com.maratangsoft.dicochat.databinding.FragmentChattingItemBinding
-import com.maratangsoft.dicochat.databinding.FragmentMentionBsItemBinding
 import com.maratangsoft.dicochat.databinding.FragmentMentionItemBinding
 
 class ChattingFragAdapter(val context:Context, var items:MutableList<ChatItem>): Adapter<ChattingFragAdapter.ChattingFragVH>(){
@@ -93,21 +92,6 @@ class MentionFragmentAdapter(val context:Context, var items:MutableList<ChatItem
         holder.binding.tvNickname.text = items[position].nickname
         holder.binding.tvWriteDate.text = items[position].write_date
         holder.binding.tvMessage.text = items[position].message
-    }
-
-    override fun getItemCount() = items.size
-}
-
-class MentionFragmentBsAdapter(val context:Context, var items:MutableList<RoomItem>): Adapter<MentionFragmentBsAdapter.MentionFragBsVH>(){
-    inner class MentionFragBsVH(val binding:FragmentMentionBsItemBinding): ViewHolder(binding.root)
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MentionFragBsVH {
-        val itemView = LayoutInflater.from(context).inflate(R.layout.fragment_chatting_drawer_right_item, parent, false)
-        return MentionFragBsVH(FragmentMentionBsItemBinding.bind(itemView))
-    }
-
-    override fun onBindViewHolder(holder: MentionFragBsVH, position: Int) {
-        holder.binding.cbFilter.text = items[position].room_title
     }
 
     override fun getItemCount() = items.size
