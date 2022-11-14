@@ -1,9 +1,13 @@
 package com.maratangsoft.dicochat
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.view.*
+import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat.getSystemService
+import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetDialog
@@ -27,6 +31,7 @@ class ChattingFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+//////////////가운데 패널 뷰 설정////////////////
         //툴바 아이콘 리스너
         binding.panelCentral.toolbar.setNavigationOnClickListener { binding.overlappingPanels.openStartPanel() }
         binding.panelCentral.toolbar.setOnMenuItemClickListener {
@@ -40,56 +45,70 @@ class ChattingFragment : Fragment() {
             bsd.setContentView(layoutInflater.inflate(R.layout.fragment_chatting_bs_dialog, null))
             bsd.findViewById<RecyclerView>(R.id.recycler_chatting_bs)?.adapter =
                 ChattingFragBsAdapter(requireActivity(), chattingFragBsItems)
-            loadBsData()
+            getFriend()
             bsd.show()
         }
+        //채팅목록 리사이클러뷰
+        binding.panelCentral.recyclerPanelCentral.adapter =
+            ChattingFragAdapter(requireActivity(), chattingFragItems)
 
+        getChat()
+
+        //보내기 버튼 리스너
+        binding.panelCentral.btnSendChat.setOnClickListener { sendChat() }
+        binding.panelCentral.btnSendFile.setOnClickListener { sendFile() }
+
+
+//////////////왼쪽 패널 뷰 설정//////////////////
         //다른 액티비티로 이동 리스너
         binding.panelStart.btnCreateRoom.setOnClickListener {
             (requireActivity() as AppCompatActivity).startActivity(
                 Intent(activity, NewRoomActivity::class.java)
             )
         }
+
+        //입장한 방 목록 리사이클러뷰
+        binding.panelStart.recyclerPanelStart.adapter =
+            ChattingFragPanelStartAdapter(requireActivity(), this, chattingFragPanelStartItems)
+
+        getRoom()
+
+//////////////오른쪽 패널 뷰 설정/////////////////
         binding.panelEnd.btnRoomSetting.setOnClickListener {
             (requireActivity() as AppCompatActivity).startActivity(
                 Intent(activity, RoomSettingActivity::class.java)
             )
         }
 
-        //리사이클러뷰 어댑터 연결
-        binding.panelCentral.recyclerPanelCentral.adapter =
-            ChattingFragAdapter(requireActivity(), chattingFragItems)
-        binding.panelStart.recyclerPanelStart.adapter =
-            ChattingFragPanelStartAdapter(requireActivity(), chattingFragPanelStartItems)
+        //방 멤버 목록 리사이클러뷰
         binding.panelEnd.recyclerPanelEnd.adapter =
             ChattingFragPanelEndAdapter(requireActivity(), chattingFragPanelEndItems)
 
-        loadPanelCentralData()
-        loadPanelStartData()
-        loadPanelEndData()
+        getRoomMember()
+    }
+//////////////////////////////////////////////////////////////////////////////////
+
+    fun getChat(){
+        //TODO: 완성하기
     }
 
-    private fun loadPanelCentralData(){
-        chattingFragItems.add(ChatItem("1", "aaa", "2", "222222", null, null, "1", "sfde", "ff", "dd"))
-        chattingFragItems.add(ChatItem("1", "aaa", "2", "222222", null, null, "1", "sfde", "ff", "dd"))
-        chattingFragItems.add(ChatItem("1", "aaa", "2", "222222", null, null, "1", "sfde", "ff", "dd"))
+    private fun sendChat(){
+        //TODO: 완성하기
     }
 
-    private fun loadBsData(){
-        chattingFragBsItems.add(UserItem("1", "jgdd", "null"))
-        chattingFragBsItems.add(UserItem("1", "jgdd", "null"))
-        chattingFragBsItems.add(UserItem("1", "jgdd", "null"))
+    private fun sendFile(){
+        //TODO: 완성하기
     }
 
-    private fun loadPanelStartData(){
-        chattingFragPanelStartItems.add(RoomItem("1", "dfsfe", "null", "212312"))
-        chattingFragPanelStartItems.add(RoomItem("1", "dfsfe", "null", "212312"))
-        chattingFragPanelStartItems.add(RoomItem("1", "dfsfe", "null", "212312"))
+    private fun getFriend(){
+        //TODO: 완성하기
     }
 
-    private fun loadPanelEndData(){
-        chattingFragPanelEndItems.add(UserItem("1", "jgdd", "null"))
-        chattingFragPanelEndItems.add(UserItem("1", "jgdd", "null"))
-        chattingFragPanelEndItems.add(UserItem("1", "jgdd", "null"))
+    private fun getRoom(){
+        //TODO: 완성하기
+    }
+
+    private fun getRoomMember(){
+        //TODO: 완성하기
     }
 }

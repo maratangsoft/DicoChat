@@ -1,5 +1,10 @@
 <resources>
-    <string name="app_name">DicoChat</string>
-    <string name="drawer_open">열렸음</string>
-    <string name="drawer_close">닫혔음</string>
+    <!--Login Activity-->
+    <string name="app_name">CicoChat</string>
+    <string name="guest_login">Login with guest account</string>
+
+    <!--FindFriendActivity-->
+    <string name="add_friends">Add friends</string>
+    <string name="tv_frag_ff_search">search with User ID</string>
+    <string name="et_frag_ff">input a number after #</string>
 </resources>
