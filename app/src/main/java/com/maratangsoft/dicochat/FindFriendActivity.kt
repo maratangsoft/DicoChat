@@ -3,6 +3,7 @@ package com.maratangsoft.dicochat
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import com.maratangsoft.dicochat.databinding.ActivityFindFriendBinding
 import retrofit2.Call
 import retrofit2.Callback
@@ -32,11 +33,12 @@ class FindFriendActivity : AppCompatActivity() {
                 response: Response<String>
             ) {
                 response.body()?.let {
-                    val result = it
-
+                    if (it == "fail")
+                        Toast.makeText(this@FindFriendActivity, R.string.error_empty_response, Toast.LENGTH_SHORT).show()
+                    else
+                        binding.tvStatusMsg.setText(R.string.msg_actFF_registered)
                 }
             }
-
             override fun onFailure(call: Call<String>, t: Throwable) {
                 Log.d("CICOCHAT", t.message!!)
             }

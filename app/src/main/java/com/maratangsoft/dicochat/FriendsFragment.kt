@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.*
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.maratangsoft.dicochat.databinding.FragmentFriendsBinding
@@ -30,11 +31,18 @@ class FriendsFragment : Fragment() {
             true
         }
         binding.recyclerFriends.adapter = ChattingFragPanelEndAdapter(requireActivity(), friendsFragItems)
+    }
 
+    override fun onResume() {
+        super.onResume()
         getFriend()
     }
 
     private fun getFriend(){
+        friendsFragItems.clear()
+        val adapter = binding.recyclerFriends.adapter
+        adapter?.notifyItemRangeRemoved(0, adapter.itemCount - 1)
+
         val queryMap = mutableMapOf<String, String>()
         queryMap["type"] = "get_friend"
         queryMap["user_no"] = ALL.currentUserNo
@@ -46,11 +54,12 @@ class FriendsFragment : Fragment() {
                 response: Response<MutableList<UserItem>>
             ) {
                 response.body()?.let {
-                    val result = it
-
+                    it.forEachIndexed{ i, item ->
+                        friendsFragItems.add(item)
+                        adapter?.notifyItemInserted(i)
+                    }
                 }
             }
-
             override fun onFailure(call: Call<MutableList<UserItem>>, t: Throwable) {
                 Log.d("CICOCHAT", t.message!!)
             }

@@ -24,6 +24,7 @@
         android:layout_marginTop="25dp"/>
     
     <FrameLayout
+        android:id="@+id/btn_room_img"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="25dp"
@@ -39,7 +40,7 @@
         <de.hdodenhof.circleimageview.CircleImageView
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:src="@drawable/ic_add_24"
+            android:src="@drawable/ic_add_white"
             app:civ_circle_background_color="@color/black"
             android:layout_gravity="end"/>
     </FrameLayout>
@@ -64,12 +65,12 @@
         android:layout_marginTop="8dp"/>
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btn_create_room"
+        android:id="@+id/btn_register_room"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/btn_actNR_create"
         android:textSize="20sp"
-        android:textColor="@color/white"
+        android:textColor="@color/white_80per"
         android:background="@drawable/bg_button"
         android:layout_marginHorizontal="30dp"
         android:layout_marginTop="16dp"/>

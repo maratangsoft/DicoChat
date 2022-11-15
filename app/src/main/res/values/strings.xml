@@ -6,9 +6,10 @@
     <string name="msg_example">this is a message example. blablalblalbalblablablallalsdfsfsdfsdfsfefs</string>
     <string name="room_title">#Room Title</string>
     <string name="btn_ok">CONFIRM</string>
-    <string name="btn_cancel">CANCEL</string>
+    <string name="btn_cancel">Cancel</string>
     <string name="btn_yes">YES</string>
     <string name="btn_no">NO</string>
+    <string name="error_empty_response">DB Error!</string>
 
     <!--Login Activity-->
     <string name="guest_login">Login with guest account</string>
@@ -17,6 +18,8 @@
     <string name="et_panelC_input_msg">Input your message</string>
     <string name="tv_panelC_bs_title">Invite your friends</string>
     <string name="btn_panelC_bs_invite">Invite</string>
+
+    <string name="msg_panelC_initial">Select a room\nat the left panel</string>
 
     <!--ChattingFragment - Start-->
     <string name="btn_panelS_new_room">Create new room</string>
@@ -33,7 +36,8 @@
     <string name="et_actNR_set_title">Input the room title</string>
     <string name="btn_actNR_create">Create new room</string>
 
-    <string name="error_actNR_no_input">Input the room name!</string>
+    <string name="error_actNR_no_input">Input the room name and choose an image!</string>
+    <string name="msg_actNR_registered">You created a new room.</string>
 
     <!--RoomSettingActivity-->
     <string name="tb_actRS_title">Room Setting</string>
@@ -52,6 +56,7 @@
     <string name="btn_actFF_add">Add to your friends list</string>
 
     <string name="error_actFF_no_result">We couldn\'t find any result. Please check the number you input correct.</string>
+    <string name="msg_actFF_registered">Added a friend</string>
 
     <!--MentionFragment-->
     <string name="tb_fragM_title">Recent Mention</string>

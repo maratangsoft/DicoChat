@@ -26,11 +26,23 @@ class MentionFragment : Fragment() {
 
         //리사이클러뷰 어댑터
         binding.recyclerMention.adapter = MentionFragmentAdapter(requireActivity(), mentionFragItems)
+    }
 
+    override fun onResume() {
+        super.onResume()
         getMention()
     }
 
+    override fun onHiddenChanged(hidden: Boolean) {
+        super.onHiddenChanged(hidden)
+        if (!hidden) getMention()
+    }
+
     private fun getMention(){
+        mentionFragItems.clear()
+        val adapter = binding.recyclerMention.adapter
+        adapter?.notifyItemRangeRemoved(0, adapter.itemCount - 1)
+
         val queryMap = mutableMapOf<String, String>()
         queryMap["type"] = "get_mention"
         queryMap["user_no"] = ALL.currentUserNo
@@ -42,11 +54,12 @@ class MentionFragment : Fragment() {
                 response: Response<MutableList<ChatItem>>
             ) {
                 response.body()?.let {
-                    val result = it
-
+                    it.forEachIndexed{ i, item ->
+                        mentionFragItems.add(item)
+                        adapter?.notifyItemInserted(i)
+                    }
                 }
             }
-
             override fun onFailure(call: Call<MutableList<ChatItem>>, t: Throwable) {
                 Log.d("CICOCHAT", t.message!!)
             }

@@ -56,7 +56,7 @@ class ChattingFragPanelStartAdapter(val context:Context, val hostFragment: Chatt
     inner class ChattingFragPanelStartVH(val binding:FragmentChattingPanelStartItemBinding): ViewHolder(binding.root){
         init {
             binding.civRoomImg.setOnClickListener {
-                ALL.currentRoomNo = items[0].room_no
+                ALL.currentRoomNo = items[adapterPosition].room_no
                 hostFragment.getChat()
             }
         }

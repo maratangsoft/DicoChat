@@ -25,13 +25,6 @@ interface RetrofitService {
         @QueryMap queries: MutableMap<String,String>
     ): Call<String>
 
-    //GET방식, String 리스폰스, 요청변수가 Nullable
-    //get_user_no
-    @GET("CicoChatServer/GETtoPlain.php")
-    fun getToUserNo(
-        @QueryMap queries: MutableMap<String,String?>
-    ): Call<String>
-
     //POST방식, String 리스폰스
     //send_file, register_room, set_user_img
     @Multipart

@@ -2,8 +2,10 @@ package com.maratangsoft.dicochat
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.SpannableStringBuilder
 import android.util.Log
 import android.view.inputmethod.EditorInfo
+import android.widget.Toast
 import com.maratangsoft.dicochat.databinding.ActivityRoomSettingBinding
 import retrofit2.Call
 import retrofit2.Callback
@@ -35,11 +37,9 @@ class RoomSettingActivity : AppCompatActivity() {
                 response: Response<String>
             ) {
                 response.body()?.let {
-                    val result = it
-
+                    binding.etRoomTitle.text = SpannableStringBuilder(it)
                 }
             }
-
             override fun onFailure(call: Call<String>, t: Throwable) {
                 Log.d("CICOCHAT", t.message!!)
             }
@@ -65,11 +65,9 @@ class RoomSettingActivity : AppCompatActivity() {
                 response: Response<String>
             ) {
                 response.body()?.let {
-                    val result = it
-
+                    Toast.makeText(this@RoomSettingActivity, it, Toast.LENGTH_SHORT).show()
                 }
             }
-
             override fun onFailure(call: Call<String>, t: Throwable) {
                 Log.d("CICOCHAT", t.message!!)
             }

@@ -1,12 +1,15 @@
 package com.maratangsoft.dicochat
 
 import android.content.Context
+import android.content.pm.PackageManager
 import android.graphics.Rect
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.MotionEvent
 import android.view.inputmethod.InputMethodManager
+import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.widget.AppCompatEditText
 import androidx.fragment.app.Fragment
 import com.maratangsoft.dicochat.databinding.ActivityMainBinding
@@ -14,7 +17,19 @@ import com.maratangsoft.dicochat.databinding.ActivityMainBinding
 class MainActivity : AppCompatActivity() {
     private val binding by lazy { ActivityMainBinding.inflate(layoutInflater) }
     var fragments: Array<Fragment?> = arrayOf(ChattingFragment(), null, null, null)
-    val manager = supportFragmentManager
+    private val manager = supportFragmentManager
+
+    private val permissions = arrayOf(
+        android.Manifest.permission.WRITE_EXTERNAL_STORAGE,
+        android.Manifest.permission.ACCESS_MEDIA_LOCATION
+    )
+
+    private val permissionLauncher = registerForActivityResult(
+        ActivityResultContracts.RequestMultiplePermissions()) {
+        if(it[permissions[0]] == true){
+            Toast.makeText(this, "권한 확인됨", Toast.LENGTH_SHORT).show()
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,6 +38,9 @@ class MainActivity : AppCompatActivity() {
         manager.beginTransaction().add(R.id.container, fragments[0]!!).commit()
         binding.bnv.setOnItemSelectedListener { clickBnv(it) }
 
+        if (checkSelfPermission(permissions[0]) == PackageManager.PERMISSION_DENIED){
+            permissionLauncher.launch(permissions)
+        }
     }
     //자동 키보드 내리기 콜백메소드
     override fun dispatchTouchEvent(event: MotionEvent?): Boolean { //해당 뷰 아닌 곳을 터치시 발동

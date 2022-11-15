@@ -10,6 +10,7 @@
     <string name="btn_cancel">취소</string>
     <string name="btn_yes">네</string>
     <string name="btn_no">아니요</string>
+    <string name="error_empty_response">DB 에러!</string>
 
     <!--Login Activity-->
     <string name="guest_login">게스트 계정으로 로그인</string>
@@ -18,6 +19,8 @@
     <string name="et_panelC_input_msg">메시지를 입력하세요</string>
     <string name="tv_panelC_bs_title">친구 초대하기</string>
     <string name="btn_panelC_bs_invite">초대하기</string>
+
+    <string name="msg_panelC_initial">왼쪽 패널에서\n채팅방을 선택해 주세요</string>
 
     <!--ChattingFragment - Start-->
     <string name="btn_panelS_new_room">새 채팅방 만들기</string>
@@ -34,7 +37,8 @@
     <string name="et_actNR_set_title">방 제목을 입력하세요</string>
     <string name="btn_actNR_create">채팅방 만들기</string>
 
-    <string name="error_actNR_no_input">방 이름을 입력해 주세요!</string>
+    <string name="error_actNR_no_input">방 이름과 대표사진은 필수입니다!</string>
+    <string name="msg_actNR_registered">새로운 방을 생성했습니다.</string>
 
     <!--RoomSettingActivity-->
     <string name="tb_actRS_title">채팅방 설정</string>
@@ -53,6 +57,7 @@
     <string name="btn_actFF_add">친구 추가하기</string>
 
     <string name="error_actFF_no_result">검색 결과가 없습니다. 숫자가 정확한지 다시 한 번 확인해 주세요.</string>
+    <string name="msg_actFF_registered">친구를 추가했습니다.</string>
 
     <!--MentionFragment-->
     <string name="tb_fragM_title">최근 멘션</string>

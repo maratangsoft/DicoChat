@@ -15,7 +15,7 @@
         android:layout_marginTop="20dp"/>
 
     <LinearLayout
-        android:id="@+id/btn_create_room"
+        android:id="@+id/btn_register_room"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center_vertical"
@@ -26,7 +26,7 @@
             android:layout_height="50dp"
             android:background="@drawable/bg_circleimageview"
             android:backgroundTint="@color/black"
-            android:src="@drawable/ic_add_24"/>
+            android:src="@drawable/ic_add_white"/>
         <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
