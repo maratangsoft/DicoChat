@@ -13,13 +13,13 @@
         android:layout_height="?attr/actionBarSize"
         android:background="?colorPrimary"
         app:navigationIcon="@drawable/ic_cancel"
-        app:title="@string/tb_act_ff_title"
+        app:title="@string/tb_actFF_title"
         />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/tv_act_ff_search"
+        android:text="@string/tv_actFF_search"
         android:textSize="22sp"
         android:layout_marginTop="30dp"
         android:layout_marginStart="30dp"/>
@@ -28,7 +28,7 @@
         android:id="@+id/et_user_no"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/et_act_ff"
+        android:hint="@string/et_actFF"
         android:inputType="number"
         android:background="@drawable/bg_edittext"
         android:padding="12dp"
@@ -39,7 +39,7 @@
         android:id="@+id/tv_status_msg"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/error_frag_ff_no_result"
+        android:text="@string/error_actFF_no_result"
         android:textSize="16sp"
         android:textColor="#FFFF0000"
         android:layout_marginTop="10dp"
@@ -49,7 +49,7 @@
         android:id="@+id/btn_register_friend"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/btn_act_ff_add"
+        android:text="@string/btn_actFF_add"
         android:textSize="20sp"
         android:textColor="@color/white"
         android:background="@drawable/bg_button"

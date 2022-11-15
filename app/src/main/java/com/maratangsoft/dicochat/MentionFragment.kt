@@ -1,9 +1,13 @@
 package com.maratangsoft.dicochat
 
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import androidx.fragment.app.Fragment
 import com.maratangsoft.dicochat.databinding.FragmentMentionBinding
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class MentionFragment : Fragment() {
     lateinit var binding: FragmentMentionBinding
@@ -27,6 +31,25 @@ class MentionFragment : Fragment() {
     }
 
     private fun getMention(){
-        //TODO: 완성하기
+        val queryMap = mutableMapOf<String, String>()
+        queryMap["type"] = "get_mention"
+        queryMap["user_no"] = ALL.currentUserNo
+
+        val retrofitService = RetrofitHelper.getInstance().create(RetrofitService::class.java)
+        retrofitService.getToJsonChat(queryMap).enqueue(object : Callback<MutableList<ChatItem>> {
+            override fun onResponse(
+                call: Call<MutableList<ChatItem>>,
+                response: Response<MutableList<ChatItem>>
+            ) {
+                response.body()?.let {
+                    val result = it
+
+                }
+            }
+
+            override fun onFailure(call: Call<MutableList<ChatItem>>, t: Throwable) {
+                Log.d("CICOCHAT", t.message!!)
+            }
+        })
     }
 }

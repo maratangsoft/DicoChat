@@ -17,7 +17,7 @@
     <androidx.appcompat.widget.AppCompatTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/tv_act_nr_create"
+        android:text="@string/tv_actNR_create"
         android:textSize="26sp"
         android:textStyle="bold"
         android:layout_gravity="center_horizontal"
@@ -47,7 +47,7 @@
     <androidx.appcompat.widget.AppCompatTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/tv_act_nr_set_title"
+        android:text="@string/tv_actNR_set_title"
         android:textSize="22sp"
         android:layout_marginStart="30dp"
         android:layout_marginTop="16dp"/>
@@ -56,7 +56,7 @@
         android:id="@+id/et_room_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/et_act_nr_set_title"
+        android:hint="@string/et_actNR_set_title"
         android:inputType="text"
         android:background="@drawable/bg_edittext"
         android:padding="12dp"
@@ -67,7 +67,7 @@
         android:id="@+id/btn_create_room"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/btn_act_nr_create"
+        android:text="@string/btn_actNR_create"
         android:textSize="20sp"
         android:textColor="@color/white"
         android:background="@drawable/bg_button"

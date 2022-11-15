@@ -3,6 +3,7 @@ package com.maratangsoft.dicochat
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView.Adapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.bumptech.glide.Glide
@@ -30,10 +31,10 @@ class ChattingFragAdapter(val context:Context, var items:MutableList<ChatItem>):
     override fun getItemCount() = items.size
 }
 
-class ChattingFragBsAdapter(val context:Context, var items:MutableList<UserItem>): Adapter<ChattingFragBsAdapter.ChattingFragBsVH>(){
+class ChattingFragBsAdapter(val context:Context, val hostFragment: ChattingFragment, var items:MutableList<UserItem>): Adapter<ChattingFragBsAdapter.ChattingFragBsVH>(){
     inner class ChattingFragBsVH(val binding: FragmentChattingBsItemBinding): ViewHolder(binding.root){
         init {
-            binding.btnInvite.setOnClickListener { inviteUser() }
+            binding.btnInvite.setOnClickListener { hostFragment.inviteUser() }
         }
     }
 
@@ -49,17 +50,13 @@ class ChattingFragBsAdapter(val context:Context, var items:MutableList<UserItem>
     }
 
     override fun getItemCount() = items.size
-
-    private fun inviteUser(){
-
-    }
 }
 
 class ChattingFragPanelStartAdapter(val context:Context, val hostFragment: ChattingFragment, var items:MutableList<RoomItem>): Adapter<ChattingFragPanelStartAdapter.ChattingFragPanelStartVH>(){
     inner class ChattingFragPanelStartVH(val binding:FragmentChattingPanelStartItemBinding): ViewHolder(binding.root){
         init {
             binding.civRoomImg.setOnClickListener {
-                currentRoomNo = items[0].room_no
+                ALL.currentRoomNo = items[0].room_no
                 hostFragment.getChat()
             }
         }

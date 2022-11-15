@@ -65,7 +65,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/tv_frag_s_noti_all"
+            android:text="@string/tv_fragS_noti_all"
             android:textStyle="bold"
             android:textSize="22sp"/>
         <androidx.appcompat.widget.SwitchCompat
@@ -78,7 +78,7 @@
         android:id="@+id/btn_logout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/tv_frag_s_logout"
+        android:text="@string/btn_fragS_logout"
         android:textStyle="bold"
         android:textSize="22sp"
         android:layout_below="@+id/layout_noti_all"

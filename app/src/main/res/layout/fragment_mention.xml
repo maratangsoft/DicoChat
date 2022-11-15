@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="?colorPrimary"
-        app:title="@string/tb_frag_m_title" />
+        app:title="@string/tb_fragM_title" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_mention"

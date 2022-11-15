@@ -2,10 +2,14 @@ package com.maratangsoft.dicochat
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.maratangsoft.dicochat.databinding.FragmentFriendsBinding
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class FriendsFragment : Fragment() {
     lateinit var binding: FragmentFriendsBinding
@@ -31,6 +35,25 @@ class FriendsFragment : Fragment() {
     }
 
     private fun getFriend(){
-        //TODO: 완성하기
+        val queryMap = mutableMapOf<String, String>()
+        queryMap["type"] = "get_friend"
+        queryMap["user_no"] = ALL.currentUserNo
+
+        val retrofitService = RetrofitHelper.getInstance().create(RetrofitService::class.java)
+        retrofitService.getToJsonUser(queryMap).enqueue(object : Callback<MutableList<UserItem>> {
+            override fun onResponse(
+                call: Call<MutableList<UserItem>>,
+                response: Response<MutableList<UserItem>>
+            ) {
+                response.body()?.let {
+                    val result = it
+
+                }
+            }
+
+            override fun onFailure(call: Call<MutableList<UserItem>>, t: Throwable) {
+                Log.d("CICOCHAT", t.message!!)
+            }
+        })
     }
 }

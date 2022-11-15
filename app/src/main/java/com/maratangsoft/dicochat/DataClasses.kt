@@ -23,5 +23,6 @@ data class ChatItem(
     val write_date:String,
     var room_title:String?,
     val nickname:String,
-    val user_img:String
+    val user_img:String,
+    val RNUM:String
 )
