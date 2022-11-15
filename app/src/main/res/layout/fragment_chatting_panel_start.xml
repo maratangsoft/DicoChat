@@ -25,14 +25,13 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:background="@drawable/bg_circleimageview"
-            android:backgroundTint="@color/gray"
-            android:src="@drawable/ic_add_24_primary"/>
+            android:backgroundTint="@color/black"
+            android:src="@drawable/ic_add_24"/>
         <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="새 채팅방 만들기"
+            android:text="@string/btn_panel_s_new_room"
             android:textSize="20sp"
-            android:textColor="@color/black"
             android:layout_marginStart="10dp" />
     </LinearLayout>
 

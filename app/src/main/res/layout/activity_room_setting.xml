@@ -13,15 +13,14 @@
         android:layout_height="?attr/actionBarSize"
         android:background="?colorPrimary"
         app:navigationIcon="@drawable/ic_cancel"
-        app:title="채팅방 설정"
+        app:title="@string/tb_act_rs_title"
         app:titleTextColor="@color/white" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="방 제목"
+        android:text="@string/tv_act_rs_set_title"
         android:textSize="22sp"
-        android:textColor="@color/black"
         android:layout_marginTop="30dp"
         android:layout_marginStart="30dp"/>
 
@@ -29,8 +28,7 @@
         android:id="@+id/et_room_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="방 제목"
-        android:textColorHint="@color/black"
+        android:hint="@string/et_act_rs_set_title"
         android:backgroundTint="@color/black"
         android:layout_marginHorizontal="26dp"
         android:layout_marginTop="8dp"
@@ -46,14 +44,12 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="채팅방 알림 끄기/켜기"
-            android:textSize="22sp"
-            android:textColor="@color/black"/>
+            android:text="@string/tv_act_rs_noti"
+            android:textSize="22sp"/>
         <androidx.appcompat.widget.SwitchCompat
             android:id="@+id/switch_noti_room"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:trackTint="@color/gray"/>
+            android:layout_height="wrap_content"/>
     </LinearLayout>
 
 </LinearLayout>

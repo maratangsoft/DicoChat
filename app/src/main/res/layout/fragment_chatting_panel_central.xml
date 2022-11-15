@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="@color/bg_reactive"
     android:orientation="vertical">
 
         <androidx.appcompat.widget.Toolbar
@@ -14,7 +14,7 @@
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
             app:menu="@menu/fragment_chatting_opt"
             app:navigationIcon="@drawable/ic_hamburger"
-            app:title="#방 제목" />
+            app:title="@string/room_title" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_panel_central"
@@ -44,11 +44,10 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="@drawable/bg_edittext"
-                android:hint="메시지를 입력하세요."
+                android:hint="@string/et_panel_c_input_msg"
                 android:inputType="textMultiLine"
                 android:maxLines="5"
                 android:padding="8dp"
-                android:textColorHint="#FF606060"
                 android:textSize="16sp"
                 android:layout_marginStart="6dp"/>
 

@@ -45,7 +45,7 @@ class ChattingFragBsAdapter(val context:Context, var items:MutableList<UserItem>
     override fun onBindViewHolder(holder: ChattingFragBsVH, position: Int) {
         Glide.with(context).load(items[position].user_img).into(holder.binding.civUserImg)
         holder.binding.tvNickname.text = items[position].nickname
-        holder.binding.tvUserNo.text = items[position].user_no.toString()
+        holder.binding.tvUserNo.text = items[position].user_no
     }
 
     override fun getItemCount() = items.size

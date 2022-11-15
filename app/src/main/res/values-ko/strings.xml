@@ -1,11 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!--Login Activity-->
     <string name="app_name">씨코챗</string>
+    <string name="nickname">익명</string>
+    <string name="user_no">#9999</string>
+    <string name="write_date">2022.10.21. 오후 10:35</string>
+    <string name="msg_example">메시지 예시입니다. 블라블라블라블라라라라라라랄라라라라라라라</string>
+    <string name="room_title">#방 제목</string>
+
+    <!--Login Activity-->
     <string name="guest_login">게스트 계정으로 로그인</string>
 
+    <!--ChattingFragment - Central-->
+    <string name="et_panel_c_input_msg">메시지를 입력하세요</string>
+    <string name="tv_panel_c_bs_title">친구 초대하기</string>
+    <string name="btn_panel_c_bs_invite">초대하기</string>
+
+    <!--ChattingFragment - Start-->
+    <string name="btn_panel_s_new_room">새 채팅방 만들기</string>
+
+    <!--ChattingFragment - End-->
+    <string name="btn_panel_e_search">검색하기</string>
+    <string name="btn_panel_e_noti">알림</string>
+    <string name="btn_panel_e_room_setting">설정</string>
+    <string name="btn_panel_e_invite">멤버 초대하기</string>
+
+    <!--NewRoomActivity-->
+    <string name="tv_act_nr_create">채팅방을 만들어 보세요</string>
+    <string name="tv_act_nr_set_title">방 제목</string>
+    <string name="et_act_nr_set_title">방 제목을 입력하세요</string>
+    <string name="btn_act_nr_create">채팅방 만들기</string>
+
+    <string name="error_act_nr_no_input">방 이름을 입력해 주세요!</string>
+
+    <!--RoomSettingActivity-->
+    <string name="tb_act_rs_title">채팅방 설정</string>
+    <string name="tv_act_rs_set_title">방 제목</string>
+    <string name="et_act_rs_set_title">방 제목을 입력하세요</string>
+    <string name="tv_act_rs_noti">채팅방 알림 끄기/켜기</string>
+
+    <!--FriendsFragment-->
+    <string name="tb_frag_f_title">친구</string>
+    <string name="tv_frag_f_bs_send">ㅤ메시지 보내기</string>
+
     <!--Find Friend Activity-->
-    <string name="add_friends">친구 추가하기</string>
-    <string name="tv_frag_ff_search">아이디로 검색하기</string>
-    <string name="et_frag_ff"># 뒤의 숫자를 입력해 주세요.</string>
+    <string name="tb_act_ff_title">친구 추가하기</string>
+    <string name="tv_act_ff_search">아이디로 검색하기</string>
+    <string name="et_act_ff"># 뒤의 숫자를 입력해 주세요</string>
+    <string name="btn_act_ff_add">친구 추가하기</string>
+
+    <string name="error_frag_ff_no_result">검색 결과가 없습니다. 숫자가 정확한지 다시 한 번 확인해 주세요.</string>
+
+    <!--MentionFragment-->
+    <string name="tb_frag_m_title">최근 멘션</string>
+
+    <!--SettingFragment-->
+    <string name="tv_frag_s_noti_all">모든 알림 끄기/켜기</string>
+    <string name="tv_frag_s_logout">ㅤ로그아웃</string>
+    <string name="et_frag_s_dialog">변경할 닉네임을 입력하세요</string>
+    <string name="btn_frag_s_dialog_ok">확인</string>
+    <string name="btn_frag_s_dialog_cancel">취소</string>
+
 </resources>

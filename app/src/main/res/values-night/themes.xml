@@ -3,14 +3,15 @@
     <style name="Theme.DicoChat" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">#FF41B8FE</item>
-        <item name="colorPrimaryVariant">#FFB7DBF0</item>
+        <item name="colorPrimaryVariant">#434A4E</item>
         <item name="colorOnPrimary">@color/black</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/teal_200</item>
         <item name="colorSecondaryVariant">@color/teal_200</item>
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
-        <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
+        <item name="android:statusBarColor">?attr/colorPrimary</item>
         <!-- Customize your theme here. -->
+        <item name="android:titleTextColor">#CDFFFFFF</item>
     </style>
 </resources>

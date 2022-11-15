@@ -1,10 +1,62 @@
 <resources>
-    <!--Login Activity-->
     <string name="app_name">CicoChat</string>
+    <string name="nickname">Anonymous</string>
+    <string name="user_no">#9999</string>
+    <string name="write_date">2022.10.21. PM 10:35</string>
+    <string name="msg_example">this is a message example. blablalblalbalblablablallalsdfsfsdfsdfsfefs</string>
+    <string name="room_title">#Room Title</string>
+
+    <!--Login Activity-->
     <string name="guest_login">Login with guest account</string>
 
+    <!--ChattingFragment- Central-->
+    <string name="et_panel_c_input_msg">Input your message</string>
+    <string name="tv_panel_c_bs_title">Invite your friends</string>
+    <string name="btn_panel_c_bs_invite">Invite</string>
+
+    <!--ChattingFragment - Start-->
+    <string name="btn_panel_s_new_room">Create new room</string>
+
+    <!--ChattingFragment - End-->
+    <string name="btn_panel_e_search">Search</string>
+    <string name="btn_panel_e_noti">Notification</string>
+    <string name="btn_panel_e_room_setting">Room Setting</string>
+    <string name="btn_panel_e_invite">Invite Friends</string>
+
+    <!--NewRoomActivity-->
+    <string name="tv_act_nr_create">Create new chatting room</string>
+    <string name="tv_act_nr_set_title">Room Title</string>
+    <string name="et_act_nr_set_title">Input the room title</string>
+    <string name="btn_act_nr_create">Create new room</string>
+
+    <string name="error_act_nr_no_input">Input the room name!</string>
+
+    <!--RoomSettingActivity-->
+    <string name="tb_act_rs_title">Room Setting</string>
+    <string name="tv_act_rs_set_title">Room Title</string>
+    <string name="et_act_rs_set_title">Input the new room title</string>
+    <string name="tv_act_rs_noti">Notification for this room\n(ON / OFF)</string>
+
+    <!--FriendsFragment-->
+    <string name="tb_frag_f_title">Friends</string>
+    <string name="tv_frag_f_bs_send">ㅤSend a message</string>
+
     <!--FindFriendActivity-->
-    <string name="add_friends">Add friends</string>
-    <string name="tv_frag_ff_search">search with User ID</string>
-    <string name="et_frag_ff">input a number after #</string>
+    <string name="tb_act_ff_title">Add friends</string>
+    <string name="tv_act_ff_search">search with User ID</string>
+    <string name="et_act_ff">input a number after #</string>
+    <string name="btn_act_ff_add">Add to your friends list</string>
+
+    <string name="error_frag_ff_no_result">We couldn\'t find any result. Please check the number you input correct.</string>
+
+    <!--MentionFragment-->
+    <string name="tb_frag_m_title">Recent Mention</string>
+
+    <!--SettingFragment-->
+    <string name="tv_frag_s_noti_all">Notification for ALL room\n(ON / OFF)</string>
+    <string name="tv_frag_s_logout">ㅤLogout</string>
+    <string name="et_frag_s_dialog">Input new nickname</string>
+    <string name="btn_frag_s_dialog_ok">Confirm</string>
+    <string name="btn_frag_s_dialog_cancel">Cancel</string>
+
 </resources>

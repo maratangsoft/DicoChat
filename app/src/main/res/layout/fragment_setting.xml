@@ -27,10 +27,9 @@
         android:id="@+id/tv_nickname"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="밍구망구"
+        android:text="@string/nickname"
         android:textSize="26sp"
         android:textStyle="bold"
-        android:textColor="@color/black"
         android:layout_below="@+id/civ_user_img"
         android:layout_marginTop="18dp"/>
 
@@ -47,7 +46,7 @@
         android:id="@+id/tv_user_no"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="#2038"
+        android:text="@string/user_no"
         android:textColor="@color/gray"
         android:textStyle="bold"
         android:textSize="26sp"
@@ -55,45 +54,31 @@
         android:layout_toEndOf="@+id/tv_nickname"
         android:layout_marginStart="32dp"/>
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/btn_status"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="상태 설정"
-        android:textColor="@color/black"
-        android:textStyle="bold"
-        android:textSize="22sp"
-        android:layout_below="@+id/tv_nickname"
-        android:layout_marginTop="50dp"/>
-
     <LinearLayout
         android:id="@+id/layout_noti_all"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/btn_status"
-        android:layout_marginTop="16dp"
+        android:layout_below="@+id/tv_user_no"
+        android:layout_marginTop="50dp"
         android:gravity="center_vertical">
         <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="모든 알림 끄기/켜기"
-            android:textColor="@color/black"
+            android:text="@string/tv_frag_s_noti_all"
             android:textStyle="bold"
             android:textSize="22sp"/>
         <androidx.appcompat.widget.SwitchCompat
             android:id="@+id/switch_noti_all"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:trackTint="@color/gray"/>
+            android:layout_height="wrap_content"/>
     </LinearLayout>
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/btn_logout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text=" 로그아웃"
-        android:textColor="@color/black"
+        android:text="@string/tv_frag_s_logout"
         android:textStyle="bold"
         android:textSize="22sp"
         android:layout_below="@+id/layout_noti_all"

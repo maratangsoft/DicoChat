@@ -12,17 +12,10 @@ class RoomSettingActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        setSupportActionBar(binding.toolbar)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-
+        binding.toolbar.setNavigationOnClickListener { finish() }
         binding.etRoomTitle.setOnEditorActionListener { _, actionId, _ -> clickDone(actionId) }
 
         getRoomTitle()
-    }
-
-    override fun onSupportNavigateUp(): Boolean {
-        finish()
-        return super.onSupportNavigateUp()
     }
 
     private fun getRoomTitle(){

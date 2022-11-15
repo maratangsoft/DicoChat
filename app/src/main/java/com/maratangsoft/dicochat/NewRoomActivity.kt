@@ -13,20 +13,13 @@ class NewRoomActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        setSupportActionBar(binding.toolbar)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-
+        binding.toolbar.setNavigationOnClickListener { finish() }
         binding.btnCreateRoom.setOnClickListener { registerRoom() }
-    }
-
-    override fun onSupportNavigateUp(): Boolean {
-        finish()
-        return super.onSupportNavigateUp()
     }
 
     private fun registerRoom(){
         if (binding.etRoomTitle.text == null){
-            Toast.makeText(this, "방 이름을 입력해 주세요!", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, R.string.error_act_nr_no_input, Toast.LENGTH_SHORT).show()
         }
         val roomTitle = binding.etRoomTitle.text.toString()
         //TODO: 완성하기
