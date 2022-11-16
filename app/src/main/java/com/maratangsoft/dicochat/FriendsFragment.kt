@@ -75,10 +75,12 @@ class FriendsFragment : Fragment() {
         val tvUserNo = bsd.findViewById<AppCompatTextView>(R.id.tv_user_no)
         val civUserImg = bsd.findViewById<CircleImageView>(R.id.civ_user_img)
 
-        tvNick?.text = friendsFragItems[position].nickname
-        tvUserNo?.text = friendsFragItems[position].user_no
-        Glide.with(requireActivity()).load(ALL.BASE_URL + friendsFragItems[position].user_img).error(R.drawable.icons8_monkey_164).into(civUserImg!!)
-
         bsd.show()
+
+        tvNick?.text = friendsFragItems[position].nickname
+        tvUserNo?.text = "#${friendsFragItems[position].user_no}" //getFriends()에서 friend_no를 user_no 자리에 받았으므로 여기서도 바꿔야 한다
+
+        val imgUrl = "${ALL.BASE_URL}CicoChatServer/${friendsFragItems[position].user_img}"
+        Glide.with(requireActivity()).load(imgUrl).error(R.drawable.icons8_monkey_164).into(civUserImg!!)
     }
 }

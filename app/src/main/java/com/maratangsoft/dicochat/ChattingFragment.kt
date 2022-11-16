@@ -16,6 +16,7 @@ import androidx.fragment.app.Fragment
 import androidx.loader.content.CursorLoader
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.discord.panels.OverlappingPanelsLayout
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.maratangsoft.dicochat.databinding.FragmentChattingBinding
 import de.hdodenhof.circleimageview.CircleImageView
@@ -30,7 +31,6 @@ import java.io.File
 class ChattingFragment : Fragment() {
     lateinit var binding: FragmentChattingBinding
     var chattingFragItems: MutableList<ChatItem> = mutableListOf()
-    private var chattingFragBsItems: MutableList<UserItem> = mutableListOf()
     var chattingFragPanelStartItems: MutableList<RoomItem> = mutableListOf()
     var chattingFragPanelEndItems: MutableList<UserItem> = mutableListOf()
     private lateinit var bsd:BottomSheetDialog
@@ -66,8 +66,15 @@ class ChattingFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-//////////////가운데 패널 뷰 설정////////////////
         Log.d("CICO-currentUserNo", ALL.currentUserNo)
+        Log.d("CICO-currentRoomNo", ALL.currentRoomNo)
+
+        //앱 시작시 채팅방 입장을 위해 왼쪽 패널부터 감
+        if (ALL.currentRoomNo == "") {
+            binding.overlappingPanels.setStartPanelLockState(OverlappingPanelsLayout.LockState.OPEN)
+        }
+
+//////////////가운데 패널 뷰 설정////////////////
 
         //툴바 아이콘 리스너
         binding.panelCentral.toolbar.setNavigationOnClickListener{ binding.overlappingPanels.openStartPanel() }
@@ -103,15 +110,10 @@ class ChattingFragment : Fragment() {
             )
         }
 
-        //바텀시트 다이얼로그 리스너
+        //초대하기 바텀시트 다이얼로그 리스너
         binding.panelEnd.btnShowBs.setOnClickListener {
-            bsd = BottomSheetDialog(requireActivity())
-            bsd.setContentView(layoutInflater.inflate(R.layout.fragment_chatting_bs, null))
-
-            bsd.findViewById<RecyclerView>(R.id.recycler_chatting_bs)?.adapter = ChattingFragBsAdapter(requireActivity(), this, chattingFragBsItems)
-
-            getFriend()
-            bsd.show()
+            val bsDialog = ChattingBSFragment()
+            bsDialog.show(requireActivity().supportFragmentManager, bsDialog.tag)
         }
 
         //방 멤버 목록 리사이클러뷰
@@ -160,6 +162,8 @@ class ChattingFragment : Fragment() {
         queryMap["room_no"] = ALL.currentRoomNo
         queryMap["user_no"] = ALL.currentUserNo
         queryMap["message"] = binding.panelCentral.etMsg.text.toString()
+        queryMap["mentioned"] = "" //TODO: 멘션 기능 넣기
+        Log.d("CICO-PanelC-sendChat-queryMap", queryMap.toString())
 
         retrofitService.getToPlain(queryMap).enqueue(object : Callback<String> {
             override fun onResponse(
@@ -167,14 +171,14 @@ class ChattingFragment : Fragment() {
                 response: Response<String>
             ) {
                 response.body()?.let {
-                    if (it == "fail")
-                        Toast.makeText(requireActivity(), R.string.error_empty_response, Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireActivity(), it, Toast.LENGTH_SHORT).show()
                 }
             }
             override fun onFailure(call: Call<String>, t: Throwable) {
-                Log.d("CICOCHAT", t.message!!)
+                Log.d("CICO-PanelC-sendChat", t.message!!)
             }
         })
+        binding.panelCentral.etMsg.text = null
     }
 
     private fun gotoGallery(){
@@ -211,48 +215,7 @@ class ChattingFragment : Fragment() {
     private fun takePushChats(){
         //TODO: 푸시 받아서 채팅목록 업데이트
     }
-
-    private fun getFriend(){
-        chattingFragBsItems.clear()
-        val adapter = bsd.findViewById<RecyclerView>(R.id.recycler_chatting_bs)?.adapter
-        adapter?.notifyDataSetChanged()
-
-        val queryMap = mutableMapOf<String, String>()
-        queryMap["type"] = "get_friend"
-        queryMap["user_no"] = ALL.currentUserNo
-
-        retrofitService.getToJsonUser(queryMap).enqueue(object : Callback<MutableList<UserItem>> {
-            override fun onResponse(
-                call: Call<MutableList<UserItem>>,
-                response: Response<MutableList<UserItem>>
-            ) {
-                response.body()?.let {
-                    it.forEachIndexed{ i, item ->
-                        chattingFragPanelEndItems.add(UserItem(item.friend_no!!, null, item.nickname, item.user_img))
-                        adapter?.notifyItemInserted(i)
-                    }
-                }
-            }
-            override fun onFailure(call: Call<MutableList<UserItem>>, t: Throwable) {
-                Log.d("CICOCHAT", t.message!!)
-            }
-        })
-    }
-
-    fun getProfileBs(position:Int){
-        bsd = BottomSheetDialog(requireActivity())
-        bsd.setContentView(layoutInflater.inflate(R.layout.fragment_friends_bs, null))
-
-        val tvNick = bsd.findViewById<AppCompatTextView>(R.id.tv_nickname)
-        val tvUserNo = bsd.findViewById<AppCompatTextView>(R.id.tv_user_no)
-        val civUserImg = bsd.findViewById<CircleImageView>(R.id.civ_user_img)
-
-        tvNick?.text = chattingFragPanelEndItems[position].nickname
-        tvUserNo?.text = chattingFragPanelEndItems[position].user_no
-        Glide.with(requireActivity()).load("${ALL.BASE_URL}CicoChatServer/${chattingFragPanelEndItems[position].user_img}").error(R.drawable.icons8_monkey_164).into(civUserImg!!)
-
-        bsd.show()
-    }
+/////////왼쪽 패널//////////////////////////////////////////////////
 
     private fun getRoom(){
         chattingFragPanelStartItems.clear()
@@ -281,14 +244,20 @@ class ChattingFragment : Fragment() {
         })
     }
 
-    fun clickRoom(position:Int){
+    //어댑터 연동된 리스너 메소드
+    fun clickRoom(position:Int) {
         val item = chattingFragPanelStartItems[position]
         ALL.currentRoomNo = item.room_no
         ALL.currentRoomTitle = item.room_title
-        binding.overlappingPanels.closePanels()
+        if (ALL.currentRoomNo != "") {
+            binding.overlappingPanels.setStartPanelLockState(OverlappingPanelsLayout.LockState.UNLOCKED)
+            binding.overlappingPanels.closePanels()
+        }
+
         getChat()
         getRoomMember()
     }
+/////////////오른쪽 패널//////////////////////////////////////////////////
 
     private fun getRoomMember(){
         chattingFragPanelEndItems.clear()
@@ -317,31 +286,21 @@ class ChattingFragment : Fragment() {
         })
     }
 
-    fun inviteUser(){
-        val queryMap = mutableMapOf<String, String>()
-        queryMap["type"] = "invite_user"
-        queryMap["user_no"] = ALL.currentUserNo
-        queryMap["room_no"] = ALL.currentRoomNo
+    //어댑터 연동된 멤버 상세정보 바텀시트
+    fun getProfileBs(position:Int){
+        bsd = BottomSheetDialog(requireActivity())
+        bsd.setContentView(layoutInflater.inflate(R.layout.fragment_friends_bs, null))
 
-        retrofitService.getToPlain(queryMap).enqueue(object : Callback<String> {
-            override fun onResponse(
-                call: Call<String>,
-                response: Response<String>
-            ) {
-                response.body()?.let {
-                    if (it == "fail")
-                        Toast.makeText(requireActivity(), R.string.error_empty_response, Toast.LENGTH_SHORT).show()
-                    else
-                        takePushInvite()
-                }
-            }
-            override fun onFailure(call: Call<String>, t: Throwable) {
-                Log.d("CICOCHAT", t.message!!)
-            }
-        })
-    }
+        val tvNick = bsd.findViewById<AppCompatTextView>(R.id.tv_nickname)
+        val tvUserNo = bsd.findViewById<AppCompatTextView>(R.id.tv_user_no)
+        val civUserImg = bsd.findViewById<CircleImageView>(R.id.civ_user_img)
 
-    fun takePushInvite(){
-        //TODO: 푸시로 멤버리스트 업데이트
+        bsd.show()
+
+        tvNick?.text = chattingFragPanelEndItems[position].nickname
+        tvUserNo?.text = "#${chattingFragPanelEndItems[position].user_no}"
+
+        val imgUrl = "${ALL.BASE_URL}CicoChatServer/${chattingFragPanelEndItems[position].user_img}"
+        Glide.with(requireActivity()).load(imgUrl).error(R.drawable.icons8_monkey_164).into(civUserImg!!)
     }
 }

@@ -22,28 +22,12 @@ class ChattingFragAdapter(val context:Context, var items:MutableList<ChatItem>):
         return ChattingFragVH(FragmentChattingItemBinding.bind(itemView))
     }
     override fun onBindViewHolder(holder: ChattingFragVH, position: Int) {
-        Glide.with(context).load("${ALL.BASE_URL}${items[position].user_img}").error(R.drawable.icons8_monkey_164).into(holder.binding.civUserImg)
         holder.binding.tvNickname.text = items[position].nickname
         holder.binding.tvMesssage.text = items[position].message
         holder.binding.tvWriteDate.text = items[position].write_date
-    }
-    override fun getItemCount() = items.size
-}
 
-class ChattingFragBsAdapter(val context:Context, val hostFragment: ChattingFragment, var items:MutableList<UserItem>): Adapter<ChattingFragBsAdapter.ChattingFragBsVH>(){
-    inner class ChattingFragBsVH(val binding: FragmentChattingBsItemBinding): ViewHolder(binding.root){
-        init {
-            binding.btnInvite.setOnClickListener { hostFragment.inviteUser() }
-        }
-    }
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ChattingFragBsVH {
-        val itemView = LayoutInflater.from(context).inflate(R.layout.fragment_chatting_bs_item, parent, false)
-        return ChattingFragBsVH(FragmentChattingBsItemBinding.bind(itemView))
-    }
-    override fun onBindViewHolder(holder: ChattingFragBsVH, position: Int) {
-        Glide.with(context).load("${ALL.BASE_URL}${items[position].user_img}").error(R.drawable.icons8_monkey_164).into(holder.binding.civUserImg)
-        holder.binding.tvNickname.text = items[position].nickname
-        holder.binding.tvUserNo.text = items[position].user_no
+        val imgUrl = "${ALL.BASE_URL}CicoChatServer/${items[position].user_img}"
+        Glide.with(context).load(imgUrl).error(R.drawable.icons8_monkey_164).into(holder.binding.civUserImg)
     }
     override fun getItemCount() = items.size
 }
@@ -59,10 +43,12 @@ class ChattingFragPanelStartAdapter(val context:Context, val hostFragment: Chatt
         return ChattingFragPanelStartVH(FragmentChattingPanelStartItemBinding.bind(itemView))
     }
     override fun onBindViewHolder(holder: ChattingFragPanelStartVH, position: Int) {
-        Glide.with(context).load("${ALL.BASE_URL}${items[position].room_img}").error(R.drawable.icons8_monkey_164).into(holder.binding.civRoomImg)
         holder.binding.tvRoomTitle.text = items[position].room_title
         holder.binding.vPointer.visibility = if (items[position].room_no == ALL.currentRoomNo) View.VISIBLE
                                             else View.INVISIBLE
+
+        val imgUrl = "${ALL.BASE_URL}CicoChatServer/${items[position].room_img}"
+        Glide.with(context).load(imgUrl).error(R.drawable.icons8_monkey_164).into(holder.binding.civRoomImg)
     }
     override fun getItemCount() = items.size
 }
@@ -78,8 +64,31 @@ class ChattingFragPanelEndAdapter(val context:Context, val hostFragment: Chattin
         return ChattingFragPanelEndVH(FragmentChattingPanelEndItemBinding.bind(itemView))
     }
     override fun onBindViewHolder(holder: ChattingFragPanelEndVH, position: Int) {
-        Glide.with(context).load("${ALL.BASE_URL}${items[position].user_img}").error(R.drawable.icons8_monkey_164).into(holder.binding.civUserImg)
         holder.binding.tvNickname.text = items[position].nickname
+
+        val imgUrl = "${ALL.BASE_URL}CicoChatServer/${items[position].user_img}"
+        Glide.with(context).load(imgUrl).error(R.drawable.icons8_monkey_164).into(holder.binding.civUserImg)
+    }
+    override fun getItemCount() = items.size
+}
+
+class ChattingFragBsAdapter(val context:Context, val hostFragment: ChattingBSFragment, var items:MutableList<UserItem>): Adapter<ChattingFragBsAdapter.ChattingFragBsVH>(){
+    inner class ChattingFragBsVH(val binding: FragmentChattingBsItemBinding): ViewHolder(binding.root){
+        init {
+            binding.btnInvite.setOnClickListener { hostFragment.inviteUser(adapterPosition) }
+        }
+    }
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ChattingFragBsVH {
+        val itemView = LayoutInflater.from(context).inflate(R.layout.fragment_chatting_bs_item, parent, false)
+        return ChattingFragBsVH(FragmentChattingBsItemBinding.bind(itemView))
+    }
+    override fun onBindViewHolder(holder: ChattingFragBsVH, position: Int) {
+        holder.binding.tvNickname.text = items[position].nickname
+        holder.binding.tvUserNo.text = items[position].friend_no
+
+        val imgUrl = "${ALL.BASE_URL}CicoChatServer/${items[position].user_img}"
+        Glide.with(context).load(imgUrl).error(R.drawable.icons8_monkey_164).into(holder.binding.civUserImg)
     }
     override fun getItemCount() = items.size
 }
@@ -95,8 +104,10 @@ class FriendsFragmentAdapter(val context:Context, val hostFragment: FriendsFragm
         return FriendsFragmentVH(FragmentChattingPanelEndItemBinding.bind(itemView))
     }
     override fun onBindViewHolder(holder: FriendsFragmentVH, position: Int) {
-        Glide.with(context).load("${ALL.BASE_URL}${items[position].user_img}").error(R.drawable.icons8_monkey_164).into(holder.binding.civUserImg)
         holder.binding.tvNickname.text = items[position].nickname
+
+        val imgUrl = "${ALL.BASE_URL}CicoChatServer/${items[position].user_img}"
+        Glide.with(context).load(imgUrl).error(R.drawable.icons8_monkey_164).into(holder.binding.civUserImg)
     }
     override fun getItemCount() = items.size
 }
@@ -110,10 +121,12 @@ class MentionFragmentAdapter(val context:Context, var items:MutableList<ChatItem
     }
     override fun onBindViewHolder(holder: MentionFragVH, position: Int) {
         holder.binding.tvRoomTitle.text = items[position].room_title
-        Glide.with(context).load("${ALL.BASE_URL}${items[position].user_img}").error(R.drawable.icons8_monkey_164).into(holder.binding.civUserImg)
         holder.binding.tvNickname.text = items[position].nickname
         holder.binding.tvWriteDate.text = items[position].write_date
         holder.binding.tvMessage.text = items[position].message
+
+        val imgUrl = "${ALL.BASE_URL}CicoChatServer/${items[position].user_img}"
+        Glide.with(context).load(imgUrl).error(R.drawable.icons8_monkey_164).into(holder.binding.civUserImg)
     }
 
     override fun getItemCount() = items.size

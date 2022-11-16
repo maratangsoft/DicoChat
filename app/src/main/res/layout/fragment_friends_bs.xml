@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    android:id="@+id/bs_root"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     app:behavior_peekHeight="0dp"
     android:background="@drawable/bg_bottomsheet"
     app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
@@ -61,6 +63,7 @@
         android:drawableStart="@drawable/ic_chat_bubble_24"
         android:layout_below="@+id/tv_nickname"
         android:layout_alignStart="@+id/tv_nickname"
-        android:layout_marginTop="20dp"/>
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="100dp"/>
 
 </RelativeLayout>

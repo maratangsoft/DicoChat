@@ -33,11 +33,13 @@ class SettingFragment : Fragment() {
     private val resultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){ result ->
         if (result.resultCode != Activity.RESULT_CANCELED){
             val uri = result.data?.data
+            Log.d("CICO-FragS-uri", uri.toString())
             Glide.with(requireActivity()).load(uri).into(binding.civUserImg)
 
             val proj = arrayOf(MediaStore.Images.Media.DATA)
             val loader = CursorLoader(requireActivity(), uri!!, proj, null, null, null)
             val cursor = loader.loadInBackground()
+            Log.d("CICO-FragS-cursor", cursor.toString())
             val columnIndex = cursor!!.getColumnIndexOrThrow(MediaStore.Images.Media.DATA)
             cursor.moveToFirst()
             imgPath = cursor.getString(columnIndex)
@@ -60,8 +62,6 @@ class SettingFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.tvUserNo.text = "#${ALL.currentUserNo}"
-        binding.civUserImg.setOnClickListener { goToGallery() }
-        binding.tvNickname.setOnClickListener { openNickDialog() }
         binding.btnLogout.setOnClickListener { logout() }
 
         getProfile()
@@ -78,9 +78,13 @@ class SettingFragment : Fragment() {
                 response: Response<MutableList<UserItem>>
             ) {
                 response.body()?.let {
-                    Log.d("CICO-FragSet-response", it.toString())
                     binding.tvNickname.text = it[0].nickname
-                    Glide.with(requireActivity()).load("${ALL.BASE_URL}CicoChatServer/${it[0].user_img}").error(R.drawable.icons8_monkey_164).into(binding.civUserImg)
+
+                    val imgUrl = "${ALL.BASE_URL}CicoChatServer/${it[0].user_img}"
+                    Glide.with(requireActivity()).load(imgUrl).error(R.drawable.icons8_monkey_164).into(binding.civUserImg)
+
+                    binding.civUserImg.setOnClickListener { goToGallery() }
+                    binding.tvNickname.setOnClickListener { openNickDialog() }
                 }
             }
             override fun onFailure(call: Call<MutableList<UserItem>>, t: Throwable) {
@@ -116,8 +120,7 @@ class SettingFragment : Fragment() {
                 response: Response<String>
             ) {
                 response.body()?.let {
-                    if (it == "fail")
-                        Toast.makeText(requireActivity(), R.string.error_empty_response, Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireActivity(), it, Toast.LENGTH_SHORT).show()
                 }
             }
             override fun onFailure(call: Call<String>, t: Throwable) {
@@ -148,8 +151,7 @@ class SettingFragment : Fragment() {
                 response: Response<String>
             ) {
                 response.body()?.let {
-                    if (it == "fail")
-                        Log.d("CICO-sdfsdf", it)
+                    Toast.makeText(requireActivity(), it, Toast.LENGTH_SHORT).show()
                 }
             }
             override fun onFailure(call: Call<String>, t: Throwable) {
