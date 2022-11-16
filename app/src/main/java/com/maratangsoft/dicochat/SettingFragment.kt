@@ -4,7 +4,6 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.provider.MediaStore
-import android.support.v4.os.IResultReceiver._Parcel
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -14,6 +13,7 @@ import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.AppCompatEditText
+import androidx.appcompat.widget.AppCompatTextView
 import androidx.loader.content.CursorLoader
 import com.bumptech.glide.Glide
 import com.maratangsoft.dicochat.databinding.FragmentSettingBinding
@@ -27,13 +27,14 @@ import java.io.File
 
 class SettingFragment : Fragment() {
     lateinit var binding: FragmentSettingBinding
-    private val retrofitService: RetrofitService by lazy {
-        RetrofitHelper.getInstance().create(RetrofitService::class.java) }
+    private val retrofitService by lazy { RetrofitHelper.getInstance().create(RetrofitService::class.java) }
     private var imgPath = ""
 
     private val resultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){ result ->
         if (result.resultCode != Activity.RESULT_CANCELED){
             val uri = result.data?.data
+            Glide.with(requireActivity()).load(uri).into(binding.civUserImg)
+
             val proj = arrayOf(MediaStore.Images.Media.DATA)
             val loader = CursorLoader(requireActivity(), uri!!, proj, null, null, null)
             val cursor = loader.loadInBackground()
@@ -41,7 +42,9 @@ class SettingFragment : Fragment() {
             cursor.moveToFirst()
             imgPath = cursor.getString(columnIndex)
             cursor.close()
-            Log.d("CICOCHAT", imgPath)
+
+            Log.d("CICO-FragS-imgPath", imgPath)
+            setUserImg()
         }
     }
 
@@ -56,8 +59,8 @@ class SettingFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.tvUserNo.text = ALL.currentUserNo
-        binding.civUserImg.setOnClickListener { setUserImg() }
+        binding.tvUserNo.text = "#${ALL.currentUserNo}"
+        binding.civUserImg.setOnClickListener { goToGallery() }
         binding.tvNickname.setOnClickListener { openNickDialog() }
         binding.btnLogout.setOnClickListener { logout() }
 
@@ -75,28 +78,30 @@ class SettingFragment : Fragment() {
                 response: Response<MutableList<UserItem>>
             ) {
                 response.body()?.let {
+                    Log.d("CICO-FragSet-response", it.toString())
                     binding.tvNickname.text = it[0].nickname
-                    Glide.with(requireActivity()).load(it[0].user_img).error(R.drawable.icons8_monkey_164).into(binding.civUserImg)
+                    Glide.with(requireActivity()).load("${ALL.BASE_URL}CicoChatServer/${it[0].user_img}").error(R.drawable.icons8_monkey_164).into(binding.civUserImg)
                 }
             }
             override fun onFailure(call: Call<MutableList<UserItem>>, t: Throwable) {
-                Log.d("CICOCHAT", t.message!!)
+                Log.d("CICO-FragS-getProfile", t.message!!)
             }
         })
     }
 
     private fun openNickDialog(){
-        val dialogView = layoutInflater.inflate(R.layout.fragment_setting_dialog_change_nick, null)
-        val et = dialogView.findViewById<AppCompatEditText>(R.id.et_change_nickname)
+        val dialog = AlertDialog.Builder(requireActivity()).setView(R.layout.fragment_setting_dialog_change_nick).show()
 
-        val builder = AlertDialog.Builder(requireActivity())
-        builder.setView(R.layout.fragment_setting_dialog_change_nick)
-        builder.setPositiveButton(R.string.btn_ok){ _,_ ->
-            binding.tvNickname.text = et.text
+        val et = dialog.findViewById<AppCompatEditText>(R.id.et_change_nickname)
+        val btnOk = dialog.findViewById<AppCompatTextView>(R.id.btn_ok)
+        val btnCancel = dialog.findViewById<AppCompatTextView>(R.id.btn_cancel)
+
+        btnOk?.setOnClickListener {
+            binding.tvNickname.text = et?.text
             setNickname()
+            dialog.dismiss()
         }
-        builder.setNegativeButton(R.string.btn_cancel, null)
-        builder.show()
+        btnCancel?.setOnClickListener { dialog.dismiss() }
     }
 
     private fun setNickname(){
@@ -116,16 +121,18 @@ class SettingFragment : Fragment() {
                 }
             }
             override fun onFailure(call: Call<String>, t: Throwable) {
-                Log.d("CICOCHAT", t.message!!)
+                Log.d("CICO-FragS-setNickname", t.message!!)
             }
         })
     }
 
-    private fun setUserImg(){
+    private fun goToGallery(){
         val intent = Intent(Intent.ACTION_PICK)
         intent.type = "image/*"
         resultLauncher.launch(intent)
+    }
 
+    private fun setUserImg(){
         val dataPart = mutableMapOf<String, String>()
         dataPart["type"] = "set_user_img"
         dataPart["room_no"] = ALL.currentRoomNo
@@ -133,7 +140,7 @@ class SettingFragment : Fragment() {
 
         val file = File(imgPath)
         val requestBody = RequestBody.create(MediaType.parse("image/*"), file)
-        val filePart = MultipartBody.Part.createFormData("file_url", file.name, requestBody)
+        val filePart = MultipartBody.Part.createFormData("img", file.name, requestBody)
 
         retrofitService.postToPlain(dataPart, filePart).enqueue(object : Callback<String> {
             override fun onResponse(
@@ -142,11 +149,11 @@ class SettingFragment : Fragment() {
             ) {
                 response.body()?.let {
                     if (it == "fail")
-                        Toast.makeText(requireActivity(), R.string.error_empty_response, Toast.LENGTH_SHORT).show()
+                        Log.d("CICO-sdfsdf", it)
                 }
             }
             override fun onFailure(call: Call<String>, t: Throwable) {
-                Log.d("CICOCHAT", t.message!!)
+                Log.d("CICO-FragSet-setUserImg", t.message!!)
             }
         })
     }

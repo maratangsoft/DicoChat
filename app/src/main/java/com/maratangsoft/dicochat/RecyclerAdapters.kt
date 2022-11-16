@@ -2,6 +2,7 @@ package com.maratangsoft.dicochat
 
 import android.content.Context
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView.Adapter
@@ -20,14 +21,12 @@ class ChattingFragAdapter(val context:Context, var items:MutableList<ChatItem>):
         val itemView = LayoutInflater.from(context).inflate(R.layout.fragment_chatting_item, parent, false)
         return ChattingFragVH(FragmentChattingItemBinding.bind(itemView))
     }
-
     override fun onBindViewHolder(holder: ChattingFragVH, position: Int) {
-        Glide.with(context).load(items[position].user_img).into(holder.binding.civUserImg)
+        Glide.with(context).load("${ALL.BASE_URL}${items[position].user_img}").error(R.drawable.icons8_monkey_164).into(holder.binding.civUserImg)
         holder.binding.tvNickname.text = items[position].nickname
         holder.binding.tvMesssage.text = items[position].message
         holder.binding.tvWriteDate.text = items[position].write_date
     }
-
     override fun getItemCount() = items.size
 }
 
@@ -37,57 +36,68 @@ class ChattingFragBsAdapter(val context:Context, val hostFragment: ChattingFragm
             binding.btnInvite.setOnClickListener { hostFragment.inviteUser() }
         }
     }
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ChattingFragBsVH {
         val itemView = LayoutInflater.from(context).inflate(R.layout.fragment_chatting_bs_item, parent, false)
         return ChattingFragBsVH(FragmentChattingBsItemBinding.bind(itemView))
     }
-
     override fun onBindViewHolder(holder: ChattingFragBsVH, position: Int) {
-        Glide.with(context).load(items[position].user_img).into(holder.binding.civUserImg)
+        Glide.with(context).load("${ALL.BASE_URL}${items[position].user_img}").error(R.drawable.icons8_monkey_164).into(holder.binding.civUserImg)
         holder.binding.tvNickname.text = items[position].nickname
         holder.binding.tvUserNo.text = items[position].user_no
     }
-
     override fun getItemCount() = items.size
 }
 
 class ChattingFragPanelStartAdapter(val context:Context, val hostFragment: ChattingFragment, var items:MutableList<RoomItem>): Adapter<ChattingFragPanelStartAdapter.ChattingFragPanelStartVH>(){
     inner class ChattingFragPanelStartVH(val binding:FragmentChattingPanelStartItemBinding): ViewHolder(binding.root){
         init {
-            binding.civRoomImg.setOnClickListener {
-                ALL.currentRoomNo = items[adapterPosition].room_no
-                hostFragment.getChat()
-            }
+            binding.root.setOnClickListener { hostFragment.clickRoom(adapterPosition) }
         }
     }
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ChattingFragPanelStartVH {
         val itemView = LayoutInflater.from(context).inflate(R.layout.fragment_chatting_panel_start_item, parent, false)
         return ChattingFragPanelStartVH(FragmentChattingPanelStartItemBinding.bind(itemView))
     }
-
     override fun onBindViewHolder(holder: ChattingFragPanelStartVH, position: Int) {
-        Glide.with(context).load(items[position].room_img).into(holder.binding.civRoomImg)
+        Glide.with(context).load("${ALL.BASE_URL}${items[position].room_img}").error(R.drawable.icons8_monkey_164).into(holder.binding.civRoomImg)
         holder.binding.tvRoomTitle.text = items[position].room_title
+        holder.binding.vPointer.visibility = if (items[position].room_no == ALL.currentRoomNo) View.VISIBLE
+                                            else View.INVISIBLE
     }
-
     override fun getItemCount() = items.size
 }
 
-class ChattingFragPanelEndAdapter(val context:Context, var items:MutableList<UserItem>): Adapter<ChattingFragPanelEndAdapter.ChattingFragPanelEndVH>(){
-    inner class ChattingFragPanelEndVH(val binding:FragmentChattingPanelEndItemBinding): ViewHolder(binding.root)
-
+class ChattingFragPanelEndAdapter(val context:Context, val hostFragment: ChattingFragment, var items:MutableList<UserItem>): Adapter<ChattingFragPanelEndAdapter.ChattingFragPanelEndVH>(){
+    inner class ChattingFragPanelEndVH(val binding:FragmentChattingPanelEndItemBinding): ViewHolder(binding.root){
+        init {
+            binding.root.setOnClickListener { hostFragment.getProfileBs(adapterPosition) }
+        }
+    }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ChattingFragPanelEndVH {
         val itemView = LayoutInflater.from(context).inflate(R.layout.fragment_chatting_panel_end_item, parent, false)
         return ChattingFragPanelEndVH(FragmentChattingPanelEndItemBinding.bind(itemView))
     }
-
     override fun onBindViewHolder(holder: ChattingFragPanelEndVH, position: Int) {
-        Glide.with(context).load(items[position].user_img).into(holder.binding.civUserImg)
+        Glide.with(context).load("${ALL.BASE_URL}${items[position].user_img}").error(R.drawable.icons8_monkey_164).into(holder.binding.civUserImg)
         holder.binding.tvNickname.text = items[position].nickname
     }
+    override fun getItemCount() = items.size
+}
 
+class FriendsFragmentAdapter(val context:Context, val hostFragment: FriendsFragment, var items:MutableList<UserItem>): Adapter<FriendsFragmentAdapter.FriendsFragmentVH>(){
+    inner class FriendsFragmentVH(val binding:FragmentChattingPanelEndItemBinding): ViewHolder(binding.root){
+        init {
+            binding.root.setOnClickListener { hostFragment.getProfileBs(adapterPosition) }
+        }
+    }
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FriendsFragmentVH {
+        val itemView = LayoutInflater.from(context).inflate(R.layout.fragment_chatting_panel_end_item, parent, false)
+        return FriendsFragmentVH(FragmentChattingPanelEndItemBinding.bind(itemView))
+    }
+    override fun onBindViewHolder(holder: FriendsFragmentVH, position: Int) {
+        Glide.with(context).load("${ALL.BASE_URL}${items[position].user_img}").error(R.drawable.icons8_monkey_164).into(holder.binding.civUserImg)
+        holder.binding.tvNickname.text = items[position].nickname
+    }
     override fun getItemCount() = items.size
 }
 
@@ -98,10 +108,9 @@ class MentionFragmentAdapter(val context:Context, var items:MutableList<ChatItem
         val itemView = LayoutInflater.from(context).inflate(R.layout.fragment_mention_item, parent, false)
         return MentionFragVH(FragmentMentionItemBinding.bind(itemView))
     }
-
     override fun onBindViewHolder(holder: MentionFragVH, position: Int) {
         holder.binding.tvRoomTitle.text = items[position].room_title
-        Glide.with(context).load(items[position].user_img).into(holder.binding.civUserImg)
+        Glide.with(context).load("${ALL.BASE_URL}${items[position].user_img}").error(R.drawable.icons8_monkey_164).into(holder.binding.civUserImg)
         holder.binding.tvNickname.text = items[position].nickname
         holder.binding.tvWriteDate.text = items[position].write_date
         holder.binding.tvMessage.text = items[position].message

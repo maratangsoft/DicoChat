@@ -47,7 +47,6 @@ class LoginActivity : AppCompatActivity() {
         queryMap["type"] = "get_user_no"
         queryMap["google_id"] = googleId
         queryMap["kakao_id"] = kakaoId
-        Log.d("CICOCHAT-querymap", queryMap.toString())
 
         val retrofitService = RetrofitHelper.getInstance().create(RetrofitService::class.java)
         retrofitService.getToPlain(queryMap).enqueue(object : Callback<String> {
@@ -55,7 +54,6 @@ class LoginActivity : AppCompatActivity() {
                 call: Call<String>,
                 response: Response<String>
             ) {
-                Log.d("CICOCHAT", response.body().toString())
                 response.body()?.let {
                     ALL.currentUserNo = it
                     Toast.makeText(this@LoginActivity, "#${ALL.currentUserNo}님, 환영합니다.", Toast.LENGTH_SHORT).show()

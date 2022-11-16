@@ -17,7 +17,7 @@
         android:id="@+id/civ_room_img"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:src="@drawable/urnc"
+        android:src="@drawable/icons8_monkey_164"
         app:civ_circle_background_color="@color/gray"
         android:layout_gravity="center_horizontal"
         android:layout_marginStart="8dp"/>

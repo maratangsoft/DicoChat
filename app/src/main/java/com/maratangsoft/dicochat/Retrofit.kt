@@ -10,7 +10,7 @@ import retrofit2.http.*
 object RetrofitHelper{
     fun getInstance(): Retrofit{
         return Retrofit.Builder()
-            .baseUrl("http://maratangsoft.dothome.co.kr/")
+            .baseUrl(ALL.BASE_URL)
             .addConverterFactory(ScalarsConverterFactory.create())
             .addConverterFactory(GsonConverterFactory.create())
             .build()

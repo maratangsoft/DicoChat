@@ -29,6 +29,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/et_actRS_set_title"
+        android:inputType="text"
         android:backgroundTint="@color/black"
         android:layout_marginHorizontal="26dp"
         android:layout_marginTop="8dp"

@@ -66,7 +66,7 @@ class NewRoomActivity : AppCompatActivity() {
 
         val file = File(imgPath)
         val requestBody = RequestBody.create(MediaType.parse("image/*"), file)
-        val filePart = MultipartBody.Part.createFormData("room_img", file.name, requestBody)
+        val filePart = MultipartBody.Part.createFormData("img", file.name, requestBody)
 
         val retrofitService = RetrofitHelper.getInstance().create(RetrofitService::class.java)
         retrofitService.postToPlain(dataPart, filePart).enqueue(object : Callback<String> {

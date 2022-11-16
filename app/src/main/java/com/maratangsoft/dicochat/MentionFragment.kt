@@ -26,16 +26,8 @@ class MentionFragment : Fragment() {
 
         //리사이클러뷰 어댑터
         binding.recyclerMention.adapter = MentionFragmentAdapter(requireActivity(), mentionFragItems)
-    }
 
-    override fun onResume() {
-        super.onResume()
         getMention()
-    }
-
-    override fun onHiddenChanged(hidden: Boolean) {
-        super.onHiddenChanged(hidden)
-        if (!hidden) getMention()
     }
 
     private fun getMention(){

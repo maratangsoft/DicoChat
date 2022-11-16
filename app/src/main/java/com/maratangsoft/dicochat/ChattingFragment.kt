@@ -11,11 +11,14 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.AppCompatTextView
 import androidx.fragment.app.Fragment
 import androidx.loader.content.CursorLoader
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.maratangsoft.dicochat.databinding.FragmentChattingBinding
+import de.hdodenhof.circleimageview.CircleImageView
 import okhttp3.MediaType
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -26,11 +29,11 @@ import java.io.File
 
 class ChattingFragment : Fragment() {
     lateinit var binding: FragmentChattingBinding
-    private lateinit var bsd: BottomSheetDialog
     var chattingFragItems: MutableList<ChatItem> = mutableListOf()
     private var chattingFragBsItems: MutableList<UserItem> = mutableListOf()
     var chattingFragPanelStartItems: MutableList<RoomItem> = mutableListOf()
     var chattingFragPanelEndItems: MutableList<UserItem> = mutableListOf()
+    private lateinit var bsd:BottomSheetDialog
 
     private var imgPath = ""
     private val retrofitService: RetrofitService by lazy {
@@ -47,7 +50,9 @@ class ChattingFragment : Fragment() {
             cursor.moveToFirst()
             imgPath = cursor.getString(columnIndex)
             cursor.close()
-            Log.d("CICOCHAT", imgPath)
+
+            Log.d("CICO-FragC-imgPath", imgPath)
+            sendFile()
         }
     }
 
@@ -61,8 +66,9 @@ class ChattingFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
 //////////////가운데 패널 뷰 설정////////////////
+        Log.d("CICO-currentUserNo", ALL.currentUserNo)
+
         //툴바 아이콘 리스너
         binding.panelCentral.toolbar.setNavigationOnClickListener{ binding.overlappingPanels.openStartPanel() }
         binding.panelCentral.toolbar.setOnMenuItemClickListener {
@@ -74,9 +80,9 @@ class ChattingFragment : Fragment() {
         binding.panelCentral.recyclerPanelCentral.adapter =
             ChattingFragAdapter(requireActivity(), chattingFragItems)
 
-        //보내기 버튼 리스너
+        //하단 버튼 리스너
         binding.panelCentral.btnSendChat.setOnClickListener { sendChat() }
-        binding.panelCentral.btnSendFile.setOnClickListener { sendFile() }
+        binding.panelCentral.btnSendFile.setOnClickListener { gotoGallery() }
 
 //////////////왼쪽 패널 뷰 설정//////////////////
         //다른 액티비티로 이동 리스너
@@ -100,7 +106,7 @@ class ChattingFragment : Fragment() {
         //바텀시트 다이얼로그 리스너
         binding.panelEnd.btnShowBs.setOnClickListener {
             bsd = BottomSheetDialog(requireActivity())
-            bsd.setContentView(layoutInflater.inflate(R.layout.fragment_chatting_bs_dialog, null))
+            bsd.setContentView(layoutInflater.inflate(R.layout.fragment_chatting_bs, null))
 
             bsd.findViewById<RecyclerView>(R.id.recycler_chatting_bs)?.adapter = ChattingFragBsAdapter(requireActivity(), this, chattingFragBsItems)
 
@@ -110,30 +116,20 @@ class ChattingFragment : Fragment() {
 
         //방 멤버 목록 리사이클러뷰
         binding.panelEnd.recyclerPanelEnd.adapter =
-            ChattingFragPanelEndAdapter(requireActivity(), chattingFragPanelEndItems)
-    }
+            ChattingFragPanelEndAdapter(requireActivity(), this, chattingFragPanelEndItems)
 
-    override fun onResume() {
-        super.onResume()
-        getChat()
         getRoom()
-        getRoomMember()
-    }
-
-    override fun onHiddenChanged(hidden: Boolean) {
-        super.onHiddenChanged(hidden)
-        if(!hidden){
-            getChat()
-            getRoom()
-            getRoomMember()
-        }
     }
 //////////////////////////////////////////////////////////////////////////////////
 
-    fun getChat(){
+    private fun getChat(){
+        binding.panelCentral.tvInitial.visibility = View.INVISIBLE
+        binding.panelCentral.toolbar.title = "#${ALL.currentRoomTitle}"
+        binding.panelEnd.tvRoomTitle.text = "#${ALL.currentRoomTitle}"
+
         chattingFragItems.clear()
         val adapter = binding.panelCentral.recyclerPanelCentral.adapter
-        adapter?.notifyItemRangeRemoved(0, adapter.itemCount - 1)
+        adapter?.notifyDataSetChanged()
 
         val queryMap = mutableMapOf<String, String>()
         queryMap["type"] = "get_chat"
@@ -181,11 +177,13 @@ class ChattingFragment : Fragment() {
         })
     }
 
-    private fun sendFile(){
+    private fun gotoGallery(){
         val intent = Intent(Intent.ACTION_PICK)
         intent.type = "image/*"
         resultLauncher.launch(intent)
+    }
 
+    private fun sendFile(){
         val dataPart = mutableMapOf<String, String>()
         dataPart["type"] = "send_file"
         dataPart["room_no"] = ALL.currentRoomNo
@@ -193,7 +191,7 @@ class ChattingFragment : Fragment() {
 
         val file = File(imgPath)
         val requestBody = RequestBody.create(MediaType.parse("image/*"), file)
-        val filePart = MultipartBody.Part.createFormData("file_url", file.name, requestBody)
+        val filePart = MultipartBody.Part.createFormData("img", file.name, requestBody)
 
         retrofitService.postToPlain(dataPart, filePart).enqueue(object : Callback<String> {
             override fun onResponse(
@@ -217,7 +215,7 @@ class ChattingFragment : Fragment() {
     private fun getFriend(){
         chattingFragBsItems.clear()
         val adapter = bsd.findViewById<RecyclerView>(R.id.recycler_chatting_bs)?.adapter
-        adapter?.notifyItemRangeRemoved(0, adapter.itemCount - 1)
+        adapter?.notifyDataSetChanged()
 
         val queryMap = mutableMapOf<String, String>()
         queryMap["type"] = "get_friend"
@@ -230,7 +228,7 @@ class ChattingFragment : Fragment() {
             ) {
                 response.body()?.let {
                     it.forEachIndexed{ i, item ->
-                        chattingFragBsItems.add(item)
+                        chattingFragPanelEndItems.add(UserItem(item.friend_no!!, null, item.nickname, item.user_img))
                         adapter?.notifyItemInserted(i)
                     }
                 }
@@ -241,10 +239,25 @@ class ChattingFragment : Fragment() {
         })
     }
 
+    fun getProfileBs(position:Int){
+        bsd = BottomSheetDialog(requireActivity())
+        bsd.setContentView(layoutInflater.inflate(R.layout.fragment_friends_bs, null))
+
+        val tvNick = bsd.findViewById<AppCompatTextView>(R.id.tv_nickname)
+        val tvUserNo = bsd.findViewById<AppCompatTextView>(R.id.tv_user_no)
+        val civUserImg = bsd.findViewById<CircleImageView>(R.id.civ_user_img)
+
+        tvNick?.text = chattingFragPanelEndItems[position].nickname
+        tvUserNo?.text = chattingFragPanelEndItems[position].user_no
+        Glide.with(requireActivity()).load("${ALL.BASE_URL}CicoChatServer/${chattingFragPanelEndItems[position].user_img}").error(R.drawable.icons8_monkey_164).into(civUserImg!!)
+
+        bsd.show()
+    }
+
     private fun getRoom(){
         chattingFragPanelStartItems.clear()
         val adapter = binding.panelStart.recyclerPanelStart.adapter
-        adapter?.notifyItemRangeRemoved(0, adapter.itemCount - 1)
+        adapter?.notifyDataSetChanged()
 
         val queryMap = mutableMapOf<String, String>()
         queryMap["type"] = "get_room"
@@ -268,10 +281,19 @@ class ChattingFragment : Fragment() {
         })
     }
 
+    fun clickRoom(position:Int){
+        val item = chattingFragPanelStartItems[position]
+        ALL.currentRoomNo = item.room_no
+        ALL.currentRoomTitle = item.room_title
+        binding.overlappingPanels.closePanels()
+        getChat()
+        getRoomMember()
+    }
+
     private fun getRoomMember(){
         chattingFragPanelEndItems.clear()
         val adapter = binding.panelEnd.recyclerPanelEnd.adapter
-        adapter?.notifyItemRangeRemoved(0, adapter.itemCount - 1)
+        adapter?.notifyDataSetChanged()
 
         val queryMap = mutableMapOf<String, String>()
         queryMap["type"] = "get_room_member"
