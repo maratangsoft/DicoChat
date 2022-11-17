@@ -6,72 +6,67 @@
     android:background="@color/bg_reactive"
     android:orientation="vertical">
 
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?colorPrimary"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:menu="@menu/fragment_chatting_opt"
+        app:navigationIcon="@drawable/ic_hamburger"
+        app:title="@string/room_title" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_panel_central"
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="?colorPrimary"
-            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-            app:menu="@menu/fragment_chatting_opt"
-            app:navigationIcon="@drawable/ic_hamburger"
-            app:title="@string/room_title" />
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:layout_margin="10dp"
+            android:orientation="vertical"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
-        <RelativeLayout
+        <LinearLayout
+            android:id="@+id/bottom_bar"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:padding="6dp">
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recycler_panel_central"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_margin="10dp"
-                android:orientation="vertical"
-                android:layout_above="@id/bottom_bar"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/btn_send_file"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/ic_add_gray"
+                app:civ_circle_background_color="?colorPrimaryVariant" />
 
-            <LinearLayout
-                android:id="@+id/bottom_bar"
-                android:layout_width="match_parent"
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/et_msg"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:gravity="center_vertical"
-                android:layout_alignParentBottom="true"
-                android:padding="6dp">
-                <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/btn_send_file"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:src="@drawable/ic_add_gray"
-                    app:civ_circle_background_color="?colorPrimaryVariant"/>
-                <androidx.appcompat.widget.AppCompatEditText
-                    android:id="@+id/et_msg"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:background="@drawable/bg_edittext"
-                    android:hint="@string/et_panelC_input_msg"
-                    android:inputType="textMultiLine"
-                    android:maxLines="5"
-                    android:padding="8dp"
-                    android:textSize="16sp"
-                    android:layout_marginStart="6dp"/>
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/btn_send_chat"
-                    android:layout_width="55dp"
-                    android:layout_height="40dp"
-                    android:layout_gravity="center_vertical"
-                    android:background="@drawable/bg_button"
-                    android:src="@drawable/ic_send"
-                    android:paddingVertical="6dp"
-                    android:layout_marginStart="6dp"/>
-            </LinearLayout>
+                android:layout_marginStart="6dp"
+                android:layout_weight="1"
+                android:background="@drawable/bg_edittext"
+                android:hint="@string/et_panelC_input_msg"
+                android:inputType="textMultiLine"
+                android:maxLines="5"
+                android:padding="8dp"
+                android:textSize="16sp" />
 
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/tv_initial"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:text="@string/msg_panelC_initial"
-                android:textSize="28sp"
-                android:background="@color/bg_reactive"/>
-        </RelativeLayout>
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/btn_send_chat"
+                android:layout_width="55dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="6dp"
+                android:background="@drawable/bg_button"
+                android:paddingVertical="6dp"
+                android:src="@drawable/ic_send" />
+        </LinearLayout>
+
     </LinearLayout>
+</LinearLayout>

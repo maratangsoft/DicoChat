@@ -165,6 +165,8 @@ class SettingFragment : Fragment() {
         builder.setMessage(R.string.tv_fragS_dialogLO_question)
         builder.setPositiveButton(R.string.btn_yes) { _, _ ->
             //TODO: 자동로그인 처리 해제
+            ALL.currentRoomNo = ""
+
             startActivity(Intent(requireActivity(), LoginActivity::class.java))
             requireActivity().finish()
         }

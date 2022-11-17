@@ -54,7 +54,6 @@ class FriendsFragment : Fragment() {
                 response: Response<MutableList<UserItem>>
             ) {
                 response.body()?.let {
-                    Log.d("CICO-FragFriends", it.toString())
                     it.forEachIndexed{ i, item ->
                         friendsFragItems.add(UserItem(item.friend_no!!, null, item.nickname, item.user_img))
                         adapter?.notifyItemInserted(i)

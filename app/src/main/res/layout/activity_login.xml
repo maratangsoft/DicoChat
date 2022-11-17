@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="?colorPrimaryVariant"
+    android:background="#FFB7DBF0"
     android:padding="24dp"
     tools:context=".LoginActivity">
 
@@ -17,7 +17,7 @@
     <com.google.android.gms.common.SignInButton
         android:id="@+id/btn_google_login"
         android:layout_width="308dp"
-        android:layout_height="53dp"
+        android:layout_height="wrap_content"
         android:layout_below="@+id/iv_logo"
         android:layout_centerHorizontal="true"/>
 

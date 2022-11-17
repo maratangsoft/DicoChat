@@ -14,6 +14,8 @@
 
     <!--Login Activity-->
     <string name="guest_login">게스트 계정으로 로그인</string>
+    <string name="google_login_succeeded">구글 계정으로 로그인하셨습니다.</string>
+    <string name="kakao_login_succeeded">카카오 계정으로 로그인하셨습니다.</string>
 
     <!--ChattingFragment - Central-->
     <string name="et_panelC_input_msg">메시지를 입력하세요</string>
@@ -67,5 +69,8 @@
     <string name="btn_fragS_logout">ㅤ로그아웃</string>
     <string name="et_fragS_dialogNick">변경할 닉네임을 입력하세요</string>
     <string name="tv_fragS_dialogLO_question">로그아웃 하시겠어요?</string>
+
+    <!--for Google Sign In-->
+    <string name="client_id">656815453130-vuna6v6qnc1lqtu4337iav5o3m5b2cu2.apps.googleusercontent.com</string>
 
 </resources>

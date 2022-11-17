@@ -2,7 +2,6 @@ package com.maratangsoft.dicochat
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.text.SpannableStringBuilder
 import android.util.Log
 import android.view.inputmethod.EditorInfo
 import android.widget.Toast
@@ -37,7 +36,7 @@ class RoomSettingActivity : AppCompatActivity() {
                 response: Response<String>
             ) {
                 response.body()?.let {
-                    binding.etRoomTitle.text = SpannableStringBuilder(it)
+                    binding.etRoomTitle.setText(it)
                 }
             }
             override fun onFailure(call: Call<String>, t: Throwable) {

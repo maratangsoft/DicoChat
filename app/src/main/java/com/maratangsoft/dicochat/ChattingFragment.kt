@@ -39,23 +39,6 @@ class ChattingFragment : Fragment() {
     private val retrofitService: RetrofitService by lazy {
         RetrofitHelper.getInstance().create(RetrofitService::class.java) }
 
-    //갤러리 앱에서 사진주소 가지고 와서 절대주소로 변환해주는 리절트런처
-    private val resultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){ result ->
-        if (result.resultCode != Activity.RESULT_CANCELED){
-            val uri = result.data?.data
-            val proj = arrayOf(MediaStore.Images.Media.DATA)
-            val loader = CursorLoader(requireActivity(), uri!!, proj, null, null, null)
-            val cursor = loader.loadInBackground()
-            val columnIndex = cursor!!.getColumnIndexOrThrow(MediaStore.Images.Media.DATA)
-            cursor.moveToFirst()
-            imgPath = cursor.getString(columnIndex)
-            cursor.close()
-
-            Log.d("CICO-FragC-imgPath", imgPath)
-            sendFile()
-        }
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -122,10 +105,16 @@ class ChattingFragment : Fragment() {
 
         getRoom()
     }
+
+    override fun onHiddenChanged(hidden: Boolean) {
+        super.onHiddenChanged(hidden)
+
+        getRoom()
+        if (ALL.currentRoomNo != "") getRoomMember()
+    }
 //////////////////////////////////////////////////////////////////////////////////
 
     private fun getChat(){
-        binding.panelCentral.tvInitial.visibility = View.INVISIBLE
         binding.panelCentral.toolbar.title = "#${ALL.currentRoomTitle}"
         binding.panelEnd.tvRoomTitle.text = "#${ALL.currentRoomTitle}"
 
@@ -163,7 +152,6 @@ class ChattingFragment : Fragment() {
         queryMap["user_no"] = ALL.currentUserNo
         queryMap["message"] = binding.panelCentral.etMsg.text.toString()
         queryMap["mentioned"] = "" //TODO: 멘션 기능 넣기
-        Log.d("CICO-PanelC-sendChat-queryMap", queryMap.toString())
 
         retrofitService.getToPlain(queryMap).enqueue(object : Callback<String> {
             override fun onResponse(
@@ -178,13 +166,30 @@ class ChattingFragment : Fragment() {
                 Log.d("CICO-PanelC-sendChat", t.message!!)
             }
         })
-        binding.panelCentral.etMsg.text = null
+        binding.panelCentral.etMsg.setText("")
     }
 
     private fun gotoGallery(){
         val intent = Intent(Intent.ACTION_PICK)
         intent.type = "image/*"
         resultLauncher.launch(intent)
+    }
+
+    //갤러리 앱에서 사진주소 가지고 와서 절대주소로 변환해주는 리절트런처
+    private val resultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){ result ->
+        if (result.resultCode != Activity.RESULT_CANCELED){
+            val uri = result.data?.data
+            val proj = arrayOf(MediaStore.Images.Media.DATA)
+            val loader = CursorLoader(requireActivity(), uri!!, proj, null, null, null)
+            val cursor = loader.loadInBackground()
+            val columnIndex = cursor!!.getColumnIndexOrThrow(MediaStore.Images.Media.DATA)
+            cursor.moveToFirst()
+            imgPath = cursor.getString(columnIndex)
+            cursor.close()
+
+            Log.d("CICO-FragC-imgPath", imgPath)
+            sendFile()
+        }
     }
 
     private fun sendFile(){
@@ -255,6 +260,7 @@ class ChattingFragment : Fragment() {
         }
 
         getChat()
+        getRoom()
         getRoomMember()
     }
 /////////////오른쪽 패널//////////////////////////////////////////////////
