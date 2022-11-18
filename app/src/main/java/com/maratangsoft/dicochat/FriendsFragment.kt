@@ -35,7 +35,10 @@ class FriendsFragment : Fragment() {
             true
         }
         binding.recyclerFriends.adapter = FriendsFragmentAdapter(requireActivity(), this, friendsFragItems)
+    }
 
+    override fun onResume() {
+        super.onResume()
         getFriend()
     }
 

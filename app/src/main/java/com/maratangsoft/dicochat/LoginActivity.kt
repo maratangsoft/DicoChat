@@ -50,7 +50,7 @@ class LoginActivity : AppCompatActivity() {
 //            binding.btnKakaoLogin.visibility = View.INVISIBLE
 //            binding.btnGuestLogin.visibility = View.INVISIBLE
 //
-//            ALL.currentUserNo = account.id.toString()
+//            googleId = account.id.toString()
 //            Log.d("GoogleSignInAccount ID", account.id.toString())
 //
 //            getUserNo()
@@ -71,6 +71,13 @@ class LoginActivity : AppCompatActivity() {
 //////////////////////////Google Sign In/////////////////////////////////////
 
     private fun loginWithGoogle(){
+        //기존 로그인 이력이 있다면 자동로그인
+        val account = GoogleSignIn.getLastSignedInAccount(this)
+        account?.let {
+            googleId = account.id.toString()
+            getUserNo()
+        }
+
         //클라이언트ID로 펜딩인텐트 요청 만들기
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).build()
         val mGoogleSignInClient = GoogleSignIn.getClient(this, gso)
@@ -100,7 +107,7 @@ class LoginActivity : AppCompatActivity() {
 //////////////////////////Kakao Login/////////////////////////////////////
 
     private fun loginWithKakao(){
-        //로그인 방법 선택: 카톡앱 로그인 vs 카카오계정 로그인
+        //카톡앱 로그인 가능하면 카톡앱 로그인, 아니면 카카오계정 로그인
         if (UserApiClient.instance.isKakaoTalkLoginAvailable(this)){
             UserApiClient.instance.loginWithKakaoTalk(this, callback = callbackKakao)
         }else{

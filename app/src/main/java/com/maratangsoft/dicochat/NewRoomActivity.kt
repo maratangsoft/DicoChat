@@ -55,7 +55,7 @@ class NewRoomActivity : AppCompatActivity() {
 
     private fun registerRoom() {
         if (binding.etRoomTitle.text == null || imgPath == "") {
-            Toast.makeText(this, R.string.error_actNR_no_input, Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, R.string.msg_actNR_no_input, Toast.LENGTH_SHORT).show()
             return
         }
 
@@ -76,7 +76,7 @@ class NewRoomActivity : AppCompatActivity() {
             ) {
                 response.body()?.let {
                     if (it == "fail")
-                        Toast.makeText(this@NewRoomActivity, R.string.error_empty_response, Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this@NewRoomActivity, R.string.msg_empty_response, Toast.LENGTH_SHORT).show()
                     else
                         Toast.makeText(this@NewRoomActivity, R.string.msg_actNR_registered, Toast.LENGTH_SHORT).show()
                     finish()

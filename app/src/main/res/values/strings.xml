@@ -9,7 +9,7 @@
     <string name="btn_cancel">Cancel</string>
     <string name="btn_yes">YES</string>
     <string name="btn_no">NO</string>
-    <string name="error_empty_response">DB Error!</string>
+    <string name="msg_empty_response">DB Error!</string>
 
     <!--Login Activity-->
     <string name="guest_login">Login with guest account</string>
@@ -38,7 +38,7 @@
     <string name="et_actNR_set_title">Input the room title</string>
     <string name="btn_actNR_create">Create new room</string>
 
-    <string name="error_actNR_no_input">Input the room name and choose an image!</string>
+    <string name="msg_actNR_no_input">Input the room name and choose an image!</string>
     <string name="msg_actNR_registered">You created a new room.</string>
 
     <!--RoomSettingActivity-->
@@ -57,7 +57,7 @@
     <string name="et_actFF">input a number after #</string>
     <string name="btn_actFF_add">Add to your friends list</string>
 
-    <string name="error_actFF_no_result">We couldn\'t find any result. Please check the number you input correct.</string>
+    <string name="msg_actFF_no_result">We couldn\'t find any result. Please check the number you input correct.</string>
     <string name="msg_actFF_registered">Added a friend</string>
 
     <!--MentionFragment-->

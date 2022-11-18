@@ -33,10 +33,11 @@ class FindFriendActivity : AppCompatActivity() {
                 response: Response<String>
             ) {
                 response.body()?.let {
-                    if (it == "fail")
-                        Toast.makeText(this@FindFriendActivity, R.string.error_empty_response, Toast.LENGTH_SHORT).show()
-                    else
-                        binding.tvStatusMsg.setText(R.string.msg_actFF_registered)
+                    when (it) {
+                        "fail"  -> binding.tvStatusMsg.setText(R.string.msg_empty_response)
+                        ""      -> binding.tvStatusMsg.setText(R.string.msg_actFF_no_result)
+                        else    -> finish()
+                    }
                 }
             }
             override fun onFailure(call: Call<String>, t: Throwable) {

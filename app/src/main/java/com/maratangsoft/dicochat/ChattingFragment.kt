@@ -14,7 +14,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.fragment.app.Fragment
 import androidx.loader.content.CursorLoader
-import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.discord.panels.OverlappingPanelsLayout
 import com.google.android.material.bottomsheet.BottomSheetDialog
@@ -95,7 +94,7 @@ class ChattingFragment : Fragment() {
 
         //초대하기 바텀시트 다이얼로그 리스너
         binding.panelEnd.btnShowBs.setOnClickListener {
-            val bsDialog = ChattingBSFragment()
+            val bsDialog = ChattingBSFragment(this)
             bsDialog.show(requireActivity().supportFragmentManager, bsDialog.tag)
         }
 
@@ -159,7 +158,8 @@ class ChattingFragment : Fragment() {
                 response: Response<String>
             ) {
                 response.body()?.let {
-                    Toast.makeText(requireActivity(), it, Toast.LENGTH_SHORT).show()
+                    getChat()
+                    //TODO: 푸시 기능 넣으면 이거 빼라
                 }
             }
             override fun onFailure(call: Call<String>, t: Throwable) {
@@ -208,7 +208,7 @@ class ChattingFragment : Fragment() {
                 response: Response<String>
             ) {
                 response.body()?.let {
-                    Toast.makeText(requireActivity(), R.string.error_empty_response, Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireActivity(), R.string.msg_empty_response, Toast.LENGTH_SHORT).show()
                 }
             }
             override fun onFailure(call: Call<String>, t: Throwable) {
@@ -265,7 +265,7 @@ class ChattingFragment : Fragment() {
     }
 /////////////오른쪽 패널//////////////////////////////////////////////////
 
-    private fun getRoomMember(){
+    fun getRoomMember(){
         chattingFragPanelEndItems.clear()
         val adapter = binding.panelEnd.recyclerPanelEnd.adapter
         adapter?.notifyDataSetChanged()

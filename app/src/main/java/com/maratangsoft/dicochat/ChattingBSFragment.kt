@@ -12,7 +12,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class ChattingBSFragment: BottomSheetDialogFragment() {
+class ChattingBSFragment(val chatFrag:ChattingFragment): BottomSheetDialogFragment() {
     lateinit var binding: FragmentChattingBsBinding
     val items = mutableListOf<UserItem>()
     private val retrofitService = RetrofitHelper.getInstance().create(RetrofitService::class.java)
@@ -69,6 +69,7 @@ class ChattingBSFragment: BottomSheetDialogFragment() {
             ) {
                 response.body()?.let {
                     Toast.makeText(requireActivity(), it, Toast.LENGTH_SHORT).show()
+                    chatFrag.getRoomMember()
                 }
             }
             override fun onFailure(call: Call<String>, t: Throwable) {
