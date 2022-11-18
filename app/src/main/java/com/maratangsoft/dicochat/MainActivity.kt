@@ -1,6 +1,7 @@
 package com.maratangsoft.dicochat
 
 import android.content.Context
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Rect
 import android.os.Build.VERSION
@@ -22,12 +23,9 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-
         manager.beginTransaction().add(R.id.container, fragments[0]).commit()
-
-        binding.bnv.setOnItemSelectedListener { navigateFragment(it) }
-
         checkPermissions()
+        binding.bnv.setOnItemSelectedListener { navigateFragment(it) }
     }
 
     private fun navigateFragment(menuItem:MenuItem): Boolean{
@@ -99,5 +97,11 @@ class MainActivity : AppCompatActivity() {
         if(permissions.entries.all { it.value }){
             Log.d("CICO-MA", "권한 승인")
         }
+    }
+
+    override fun onNewIntent(intent: Intent?) {
+        super.onNewIntent(intent)
+        val bundle = intent?.getBundleExtra("bundle")
+        bundle?.let { manager.setFragmentResult("push_request", it) }
     }
 }

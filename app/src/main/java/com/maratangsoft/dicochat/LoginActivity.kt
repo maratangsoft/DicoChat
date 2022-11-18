@@ -7,16 +7,12 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Toast
-import androidx.activity.result.IntentSenderRequest
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.activity.result.registerForActivityResult
-import com.google.android.gms.auth.api.identity.GetSignInIntentRequest
-import com.google.android.gms.auth.api.identity.Identity
 import com.google.android.gms.auth.api.signin.GoogleSignIn
-import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.SignInButton
 import com.google.android.gms.common.api.ApiException
+import com.google.firebase.messaging.FirebaseMessaging
 import com.kakao.sdk.auth.model.OAuthToken
 import com.kakao.sdk.user.UserApiClient
 import com.maratangsoft.dicochat.databinding.ActivityLoginBinding
@@ -27,44 +23,35 @@ import retrofit2.Response
 class LoginActivity : AppCompatActivity() {
     private val binding by lazy { ActivityLoginBinding.inflate(layoutInflater) }
 
-    private var googleId: String = ""
-    private var kakaoId: String = ""
+    private var googleId = ""
+    private var kakaoId = ""
+    private var fcmToken = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-
+        binding.btnGoogleLogin.setSize(SignInButton.SIZE_WIDE)
+        getFCMToken()
         binding.btnGoogleLogin.setOnClickListener { authenticateUser(it) }
         binding.btnKakaoLogin.setOnClickListener { authenticateUser(it) }
         binding.btnGuestLogin.setOnClickListener { authenticateUser(it) }
-
-        binding.btnGoogleLogin.setSize(SignInButton.SIZE_WIDE)
     }
 
-    //자동로그인 기능
-//    override fun onStart() {
-//        super.onStart()
-//        val account = GoogleSignIn.getLastSignedInAccount(this)
-//        if (account != null){ //이미 구글로그인 함
-//            binding.btnGoogleLogin.visibility = View.INVISIBLE
-//            binding.btnKakaoLogin.visibility = View.INVISIBLE
-//            binding.btnGuestLogin.visibility = View.INVISIBLE
-//
-//            googleId = account.id.toString()
-//            Log.d("GoogleSignInAccount ID", account.id.toString())
-//
-//            getUserNo()
-//        }
-//    }
+    private fun getFCMToken(){
+        FirebaseMessaging.getInstance().token.addOnCompleteListener {
+            if (!it.isSuccessful){
+                Log.i("CICO-FCMToken", "FCM 등록 실패")
+            }else{
+                fcmToken = it.result
+                Log.i("CICO-ActL-FCMToken", fcmToken)
+            }
+        }
+    }
 
     private fun authenticateUser(view:View){
         when (view){
-            binding.btnGoogleLogin -> {
-                loginWithGoogle()
-            }
-            binding.btnKakaoLogin -> {
-                loginWithKakao()
-            }
+            binding.btnGoogleLogin -> loginWithGoogle()
+            binding.btnKakaoLogin -> loginWithKakao()
             binding.btnGuestLogin -> getUserNo()
         }
     }
@@ -115,7 +102,7 @@ class LoginActivity : AppCompatActivity() {
         }
     }
     //로그인 성공시 토큰 받아오는 콜백 설계
-    val callbackKakao: (OAuthToken?, Throwable?) -> Unit = { token, error ->
+    private val callbackKakao: (OAuthToken?, Throwable?) -> Unit = { token, error ->
         token?.let {
             loadKakaoUserinfo()
         }
@@ -132,12 +119,14 @@ class LoginActivity : AppCompatActivity() {
             }
         }
     }
+/////////////////////////공통////////////////////////////////////////////////
 
     private fun getUserNo(){
         val queryMap = mutableMapOf<String, String>()
         queryMap["type"] = "get_user_no"
         queryMap["google_id"] = googleId
         queryMap["kakao_id"] = kakaoId
+        queryMap["fcm_token"] = fcmToken
 
         val retrofitService = RetrofitHelper.getInstance().create(RetrofitService::class.java)
         retrofitService.getToPlain(queryMap).enqueue(object : Callback<String> {

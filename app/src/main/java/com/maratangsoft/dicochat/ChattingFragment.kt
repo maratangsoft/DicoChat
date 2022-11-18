@@ -13,6 +13,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentResultListener
 import androidx.loader.content.CursorLoader
 import com.bumptech.glide.Glide
 import com.discord.panels.OverlappingPanelsLayout
@@ -38,6 +39,14 @@ class ChattingFragment : Fragment() {
     private val retrofitService: RetrofitService by lazy {
         RetrofitHelper.getInstance().create(RetrofitService::class.java) }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        parentFragmentManager.setFragmentResultListener("push_request", this) {
+                _, bundle -> takePushChats(bundle)
+        }
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -57,6 +66,9 @@ class ChattingFragment : Fragment() {
         }
 
 //////////////가운데 패널 뷰 설정////////////////
+        //채팅목록 리사이클러뷰
+        binding.panelCentral.recyclerPanelCentral.adapter =
+            ChattingFragAdapter(requireActivity(), chattingFragItems)
 
         //툴바 아이콘 리스너
         binding.panelCentral.toolbar.setNavigationOnClickListener{ binding.overlappingPanels.openStartPanel() }
@@ -65,44 +77,38 @@ class ChattingFragment : Fragment() {
             true
         }
 
-        //채팅목록 리사이클러뷰
-        binding.panelCentral.recyclerPanelCentral.adapter =
-            ChattingFragAdapter(requireActivity(), chattingFragItems)
-
         //하단 버튼 리스너
         binding.panelCentral.btnSendChat.setOnClickListener { sendChat() }
         binding.panelCentral.btnSendFile.setOnClickListener { gotoGallery() }
 
 //////////////왼쪽 패널 뷰 설정//////////////////
+        //입장한 방 목록 리사이클러뷰
+        binding.panelStart.recyclerPanelStart.adapter =
+            ChattingFragPanelStartAdapter(requireActivity(), this, chattingFragPanelStartItems)
+
         //다른 액티비티로 이동 리스너
         binding.panelStart.btnRegisterRoom.setOnClickListener {
             (requireActivity() as AppCompatActivity).startActivity(
                 Intent(activity, NewRoomActivity::class.java)
             )
         }
-
-        //입장한 방 목록 리사이클러뷰
-        binding.panelStart.recyclerPanelStart.adapter =
-            ChattingFragPanelStartAdapter(requireActivity(), this, chattingFragPanelStartItems)
-
 //////////////오른쪽 패널 뷰 설정/////////////////
-        binding.panelEnd.btnRoomSetting.setOnClickListener {
-            (requireActivity() as AppCompatActivity).startActivity(
-                Intent(activity, RoomSettingActivity::class.java)
-            )
-        }
-
-        //초대하기 바텀시트 다이얼로그 리스너
-        binding.panelEnd.btnShowBs.setOnClickListener {
-            val bsDialog = ChattingBSFragment(this)
-            bsDialog.show(requireActivity().supportFragmentManager, bsDialog.tag)
-        }
-
         //방 멤버 목록 리사이클러뷰
         binding.panelEnd.recyclerPanelEnd.adapter =
             ChattingFragPanelEndAdapter(requireActivity(), this, chattingFragPanelEndItems)
 
         getRoom()
+
+        binding.panelEnd.btnRoomSetting.setOnClickListener {
+            (requireActivity() as AppCompatActivity).startActivity(
+                Intent(activity, RoomSettingActivity::class.java)
+            )
+        }
+        //초대하기 바텀시트 다이얼로그 리스너
+        binding.panelEnd.btnShowBs.setOnClickListener {
+            val bsDialog = ChattingBSFragment(this)
+            bsDialog.show(requireActivity().supportFragmentManager, bsDialog.tag)
+        }
     }
 
     override fun onHiddenChanged(hidden: Boolean) {
@@ -216,9 +222,23 @@ class ChattingFragment : Fragment() {
             }
         })
     }
+    //번들로 넘어온 푸시 받아서 채팅창에 추가
+    private fun takePushChats(bundle:Bundle){
+        val chatNo = bundle.getString("chat_no")
+        val roomNo = bundle.getString("room_no")
+        val userNo = bundle.getString("user_no")
+        val message = bundle.getString("message")
+        val fileUrl = bundle.getString("fileUrl")
+        val mentioned = bundle.getString("mentioned")
+        val writeDate = bundle.getString("write_date")
+        val nickname = bundle.getString("nickname")
+        val userImg = bundle.getString("user_img")
 
-    private fun takePushChats(){
-        //TODO: 푸시 받아서 채팅목록 업데이트
+        val pushItem = ChatItem(chatNo!!, roomNo!!, userNo!!, message!!, fileUrl!!, mentioned!!, writeDate!!, null, nickname!!, userImg!!)
+        chattingFragItems.add(pushItem)
+        val adapter = binding.panelCentral.recyclerPanelCentral.adapter
+        adapter?.notifyItemInserted(chattingFragItems.size - 1)
+        //TODO: 가장 마지막 아이템으로 포커스 이동
     }
 /////////왼쪽 패널//////////////////////////////////////////////////
 
