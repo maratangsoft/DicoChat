@@ -1,11 +1,76 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!--Login Activity-->
     <string name="app_name">씨코챗</string>
+    <string name="nickname">익명</string>
+    <string name="user_no">#9999</string>
+    <string name="write_date">2022.10.21. 오후 10:35</string>
+    <string name="msg_example">메시지 예시입니다. 블라블라블라블라라라라라라랄라라라라라라라</string>
+    <string name="room_title">#방 제목</string>
+    <string name="btn_ok">확인</string>
+    <string name="btn_cancel">취소</string>
+    <string name="btn_yes">네</string>
+    <string name="btn_no">아니요</string>
+    <string name="msg_empty_response">DB 에러!</string>
+
+    <!--Login Activity-->
     <string name="guest_login">게스트 계정으로 로그인</string>
+    <string name="google_login_succeeded">구글 계정으로 로그인하셨습니다.</string>
+    <string name="kakao_login_succeeded">카카오 계정으로 로그인하셨습니다.</string>
+
+    <!--ChattingFragment - Central-->
+    <string name="et_panelC_input_msg">메시지를 입력하세요</string>
+    <string name="tv_panelC_bs_title">친구 초대하기</string>
+    <string name="btn_panelC_bs_invite">초대하기</string>
+
+    <string name="msg_panelC_initial">왼쪽 패널에서\n채팅방을 선택해 주세요</string>
+
+    <!--ChattingFragment - Start-->
+    <string name="btn_panelS_new_room">새 채팅방 만들기</string>
+
+    <!--ChattingFragment - End-->
+    <string name="btn_panelE_search">검색하기</string>
+    <string name="btn_panelE_noti">알림</string>
+    <string name="btn_panelE_room_setting">설정</string>
+    <string name="btn_panelE_invite">멤버 초대하기</string>
+
+    <!--NewRoomActivity-->
+    <string name="tv_actNR_create">채팅방을 만들어 보세요</string>
+    <string name="tv_actNR_set_title">방 제목</string>
+    <string name="et_actNR_set_title">방 제목을 입력하세요</string>
+    <string name="btn_actNR_create">채팅방 만들기</string>
+
+    <string name="msg_actNR_no_input">방 이름과 대표사진은 필수입니다!</string>
+    <string name="msg_actNR_registered">새로운 방을 생성했습니다.</string>
+
+    <!--RoomSettingActivity-->
+    <string name="tb_actRS_title">채팅방 설정</string>
+    <string name="tv_actRS_set_title">방 제목</string>
+    <string name="et_actRS_set_title">방 제목을 입력하세요</string>
+    <string name="tv_actRS_noti">채팅방 알림 끄기/켜기</string>
+
+    <!--FriendsFragment-->
+    <string name="tb_fragF_title">친구</string>
+    <string name="tv_fragF_bs_send">ㅤ메시지 보내기</string>
 
     <!--Find Friend Activity-->
-    <string name="add_friends">친구 추가하기</string>
-    <string name="tv_frag_ff_search">아이디로 검색하기</string>
-    <string name="et_frag_ff"># 뒤의 숫자를 입력해 주세요.</string>
+    <string name="tb_actFF_title">친구 추가하기</string>
+    <string name="tv_actFF_search">아이디로 검색하기</string>
+    <string name="et_actFF"># 뒤의 숫자를 입력해 주세요</string>
+    <string name="btn_actFF_add">친구 추가하기</string>
+
+    <string name="msg_actFF_no_result">검색 결과가 없습니다. 숫자가 정확한지 다시 한 번 확인해 주세요.</string>
+    <string name="msg_actFF_registered">친구를 추가했습니다.</string>
+
+    <!--MentionFragment-->
+    <string name="tb_fragM_title">최근 멘션</string>
+
+    <!--SettingFragment-->
+    <string name="tv_fragS_noti_all">모든 알림 끄기/켜기</string>
+    <string name="btn_fragS_logout">ㅤ로그아웃</string>
+    <string name="et_fragS_dialogNick">변경할 닉네임을 입력하세요</string>
+    <string name="tv_fragS_dialogLO_question">로그아웃 하시겠어요?</string>
+
+    <!--for Google Sign In-->
+    <string name="client_id">656815453130-vuna6v6qnc1lqtu4337iav5o3m5b2cu2.apps.googleusercontent.com</string>
+
 </resources>

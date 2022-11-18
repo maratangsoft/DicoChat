@@ -5,15 +5,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".MentionFragment">
+    tools:context=".MentionFragment"
+    android:background="@color/bg_reactive">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="?colorPrimary"
-        app:title="최근 멘션"
-        app:titleTextColor="@color/white" />
+        app:title="@string/tb_fragM_title" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_mention"

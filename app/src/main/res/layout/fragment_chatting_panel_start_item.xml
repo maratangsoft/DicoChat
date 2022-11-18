@@ -17,7 +17,7 @@
         android:id="@+id/civ_room_img"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:src="@drawable/urnc"
+        android:src="@drawable/icons8_monkey_164"
         app:civ_circle_background_color="@color/gray"
         android:layout_gravity="center_horizontal"
         android:layout_marginStart="8dp"/>
@@ -26,8 +26,7 @@
         android:id="@+id/tv_room_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="지구멸망 채팅방"
-        android:textColor="@color/black"
+        android:text="@string/room_title"
         android:textSize="20sp"
         android:layout_marginStart="10dp"/>
 

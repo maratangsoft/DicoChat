@@ -1,10 +1,75 @@
 <resources>
-    <!--Login Activity-->
     <string name="app_name">CicoChat</string>
+    <string name="nickname">Anonymous</string>
+    <string name="user_no">#9999</string>
+    <string name="write_date">2022.10.21. PM 10:35</string>
+    <string name="msg_example">this is a message example. blablalblalbalblablablallalsdfsfsdfsdfsfefs</string>
+    <string name="room_title">#Room Title</string>
+    <string name="btn_ok">CONFIRM</string>
+    <string name="btn_cancel">Cancel</string>
+    <string name="btn_yes">YES</string>
+    <string name="btn_no">NO</string>
+    <string name="msg_empty_response">DB Error!</string>
+
+    <!--Login Activity-->
     <string name="guest_login">Login with guest account</string>
+    <string name="google_login_succeeded">You logged in with Google account.</string>
+    <string name="kakao_login_succeeded">You logged in with Kakao account.</string>
+
+    <!--ChattingFragment- Central-->
+    <string name="et_panelC_input_msg">Input your message</string>
+    <string name="tv_panelC_bs_title">Invite your friends</string>
+    <string name="btn_panelC_bs_invite">Invite</string>
+
+    <string name="msg_panelC_initial">Select a room\nat the left panel</string>
+
+    <!--ChattingFragment - Start-->
+    <string name="btn_panelS_new_room">Create new room</string>
+
+    <!--ChattingFragment - End-->
+    <string name="btn_panelE_search">Search</string>
+    <string name="btn_panelE_noti">Notification</string>
+    <string name="btn_panelE_room_setting">Room Setting</string>
+    <string name="btn_panelE_invite">Invite Friends</string>
+
+    <!--NewRoomActivity-->
+    <string name="tv_actNR_create">Create new chatting room</string>
+    <string name="tv_actNR_set_title">Room Title</string>
+    <string name="et_actNR_set_title">Input the room title</string>
+    <string name="btn_actNR_create">Create new room</string>
+
+    <string name="msg_actNR_no_input">Input the room name and choose an image!</string>
+    <string name="msg_actNR_registered">You created a new room.</string>
+
+    <!--RoomSettingActivity-->
+    <string name="tb_actRS_title">Room Setting</string>
+    <string name="tv_actRS_set_title">Room Title</string>
+    <string name="et_actRS_set_title">Input the new room title</string>
+    <string name="tv_actRS_noti">Notification for this room\n(ON / OFF)</string>
+
+    <!--FriendsFragment-->
+    <string name="tb_fragF_title">Friends</string>
+    <string name="tv_fragF_bs_send">ㅤSend a message</string>
 
     <!--FindFriendActivity-->
-    <string name="add_friends">Add friends</string>
-    <string name="tv_frag_ff_search">search with User ID</string>
-    <string name="et_frag_ff">input a number after #</string>
+    <string name="tb_actFF_title">Add friends</string>
+    <string name="tv_actFF_search">search with User ID</string>
+    <string name="et_actFF">input a number after #</string>
+    <string name="btn_actFF_add">Add to your friends list</string>
+
+    <string name="msg_actFF_no_result">We couldn\'t find any result. Please check the number you input correct.</string>
+    <string name="msg_actFF_registered">Added a friend</string>
+
+    <!--MentionFragment-->
+    <string name="tb_fragM_title">Recent Mention</string>
+
+    <!--SettingFragment-->
+    <string name="tv_fragS_noti_all">Notification for ALL room\n(ON / OFF)</string>
+    <string name="btn_fragS_logout">ㅤLogout</string>
+    <string name="et_fragS_dialogNick">Input new nickname</string>
+    <string name="tv_fragS_dialogLO_question">Do you want to log out?</string>
+
+    <!--for Google Sign In-->
+    <string name="client_id">656815453130-vuna6v6qnc1lqtu4337iav5o3m5b2cu2.apps.googleusercontent.com</string>
+
 </resources>

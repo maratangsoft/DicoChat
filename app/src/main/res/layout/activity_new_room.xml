@@ -17,14 +17,14 @@
     <androidx.appcompat.widget.AppCompatTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="채팅방을 만들어 보세요"
+        android:text="@string/tv_actNR_create"
         android:textSize="26sp"
-        android:textColor="@color/black"
         android:textStyle="bold"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="25dp"/>
     
     <FrameLayout
+        android:id="@+id/btn_room_img"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="25dp"
@@ -40,7 +40,7 @@
         <de.hdodenhof.circleimageview.CircleImageView
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:src="@drawable/ic_add_24_white"
+            android:src="@drawable/ic_add_white"
             app:civ_circle_background_color="@color/black"
             android:layout_gravity="end"/>
     </FrameLayout>
@@ -48,9 +48,8 @@
     <androidx.appcompat.widget.AppCompatTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="방 제목"
+        android:text="@string/tv_actNR_set_title"
         android:textSize="22sp"
-        android:textColor="@color/black"
         android:layout_marginStart="30dp"
         android:layout_marginTop="16dp"/>
 
@@ -58,8 +57,7 @@
         android:id="@+id/et_room_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="방 제목을 입력하세요"
-        android:textColorHint="@color/gray"
+        android:hint="@string/et_actNR_set_title"
         android:inputType="text"
         android:background="@drawable/bg_edittext"
         android:padding="12dp"
@@ -67,12 +65,12 @@
         android:layout_marginTop="8dp"/>
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btn_create_room"
+        android:id="@+id/btn_register_room"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="채팅방 만들기"
+        android:text="@string/btn_actNR_create"
         android:textSize="20sp"
-        android:textColor="@color/white"
+        android:textColor="@color/white_80per"
         android:background="@drawable/bg_button"
         android:layout_marginHorizontal="30dp"
         android:layout_marginTop="16dp"/>

@@ -16,9 +16,8 @@
         android:id="@+id/tv_nickname"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="유저닉네임"
-        android:textSize="16dp"
-        android:textColor="@color/black"
+        android:text="@string/nickname"
+        android:textSize="16sp"
         android:textStyle="bold"
         android:layout_toEndOf="@+id/civ_user_img"
         android:layout_marginStart="6dp"/>
@@ -27,7 +26,8 @@
         android:id="@+id/tv_write_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="2022.10.21. 오후 10:35"
+        android:text="@string/write_date"
+        android:textColor="@color/gray"
         android:layout_alignBottom="@+id/tv_nickname"
         android:layout_toEndOf="@+id/tv_nickname"
         android:layout_marginStart="8dp"/>
@@ -36,7 +36,7 @@
         android:id="@+id/tv_messsage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="코로나 양성나오는데 자가격리 끝났다고 출근하래서 어르신 케어하고 왔네"
+        android:text="@string/msg_example"
         android:layout_alignStart="@+id/tv_nickname"
         android:layout_below="@+id/tv_nickname"/>
 

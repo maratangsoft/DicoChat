@@ -17,10 +17,9 @@
         android:id="@+id/tv_nickname"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="유저 이름"
+        android:text="@string/nickname"
         android:textSize="20sp"
         android:textStyle="bold"
-        android:textColor="@color/black"
         android:layout_marginStart="12dp"/>
 
 </LinearLayout>

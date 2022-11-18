@@ -17,10 +17,9 @@
         android:id="@+id/tv_nickname"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="유저 이름"
+        android:text="@string/nickname"
         android:textSize="20sp"
         android:textStyle="bold"
-        android:textColor="@color/black"
         android:layout_marginStart="12dp"/>
 
     <androidx.appcompat.widget.AppCompatTextView
@@ -28,7 +27,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:text="#2345"
+        android:text="@string/user_no"
         android:textSize="20sp"
         android:textStyle="bold"
         android:textColor="@color/gray"
@@ -38,7 +37,7 @@
         android:id="@+id/btn_invite"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="초대하기"
+        android:text="@string/btn_panelC_bs_invite"
         android:textColor="@color/white"
         android:background="@drawable/bg_button"
         android:minHeight="0dp"

@@ -8,4 +8,8 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="gray">#FF808080</color>
+
+    <color name="bg_reactive">#FFFFFFFF</color>
+    <color name="ic_reactive">#FF000000</color>
+    <color name="white_80per">#CDFFFFFF</color>
 </resources>
