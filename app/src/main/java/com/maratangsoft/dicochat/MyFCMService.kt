@@ -24,10 +24,12 @@ class MyFCMService: FirebaseMessagingService() {
         super.onMessageReceived(msg)
         Log.i("CICO-FCM-Received", "onMessage Received...")
 
+        //받은 데이터 메인액티비티로 보내기
         val bundle = bundleOf("fcm_push" to msg.data)
         val intent = Intent(this, MainActivity::class.java)
         intent.putExtra("bundle", bundle)
         startActivity(intent)
+        Log.d("CICO-FCM-data", msg.data.toString())
 
         //사용자에게는 메시지 수신을 Notification으로 통지해야 함
         //TODO: 현재 푸시가 디바이스 단위로 오는 상황임. 같은 기기로 여러 계정 사용시 푸시 구분이 안됨.

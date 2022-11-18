@@ -32,6 +32,8 @@
     <string name="btn_panelE_room_setting">Room Setting</string>
     <string name="btn_panelE_invite">Invite Friends</string>
 
+    <string name="msg_panelE_subscribe">Chatting in this room will be noticed.</string>
+
     <!--NewRoomActivity-->
     <string name="tv_actNR_create">Create new chatting room</string>
     <string name="tv_actNR_set_title">Room Title</string>

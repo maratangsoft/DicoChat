@@ -103,5 +103,6 @@ class MainActivity : AppCompatActivity() {
         super.onNewIntent(intent)
         val bundle = intent?.getBundleExtra("bundle")
         bundle?.let { manager.setFragmentResult("push_request", it) }
+        Log.d("CICO-ActM-push", bundle.toString())
     }
 }

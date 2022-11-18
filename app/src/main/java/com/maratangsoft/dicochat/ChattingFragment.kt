@@ -18,6 +18,7 @@ import androidx.loader.content.CursorLoader
 import com.bumptech.glide.Glide
 import com.discord.panels.OverlappingPanelsLayout
 import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.google.firebase.messaging.FirebaseMessaging
 import com.maratangsoft.dicochat.databinding.FragmentChattingBinding
 import de.hdodenhof.circleimageview.CircleImageView
 import okhttp3.MediaType
@@ -99,6 +100,10 @@ class ChattingFragment : Fragment() {
 
         getRoom()
 
+        //방 알림 (푸시 주제 구독) 리스너
+        binding.panelEnd.btnNoti.setOnClickListener { clickBtnNoti() }
+
+        //방 설정 리스너
         binding.panelEnd.btnRoomSetting.setOnClickListener {
             (requireActivity() as AppCompatActivity).startActivity(
                 Intent(activity, RoomSettingActivity::class.java)
@@ -235,6 +240,8 @@ class ChattingFragment : Fragment() {
         val userImg = bundle.getString("user_img")
 
         val pushItem = ChatItem(chatNo!!, roomNo!!, userNo!!, message!!, fileUrl!!, mentioned!!, writeDate!!, null, nickname!!, userImg!!)
+        Log.d("CICO-FragC-pushItem", pushItem.toString())
+
         chattingFragItems.add(pushItem)
         val adapter = binding.panelCentral.recyclerPanelCentral.adapter
         adapter?.notifyItemInserted(chattingFragItems.size - 1)
@@ -328,5 +335,11 @@ class ChattingFragment : Fragment() {
 
         val imgUrl = "${ALL.BASE_URL}CicoChatServer/${chattingFragPanelEndItems[position].user_img}"
         Glide.with(requireActivity()).load(imgUrl).error(R.drawable.icons8_monkey_164).into(civUserImg!!)
+    }
+
+    private fun clickBtnNoti(){
+        FirebaseMessaging.getInstance().subscribeToTopic("test").addOnSuccessListener {
+            Toast.makeText(requireActivity(), getString(R.string.msg_panelE_subscribe), Toast.LENGTH_SHORT).show()
+        }
     }
 }
