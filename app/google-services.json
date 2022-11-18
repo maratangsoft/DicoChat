@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "656815453130",
+    "project_id": "cicochat-1668667265730",
+    "storage_bucket": "cicochat-1668667265730.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:656815453130:android:308f85fd7b7c3816905533",
+        "android_client_info": {
+          "package_name": "com.maratangsoft.dicochat"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "656815453130-vuna6v6qnc1lqtu4337iav5o3m5b2cu2.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.maratangsoft.dicochat",
+            "certificate_hash": "eaa4c07f7c05d887178bdac293135da744402e2e"
+          }
+        },
+        {
+          "client_id": "656815453130-2d4sb00dkkkrdil8i1hsh8mv9e94jgf2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAkbbYhW1mtT2gqhRhVTvlCCEBF7A75LGI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "656815453130-2d4sb00dkkkrdil8i1hsh8mv9e94jgf2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
