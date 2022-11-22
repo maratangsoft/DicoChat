@@ -40,10 +40,11 @@ class LoginActivity : AppCompatActivity() {
     private fun getFCMToken(){
         FirebaseMessaging.getInstance().token.addOnCompleteListener {
             if (!it.isSuccessful){
-                Log.i("CICO-FCMToken", "FCM 등록 실패")
+                Log.i("CICO-ActL-getFCMToken", "FCM 등록 실패")
             }else{
                 fcmToken = it.result
-                Log.i("CICO-ActL-FCMToken", fcmToken)
+                Log.i("CICO-ActL-getFCMToken", fcmToken)
+                ALL.currentUserFCMToken = fcmToken
             }
         }
     }
@@ -126,7 +127,7 @@ class LoginActivity : AppCompatActivity() {
         queryMap["type"] = "get_user_no"
         queryMap["google_id"] = googleId
         queryMap["kakao_id"] = kakaoId
-        queryMap["fcm_token"] = fcmToken
+        queryMap["fcm_token"] = ALL.currentUserFCMToken
 
         val retrofitService = RetrofitHelper.getInstance().create(RetrofitService::class.java)
         retrofitService.getToPlain(queryMap).enqueue(object : Callback<String> {

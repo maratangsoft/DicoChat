@@ -13,7 +13,6 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentResultListener
 import androidx.loader.content.CursorLoader
 import com.bumptech.glide.Glide
 import com.discord.panels.OverlappingPanelsLayout
@@ -146,6 +145,7 @@ class ChattingFragment : Fragment() {
                     it.forEachIndexed{ i, item ->
                         chattingFragItems.add(item)
                         adapter?.notifyItemInserted(i)
+                        binding.panelCentral.recyclerPanelCentral.scrollToPosition(adapter?.itemCount?.minus(1) ?: 0)
                     }
                 }
             }
@@ -169,8 +169,7 @@ class ChattingFragment : Fragment() {
                 response: Response<String>
             ) {
                 response.body()?.let {
-                    getChat()
-                    //TODO: 푸시 기능 넣으면 이거 빼라
+
                 }
             }
             override fun onFailure(call: Call<String>, t: Throwable) {
@@ -227,13 +226,14 @@ class ChattingFragment : Fragment() {
             }
         })
     }
+
     //번들로 넘어온 푸시 받아서 채팅창에 추가
     private fun takePushChats(bundle:Bundle){
         val chatNo = bundle.getString("chat_no")
         val roomNo = bundle.getString("room_no")
         val userNo = bundle.getString("user_no")
         val message = bundle.getString("message")
-        val fileUrl = bundle.getString("fileUrl")
+        val fileUrl = bundle.getString("file_url")
         val mentioned = bundle.getString("mentioned")
         val writeDate = bundle.getString("write_date")
         val nickname = bundle.getString("nickname")
@@ -243,9 +243,9 @@ class ChattingFragment : Fragment() {
         Log.d("CICO-FragC-pushItem", pushItem.toString())
 
         chattingFragItems.add(pushItem)
-        val adapter = binding.panelCentral.recyclerPanelCentral.adapter
-        adapter?.notifyItemInserted(chattingFragItems.size - 1)
-        //TODO: 가장 마지막 아이템으로 포커스 이동
+        val recycler = binding.panelCentral.recyclerPanelCentral
+        recycler.adapter?.notifyItemInserted(chattingFragItems.size - 1)
+        recycler.scrollToPosition(recycler.adapter?.itemCount?.minus(1) ?: 0)
     }
 /////////왼쪽 패널//////////////////////////////////////////////////
 

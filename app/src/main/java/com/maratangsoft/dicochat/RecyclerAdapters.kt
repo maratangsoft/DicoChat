@@ -13,7 +13,7 @@ import com.maratangsoft.dicochat.databinding.FragmentChattingItemBinding
 import com.maratangsoft.dicochat.databinding.FragmentChattingPanelEndItemBinding
 import com.maratangsoft.dicochat.databinding.FragmentChattingPanelStartItemBinding
 import com.maratangsoft.dicochat.databinding.FragmentMentionItemBinding
-
+//TODO: 그림 표시용 뷰홀더 따로 만들어야 함
 class ChattingFragAdapter(val context:Context, var items:MutableList<ChatItem>): Adapter<ChattingFragAdapter.ChattingFragVH>(){
     inner class ChattingFragVH(val binding: FragmentChattingItemBinding): ViewHolder(binding.root)
 

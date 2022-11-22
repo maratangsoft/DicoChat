@@ -101,7 +101,7 @@ class SettingFragment : Fragment() {
         val btnCancel = dialog.findViewById<AppCompatTextView>(R.id.btn_cancel)
 
         btnOk?.setOnClickListener {
-            binding.tvNickname.text = et?.text
+            binding.tvNickname.text = et?.text.toString()
             setNickname()
             dialog.dismiss()
         }
