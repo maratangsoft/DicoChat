@@ -29,13 +29,12 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="25dp"
         android:layout_gravity="center_horizontal">
-        <androidx.appcompat.widget.AppCompatImageView
+        <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/civ_room_img"
             android:layout_width="130dp"
             android:layout_height="130dp"
             android:background="@drawable/bg_circleimageview"
-            android:src="@drawable/ic_camera_alt_48"
-            android:scaleType="center"/>
+            android:src="@mipmap/ic_new_room_round"/>
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:layout_width="40dp"

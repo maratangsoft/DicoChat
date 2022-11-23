@@ -120,7 +120,7 @@ class MentionFragmentAdapter(val context:Context, var items:MutableList<ChatItem
         return MentionFragVH(FragmentMentionItemBinding.bind(itemView))
     }
     override fun onBindViewHolder(holder: MentionFragVH, position: Int) {
-        holder.binding.tvRoomTitle.text = items[position].room_title
+        holder.binding.tvRoomTitle.text = "#${items[position].room_title}"
         holder.binding.tvNickname.text = items[position].nickname
         holder.binding.tvWriteDate.text = items[position].write_date
         holder.binding.tvMessage.text = items[position].message

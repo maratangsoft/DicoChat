@@ -37,12 +37,13 @@
             android:gravity="center_vertical"
             android:padding="6dp">
 
-            <de.hdodenhof.circleimageview.CircleImageView
+            <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/btn_send_file"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:src="@drawable/ic_add_gray"
-                app:civ_circle_background_color="?colorPrimaryVariant" />
+                android:src="@drawable/ic_image_gray"
+                android:scaleType="centerInside"
+                android:background="@drawable/bg_circleimageview"/>
 
             <androidx.appcompat.widget.AppCompatEditText
                 android:id="@+id/et_msg"
