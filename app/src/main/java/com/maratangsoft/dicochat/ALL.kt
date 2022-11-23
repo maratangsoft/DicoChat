@@ -9,6 +9,8 @@ class ALL{
         var currentRoomNo = "" //접속중인 방 번호
         var currentRoomTitle = ""
 
+        val currentRoomMembers = mutableListOf<UserItem>()
+
         const val BASE_URL = "http://maratangsoft.dothome.co.kr/"
     }
 }

@@ -32,7 +32,6 @@ class ChattingFragment : Fragment() {
     lateinit var binding: FragmentChattingBinding
     var chattingFragItems: MutableList<ChatItem> = mutableListOf()
     var chattingFragPanelStartItems: MutableList<RoomItem> = mutableListOf()
-    var chattingFragPanelEndItems: MutableList<UserItem> = mutableListOf()
     private lateinit var bsd:BottomSheetDialog
 
     private var imgPath = ""
@@ -78,7 +77,10 @@ class ChattingFragment : Fragment() {
         }
 
         //하단 버튼 리스너
-        binding.panelCentral.btnSendChat.setOnClickListener { sendChat() }
+        binding.panelCentral.btnSendChat.setOnClickListener {
+            val mention = checkMention()
+            sendChat(mention)
+        }
         binding.panelCentral.btnSendFile.setOnClickListener { gotoGallery() }
 
 //////////////왼쪽 패널 뷰 설정//////////////////
@@ -95,7 +97,7 @@ class ChattingFragment : Fragment() {
 //////////////오른쪽 패널 뷰 설정/////////////////
         //방 멤버 목록 리사이클러뷰
         binding.panelEnd.recyclerPanelEnd.adapter =
-            ChattingFragPanelEndAdapter(requireActivity(), this, chattingFragPanelEndItems)
+            ChattingFragPanelEndAdapter(requireActivity(), this, ALL.currentRoomMembers)
 
         getRoom()
 
@@ -155,13 +157,26 @@ class ChattingFragment : Fragment() {
         })
     }
 
-    private fun sendChat(){
+    private fun checkMention(): String{
+        val message = binding.panelCentral.etMsg.text
+        var mention = ""
+        message?.let {
+            ALL.currentRoomMembers.forEach {
+                if (message.contains("@${it.nickname}")){
+                    mention = it.user_no
+                }
+            }
+        }
+        return mention
+    }
+
+    private fun sendChat(mention:String){
         val queryMap = mutableMapOf<String, String>()
         queryMap["type"] = "send_chat"
         queryMap["room_no"] = ALL.currentRoomNo
         queryMap["user_no"] = ALL.currentUserNo
         queryMap["message"] = binding.panelCentral.etMsg.text.toString()
-        queryMap["mentioned"] = "" //TODO: 멘션 기능 넣기
+        queryMap["mentioned"] = mention
 
         retrofitService.getToPlain(queryMap).enqueue(object : Callback<String> {
             override fun onResponse(
@@ -293,7 +308,7 @@ class ChattingFragment : Fragment() {
 /////////////오른쪽 패널//////////////////////////////////////////////////
 
     fun getRoomMember(){
-        chattingFragPanelEndItems.clear()
+        ALL.currentRoomMembers.clear()
         val adapter = binding.panelEnd.recyclerPanelEnd.adapter
         adapter?.notifyDataSetChanged()
 
@@ -308,7 +323,7 @@ class ChattingFragment : Fragment() {
             ) {
                 response.body()?.let {
                     it.forEachIndexed{ i, item ->
-                        chattingFragPanelEndItems.add(item)
+                        ALL.currentRoomMembers.add(item)
                         adapter?.notifyItemInserted(i)
                     }
                 }
@@ -330,10 +345,10 @@ class ChattingFragment : Fragment() {
 
         bsd.show()
 
-        tvNick?.text = chattingFragPanelEndItems[position].nickname
-        tvUserNo?.text = "#${chattingFragPanelEndItems[position].user_no}"
+        tvNick?.text = ALL.currentRoomMembers[position].nickname
+        tvUserNo?.text = "#${ALL.currentRoomMembers[position].user_no}"
 
-        val imgUrl = "${ALL.BASE_URL}CicoChatServer/${chattingFragPanelEndItems[position].user_img}"
+        val imgUrl = "${ALL.BASE_URL}CicoChatServer/${ALL.currentRoomMembers[position].user_img}"
         Glide.with(requireActivity()).load(imgUrl).error(R.drawable.icons8_monkey_164).into(civUserImg!!)
     }
 
