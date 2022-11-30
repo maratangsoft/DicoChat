@@ -12,4 +12,6 @@
     <color name="bg_reactive">#FFFFFFFF</color>
     <color name="ic_reactive">#FF000000</color>
     <color name="white_80per">#CDFFFFFF</color>
+    <color name="brand_color">#FF41B8FE</color>
+    <color name="brand_color_2">#FFB7DBF0</color>
 </resources>
