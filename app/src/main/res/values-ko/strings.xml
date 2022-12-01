@@ -33,6 +33,8 @@
     <string name="btn_panelE_room_setting">설정</string>
     <string name="btn_panelE_invite">멤버 초대하기</string>
 
+    <string name="msg_panelE_subscribe">이 방의 채팅 알림을 켰습니다.</string>
+
     <!--NewRoomActivity-->
     <string name="tv_actNR_create">채팅방을 만들어 보세요</string>
     <string name="tv_actNR_set_title">방 제목</string>
@@ -69,6 +71,9 @@
     <string name="btn_fragS_logout">ㅤ로그아웃</string>
     <string name="et_fragS_dialogNick">변경할 닉네임을 입력하세요</string>
     <string name="tv_fragS_dialogLO_question">로그아웃 하시겠어요?</string>
+
+    <!--MyFCMService-->
+    <string name="noti_title">새 채팅이 도착했습니다.</string>
 
     <!--for Google Sign In-->
     <string name="client_id">656815453130-vuna6v6qnc1lqtu4337iav5o3m5b2cu2.apps.googleusercontent.com</string>

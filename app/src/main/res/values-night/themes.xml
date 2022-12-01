@@ -14,4 +14,9 @@
         <!-- Customize your theme here. -->
         <item name="android:titleTextColor">#CDFFFFFF</item>
     </style>
+
+    <style name="LoginActivity" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="android:statusBarColor">@color/brand_color_2</item>
+        <item name="android:windowLightStatusBar">true</item>
+    </style>
 </resources>

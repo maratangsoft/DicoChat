@@ -13,7 +13,7 @@ import com.maratangsoft.dicochat.databinding.FragmentChattingItemBinding
 import com.maratangsoft.dicochat.databinding.FragmentChattingPanelEndItemBinding
 import com.maratangsoft.dicochat.databinding.FragmentChattingPanelStartItemBinding
 import com.maratangsoft.dicochat.databinding.FragmentMentionItemBinding
-
+//TODO: 그림 표시용 뷰홀더 따로 만들어야 함
 class ChattingFragAdapter(val context:Context, var items:MutableList<ChatItem>): Adapter<ChattingFragAdapter.ChattingFragVH>(){
     inner class ChattingFragVH(val binding: FragmentChattingItemBinding): ViewHolder(binding.root)
 
@@ -120,7 +120,7 @@ class MentionFragmentAdapter(val context:Context, var items:MutableList<ChatItem
         return MentionFragVH(FragmentMentionItemBinding.bind(itemView))
     }
     override fun onBindViewHolder(holder: MentionFragVH, position: Int) {
-        holder.binding.tvRoomTitle.text = items[position].room_title
+        holder.binding.tvRoomTitle.text = "#${items[position].room_title}"
         holder.binding.tvNickname.text = items[position].nickname
         holder.binding.tvWriteDate.text = items[position].write_date
         holder.binding.tvMessage.text = items[position].message
