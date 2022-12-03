@@ -11,7 +11,7 @@ import retrofit2.Response
 
 class MentionFragment : Fragment() {
     lateinit var binding: FragmentMentionBinding
-    var mentionFragItems: MutableList<ChatItem> = mutableListOf()
+    var items: MutableList<ChatItem> = mutableListOf()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -25,13 +25,13 @@ class MentionFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         //리사이클러뷰 어댑터
-        binding.recyclerMention.adapter = MentionFragmentAdapter(requireActivity(), mentionFragItems)
+        binding.recyclerMention.adapter = MentionFragAdapter(requireActivity(), items)
 
         getMention()
     }
 
     private fun getMention(){
-        mentionFragItems.clear()
+        items.clear()
         val adapter = binding.recyclerMention.adapter
         adapter?.notifyItemRangeRemoved(0, adapter.itemCount - 1)
 
@@ -47,13 +47,13 @@ class MentionFragment : Fragment() {
             ) {
                 response.body()?.let {
                     it.forEachIndexed{ i, item ->
-                        mentionFragItems.add(item)
+                        items.add(item)
                         adapter?.notifyItemInserted(i)
                     }
                 }
             }
             override fun onFailure(call: Call<MutableList<ChatItem>>, t: Throwable) {
-                Log.d("CICOCHAT", t.message!!)
+                Log.d("tttGetMention", t.message!!)
             }
         })
     }

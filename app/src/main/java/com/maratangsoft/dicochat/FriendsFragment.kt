@@ -17,7 +17,7 @@ import retrofit2.Response
 
 class FriendsFragment : Fragment() {
     lateinit var binding: FragmentFriendsBinding
-    var friendsFragItems: MutableList<UserItem> = mutableListOf()
+    var items: MutableList<UserItem> = mutableListOf()
     private val retrofitService by lazy { RetrofitHelper.getInstance().create(RetrofitService::class.java) }
 
     override fun onCreateView(
@@ -34,7 +34,7 @@ class FriendsFragment : Fragment() {
             (requireActivity() as AppCompatActivity).startActivity(Intent(activity, FindFriendActivity::class.java))
             true
         }
-        binding.recyclerFriends.adapter = FriendsFragmentAdapter(requireActivity(), this, friendsFragItems)
+        binding.recyclerFriends.adapter = FriendsFragAdapter(requireActivity(), this, items)
     }
 
     override fun onResume() {
@@ -43,7 +43,7 @@ class FriendsFragment : Fragment() {
     }
 
     private fun getFriend(){
-        friendsFragItems.clear()
+        items.clear()
         val adapter = binding.recyclerFriends.adapter
         adapter?.notifyDataSetChanged()
 
@@ -58,20 +58,20 @@ class FriendsFragment : Fragment() {
             ) {
                 response.body()?.let {
                     it.forEachIndexed{ i, item ->
-                        friendsFragItems.add(UserItem(item.friend_no!!, null, item.nickname, item.user_img))
+                        items.add(UserItem(item.friend_no!!, null, item.nickname, item.user_img))
                         adapter?.notifyItemInserted(i)
                     }
                 }
             }
             override fun onFailure(call: Call<MutableList<UserItem>>, t: Throwable) {
-                Log.d("CICOCHAT", t.message!!)
+                Log.d("tttGetFriend", t.message!!)
             }
         })
     }
 
     fun getProfileBs(position:Int){
         val bsd = BottomSheetDialog(requireActivity())
-        bsd.setContentView(layoutInflater.inflate(R.layout.fragment_friends_bs, null))
+        bsd.setContentView(layoutInflater.inflate(R.layout.bs_profile, null))
 
         val tvNick = bsd.findViewById<AppCompatTextView>(R.id.tv_nickname)
         val tvUserNo = bsd.findViewById<AppCompatTextView>(R.id.tv_user_no)
@@ -79,10 +79,10 @@ class FriendsFragment : Fragment() {
 
         bsd.show()
 
-        tvNick?.text = friendsFragItems[position].nickname
-        tvUserNo?.text = "#${friendsFragItems[position].user_no}" //getFriends()에서 friend_no를 user_no 자리에 받았으므로 여기서도 바꿔야 한다
+        tvNick?.text = items[position].nickname
+        tvUserNo?.text = "#${items[position].user_no}" //getFriends()에서 friend_no를 user_no 자리에 받았으므로 여기서도 바꿔야 한다
 
-        val imgUrl = "${ALL.BASE_URL}CicoChatServer/${friendsFragItems[position].user_img}"
+        val imgUrl = "${ALL.BASE_URL}${items[position].user_img}"
         Glide.with(requireActivity()).load(imgUrl).error(R.drawable.icons8_monkey_164).into(civUserImg!!)
     }
 }

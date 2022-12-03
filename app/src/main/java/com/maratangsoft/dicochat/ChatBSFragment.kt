@@ -7,13 +7,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import com.maratangsoft.dicochat.databinding.FragmentChattingBsBinding
+import com.maratangsoft.dicochat.databinding.BsInviteBinding
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class ChattingBSFragment(val chatFrag:ChattingFragment): BottomSheetDialogFragment() {
-    lateinit var binding: FragmentChattingBsBinding
+class ChatBSFragment(val chatFrag:ChatFragment): BottomSheetDialogFragment() {
+    lateinit var binding: BsInviteBinding
     val items = mutableListOf<UserItem>()
     private val retrofitService = RetrofitHelper.getInstance().create(RetrofitService::class.java)
 
@@ -22,7 +22,7 @@ class ChattingBSFragment(val chatFrag:ChattingFragment): BottomSheetDialogFragme
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentChattingBsBinding.inflate(layoutInflater, container, false)
+        binding = BsInviteBinding.inflate(layoutInflater, container, false)
         return binding.root
     }
 
@@ -46,12 +46,12 @@ class ChattingBSFragment(val chatFrag:ChattingFragment): BottomSheetDialogFragme
                     it.forEachIndexed{ i, item ->
                         items.add(UserItem(item.friend_no!!, null, item.nickname, item.user_img))
                         binding.recycler.adapter?.notifyItemInserted(i)
-                        binding.recycler.adapter = ChattingFragBsAdapter(requireActivity(), this@ChattingBSFragment, items)
+                        binding.recycler.adapter = ChatFragBsAdapter(requireActivity(), this@ChatBSFragment, items)
                     }
                 }
             }
             override fun onFailure(call: Call<MutableList<UserItem>>, t: Throwable) {
-                Log.d("CICO-FragCBS", t.message!!)
+                Log.d("tttGetFriend", t.message!!)
             }
         })
     }
@@ -73,7 +73,7 @@ class ChattingBSFragment(val chatFrag:ChattingFragment): BottomSheetDialogFragme
                 }
             }
             override fun onFailure(call: Call<String>, t: Throwable) {
-                Log.d("CICOCHAT", t.message!!)
+                Log.d("tttInviteUser", t.message!!)
             }
         })
     }

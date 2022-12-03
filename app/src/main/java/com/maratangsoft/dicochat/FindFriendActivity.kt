@@ -41,7 +41,7 @@ class FindFriendActivity : AppCompatActivity() {
                 }
             }
             override fun onFailure(call: Call<String>, t: Throwable) {
-                Log.d("CICOCHAT", t.message!!)
+                Log.d("tttRegisterFriend", t.message!!)
             }
         })
     }

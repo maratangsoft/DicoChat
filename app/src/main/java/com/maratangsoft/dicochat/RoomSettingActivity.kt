@@ -40,7 +40,7 @@ class RoomSettingActivity : AppCompatActivity() {
                 }
             }
             override fun onFailure(call: Call<String>, t: Throwable) {
-                Log.d("CICOCHAT", t.message!!)
+                Log.d("tttGetRoomTitle", t.message!!)
             }
         })
     }
@@ -68,7 +68,7 @@ class RoomSettingActivity : AppCompatActivity() {
                 }
             }
             override fun onFailure(call: Call<String>, t: Throwable) {
-                Log.d("CICOCHAT", t.message!!)
+                Log.d("tttSetRoomTitle", t.message!!)
             }
         })
     }

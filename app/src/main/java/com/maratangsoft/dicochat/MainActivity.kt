@@ -7,17 +7,17 @@ import android.graphics.Rect
 import android.os.Build.VERSION
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.MenuItem
 import android.view.MotionEvent
 import android.view.inputmethod.InputMethodManager
+import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.widget.AppCompatEditText
 import com.maratangsoft.dicochat.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
     private val binding by lazy { ActivityMainBinding.inflate(layoutInflater) }
-    var fragments = arrayOf(ChattingFragment(), FriendsFragment(), MentionFragment(), SettingFragment())
+    var fragments = arrayOf(ChatFragment(), FriendsFragment(), MentionFragment(), SettingFragment())
     private val manager = supportFragmentManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -95,7 +95,7 @@ class MainActivity : AppCompatActivity() {
     private val permissionLauncher = registerForActivityResult(
         ActivityResultContracts.RequestMultiplePermissions()) { permissions ->
         if(permissions.entries.all { it.value }){
-            Log.d("CICO-MA", "권한 승인")
+            Toast.makeText(this, "권한 승인하셨습니다.", Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -103,6 +103,5 @@ class MainActivity : AppCompatActivity() {
         super.onNewIntent(intent)
         val bundle = intent?.getBundleExtra("bundle")
         bundle?.let { manager.setFragmentResult("push_request", it) }
-        Log.d("CICO-ActM-push", bundle.toString())
     }
 }

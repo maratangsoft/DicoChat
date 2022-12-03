@@ -11,6 +11,6 @@ class ALL{
 
         val currentRoomMembers = mutableListOf<UserItem>()
 
-        const val BASE_URL = "http://maratangsoft.dothome.co.kr/"
+        const val BASE_URL = "http://maratangsoft.dothome.co.kr/DicoChatServer/"
     }
 }

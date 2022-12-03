@@ -22,7 +22,7 @@
         android:orientation="vertical">
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycler_panel_central"
+            android:id="@+id/rv_central"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"

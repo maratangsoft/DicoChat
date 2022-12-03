@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">CicoChat</string>
+    <string name="app_name">DicoChat</string>
     <string name="nickname">Anonymous</string>
     <string name="user_no">#9999</string>
     <string name="write_date">2022.10.21. PM 10:35</string>

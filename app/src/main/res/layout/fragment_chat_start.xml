@@ -7,7 +7,7 @@
     android:background="?colorPrimaryVariant">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_panel_start"
+        android:id="@+id/rv_start"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"

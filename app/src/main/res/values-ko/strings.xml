@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">씨코챗</string>
+    <string name="app_name">디코챗</string>
     <string name="nickname">익명</string>
     <string name="user_no">#9999</string>
     <string name="write_date">2022.10.21. 오후 10:35</string>
