@@ -24,6 +24,7 @@
     <string name="msg_panelC_initial">Select a room\nat the left panel</string>
 
     <!--ChattingFragment - Start-->
+    <string name="tv_panelS_title">Choose a chatting room</string>
     <string name="btn_panelS_new_room">Create new room</string>
 
     <!--ChattingFragment - End-->

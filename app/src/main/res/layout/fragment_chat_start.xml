@@ -6,13 +6,22 @@
     android:orientation="vertical"
     android:background="?colorPrimaryVariant">
 
+    <androidx.appcompat.widget.AppCompatTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/tv_panelS_title"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"/>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_start"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        android:layout_marginTop="20dp"/>
+        android:layout_marginTop="26dp"/>
 
     <LinearLayout
         android:id="@+id/btn_register_room"

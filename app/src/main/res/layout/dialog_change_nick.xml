@@ -21,6 +21,7 @@
         android:layout_height="wrap_content"
         android:text="@string/btn_cancel"
         android:textSize="16sp"
+        android:textColor="?colorPrimary"
         android:layout_toStartOf="@+id/btn_ok"
         android:layout_below="@id/et_change_nickname"
         android:layout_marginEnd="40dp"
@@ -32,6 +33,7 @@
         android:layout_height="wrap_content"
         android:text="@string/btn_ok"
         android:textSize="16sp"
+        android:textColor="?colorPrimary"
         android:layout_below="@id/et_change_nickname"
         android:layout_marginBottom="12dp"
         android:layout_alignEnd="@+id/et_change_nickname"/>

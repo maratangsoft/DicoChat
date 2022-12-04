@@ -75,7 +75,7 @@ class ChatFragEndAdapter(val context:Context, val hostFragment: ChatFragment, va
     override fun getItemCount() = items.size
 }
 
-class ChatFragBsAdapter(val context:Context, val hostFragment: ChatBSFragment, var items:MutableList<UserItem>): Adapter<ChatFragBsAdapter.ChatFragBsVH>(){
+class ChatFragBsAdapter(val context:Context, val hostFragment: InviteBSFragment, var items:MutableList<UserItem>): Adapter<ChatFragBsAdapter.ChatFragBsVH>(){
     inner class ChatFragBsVH(val binding: ItemInviteBinding): ViewHolder(binding.root){
         init {
             binding.btnInvite.setOnClickListener { hostFragment.inviteUser(adapterPosition) }

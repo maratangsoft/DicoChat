@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="?colorPrimary"
-        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:titleTextColor="@color/white"
         app:menu="@menu/fragment_chatting_opt"
         app:navigationIcon="@drawable/ic_hamburger"
         app:title="@string/room_title" />
@@ -41,7 +41,7 @@
                 android:id="@+id/btn_send_file"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:src="@drawable/ic_image_gray"
+                android:src="@drawable/ic_image"
                 android:scaleType="centerInside"
                 android:background="@drawable/bg_circleimageview"/>
 

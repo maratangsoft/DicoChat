@@ -19,7 +19,6 @@
         android:layout_height="wrap_content"
         android:text="@string/nickname"
         android:textSize="20sp"
-        android:textStyle="bold"
         android:layout_marginStart="12dp"/>
 
 </LinearLayout>

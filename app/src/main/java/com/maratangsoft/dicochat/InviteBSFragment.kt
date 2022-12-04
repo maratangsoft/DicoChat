@@ -12,7 +12,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class ChatBSFragment(val chatFrag:ChatFragment): BottomSheetDialogFragment() {
+class InviteBSFragment(val chatFrag:ChatFragment): BottomSheetDialogFragment() {
     lateinit var binding: BsInviteBinding
     val items = mutableListOf<UserItem>()
     private val retrofitService = RetrofitHelper.getInstance().create(RetrofitService::class.java)
@@ -46,7 +46,7 @@ class ChatBSFragment(val chatFrag:ChatFragment): BottomSheetDialogFragment() {
                     it.forEachIndexed{ i, item ->
                         items.add(UserItem(item.friend_no!!, null, item.nickname, item.user_img))
                         binding.recycler.adapter?.notifyItemInserted(i)
-                        binding.recycler.adapter = ChatFragBsAdapter(requireActivity(), this@ChatBSFragment, items)
+                        binding.recycler.adapter = ChatFragBsAdapter(requireActivity(), this@InviteBSFragment, items)
                     }
                 }
             }

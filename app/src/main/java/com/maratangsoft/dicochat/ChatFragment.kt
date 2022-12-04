@@ -112,7 +112,7 @@ class ChatFragment : Fragment() {
         }
         //초대하기 바텀시트 다이얼로그 리스너
         binding.pEnd.btnShowBs.setOnClickListener {
-            val bsDialog = ChatBSFragment(this)
+            val bsDialog = InviteBSFragment(this)
             bsDialog.show(requireActivity().supportFragmentManager, bsDialog.tag)
         }
     }
