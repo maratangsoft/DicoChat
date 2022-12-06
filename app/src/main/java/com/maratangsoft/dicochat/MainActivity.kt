@@ -95,7 +95,7 @@ class MainActivity : AppCompatActivity() {
     private val permissionLauncher = registerForActivityResult(
         ActivityResultContracts.RequestMultiplePermissions()) { permissions ->
         if(permissions.entries.all { it.value }){
-            Toast.makeText(this, "권한 승인하셨습니다.", Toast.LENGTH_SHORT).show()
+            //Toast.makeText(this, "권한 승인하셨습니다.", Toast.LENGTH_SHORT).show()
         }
     }
 

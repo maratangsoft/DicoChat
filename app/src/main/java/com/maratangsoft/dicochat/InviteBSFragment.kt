@@ -29,13 +29,14 @@ class InviteBSFragment(val chatFrag:ChatFragment): BottomSheetDialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        getFriend()
+        getFriendForInvite()
     }
 
-    private fun getFriend(){
+    private fun getFriendForInvite(){
         val queryMap = mutableMapOf<String, String>()
-        queryMap["type"] = "get_friend"
+        queryMap["type"] = "get_friend_for_invite"
         queryMap["user_no"] = ALL.currentUserNo
+        queryMap["room_no"] = ALL.currentRoomNo
 
         retrofitService.getToJsonUser(queryMap).enqueue(object : Callback<MutableList<UserItem>> {
             override fun onResponse(

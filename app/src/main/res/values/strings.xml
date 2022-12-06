@@ -61,6 +61,8 @@
     <string name="btn_actFF_add">Add to your friends list</string>
 
     <string name="msg_actFF_no_result">We couldn\'t find any result. Please check the number you input correct.</string>
+    <string name="msg_actFF_self">You can\'t add yourself to your friends.</string>
+    <string name="msg_actFF_already">This ID already has been added to your friend.</string>
     <string name="msg_actFF_registered">Added a friend</string>
 
     <!--MentionFragment-->
