@@ -74,6 +74,7 @@
     <string name="btn_fragS_logout">ㅤ로그아웃</string>
     <string name="et_fragS_dialogNick">변경할 닉네임을 입력하세요</string>
     <string name="tv_fragS_dialogLO_question">로그아웃 하시겠어요?</string>
+    <string name="license">오픈소스 라이선스 정보</string>
 
     <!--MyFCMService-->
     <string name="noti_title">새 채팅이 도착했습니다.</string>

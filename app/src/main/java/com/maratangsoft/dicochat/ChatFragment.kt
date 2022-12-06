@@ -1,16 +1,20 @@
 package com.maratangsoft.dicochat
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.AppCompatEditText
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.fragment.app.Fragment
 import androidx.loader.content.CursorLoader
@@ -51,6 +55,7 @@ class ChatFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentChatBinding.inflate(inflater, container, false)
+
         return binding.root
     }
 
@@ -82,6 +87,8 @@ class ChatFragment : Fragment() {
             sendChat(mention)
         }
         binding.pCentral.btnSendFile.setOnClickListener { gotoGallery() }
+        
+        binding.pCentral.rvCentral.setOnTouchListener { v, event -> hideKeyboard(v, event) }
 
 //////////////왼쪽 패널 뷰 설정//////////////////
         //입장한 방 목록 리사이클러뷰
@@ -123,6 +130,7 @@ class ChatFragment : Fragment() {
         getRoom()
         if (ALL.currentRoomNo != "") getRoomMember()
     }
+
 //////////////////////////////////////////////////////////////////////////////////
 
     private fun getChat(){
@@ -171,6 +179,8 @@ class ChatFragment : Fragment() {
     }
 
     private fun sendChat(mention:String){
+        if (binding.pCentral.etMsg.text.isNullOrEmpty()) return
+
         val queryMap = mutableMapOf<String, String>()
         queryMap["type"] = "send_chat"
         queryMap["room_no"] = ALL.currentRoomNo
@@ -256,8 +266,21 @@ class ChatFragment : Fragment() {
 
         chatItems.add(pushItem)
         val recycler = binding.pCentral.rvCentral
-        recycler.adapter?.notifyItemInserted(chatItems.size - 1)
+        recycler.adapter?.notifyItemInserted(chatItems.lastIndex)
         recycler.scrollToPosition(recycler.adapter?.itemCount?.minus(1) ?: 0)
+    }
+
+    private fun hideKeyboard(v:View, event:MotionEvent): Boolean{
+        if (event?.action === MotionEvent.ACTION_DOWN){
+            if (v != binding.pCentral.btnSendChat && v != binding.pCentral.btnSendFile){
+                requireActivity().currentFocus?.let {
+                    val imm: InputMethodManager = requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                    imm.hideSoftInputFromWindow(it.windowToken, 0)
+                    if(it is AppCompatEditText) it.clearFocus()
+                }
+            }
+        }
+        return false
     }
 /////////왼쪽 패널//////////////////////////////////////////////////
 

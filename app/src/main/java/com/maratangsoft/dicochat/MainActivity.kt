@@ -13,6 +13,7 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.widget.AppCompatEditText
+import androidx.appcompat.widget.AppCompatImageView
 import com.maratangsoft.dicochat.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -47,22 +48,14 @@ class MainActivity : AppCompatActivity() {
     }
 
     //자동 키보드 내리기 콜백메소드
-    override fun dispatchTouchEvent(event: MotionEvent?): Boolean { //해당 뷰 아닌 곳을 터치시 발동
-        if (event?.action === MotionEvent.ACTION_DOWN) { //손가락이 눌렀을 때
-            val view = currentFocus
-            if (view is AppCompatEditText) {
-                val outRect = Rect()
-                view.getGlobalVisibleRect(outRect)
-                if (!outRect.contains(event.rawX.toInt(), event.rawY.toInt())) {
-                    view.clearFocus()
-                    val imm: InputMethodManager =
-                        getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-                    imm.hideSoftInputFromWindow(view.getWindowToken(), 0)
-                }
-            }
-        }
-        return super.dispatchTouchEvent(event)
-    }
+//    override fun dispatchTouchEvent(ev: MotionEvent?): Boolean {
+//        val imm: InputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+//        imm.hideSoftInputFromWindow(currentFocus?.windowToken, 0)
+//        if(currentFocus is AppCompatEditText) {
+//            currentFocus!!.clearFocus()
+//        }
+//        return super.dispatchTouchEvent(ev)
+//    }
 
     private fun checkPermissions(){
         val wes = android.Manifest.permission.WRITE_EXTERNAL_STORAGE    //< 29

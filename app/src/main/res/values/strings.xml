@@ -73,6 +73,7 @@
     <string name="btn_fragS_logout">ㅤLogout</string>
     <string name="et_fragS_dialogNick">Input new nickname</string>
     <string name="tv_fragS_dialogLO_question">Do you want to log out?</string>
+    <string name="license">Open Source License Information</string>
 
     <!--MyFCMService-->
     <string name="noti_title">A new chat has arrived.</string>
