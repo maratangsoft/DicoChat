@@ -60,6 +60,7 @@ class SettingFragment : Fragment() {
 
         binding.tvUserNo.text = "#${ALL.currentUserNo}"
         binding.btnLogout.setOnClickListener { logout() }
+        binding.btnLicense.setOnClickListener { showLicense() }
 
         getProfile()
     }
@@ -169,5 +170,9 @@ class SettingFragment : Fragment() {
         }
         builder.setNegativeButton(R.string.btn_no, null)
         builder.show()
+    }
+
+    private fun showLicense(){
+        startActivity(Intent(requireActivity(), LicenseActivity::class.java))
     }
 }
