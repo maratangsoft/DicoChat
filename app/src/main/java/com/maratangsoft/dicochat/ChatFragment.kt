@@ -1,16 +1,20 @@
 package com.maratangsoft.dicochat
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.AppCompatEditText
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.fragment.app.Fragment
 import androidx.loader.content.CursorLoader
@@ -18,7 +22,7 @@ import com.bumptech.glide.Glide
 import com.discord.panels.OverlappingPanelsLayout
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.firebase.messaging.FirebaseMessaging
-import com.maratangsoft.dicochat.databinding.FragmentChattingBinding
+import com.maratangsoft.dicochat.databinding.FragmentChatBinding
 import de.hdodenhof.circleimageview.CircleImageView
 import okhttp3.MediaType
 import okhttp3.MultipartBody
@@ -28,10 +32,10 @@ import retrofit2.Callback
 import retrofit2.Response
 import java.io.File
 
-class ChattingFragment : Fragment() {
-    lateinit var binding: FragmentChattingBinding
-    var chattingFragItems: MutableList<ChatItem> = mutableListOf()
-    var chattingFragPanelStartItems: MutableList<RoomItem> = mutableListOf()
+class ChatFragment : Fragment() {
+    lateinit var binding: FragmentChatBinding
+    var chatItems: MutableList<ChatItem> = mutableListOf()
+    var roomItems: MutableList<RoomItem> = mutableListOf()
     private lateinit var bsd:BottomSheetDialog
 
     private var imgPath = ""
@@ -50,14 +54,15 @@ class ChattingFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentChattingBinding.inflate(inflater, container, false)
+        binding = FragmentChatBinding.inflate(inflater, container, false)
+
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        Log.d("CICO-currentUserNo", ALL.currentUserNo)
-        Log.d("CICO-currentRoomNo", ALL.currentRoomNo)
+        Log.d("tttCurrentUserNo", ALL.currentUserNo)
+        Log.d("tttCurrentRoomNo", ALL.currentRoomNo)
 
         //앱 시작시 채팅방 입장을 위해 왼쪽 패널부터 감
         if (ALL.currentRoomNo == "") {
@@ -66,53 +71,55 @@ class ChattingFragment : Fragment() {
 
 //////////////가운데 패널 뷰 설정////////////////
         //채팅목록 리사이클러뷰
-        binding.panelCentral.recyclerPanelCentral.adapter =
-            ChattingFragAdapter(requireActivity(), chattingFragItems)
+        binding.pCentral.rvCentral.adapter =
+            ChatFragAdapter(requireActivity(), chatItems)
 
         //툴바 아이콘 리스너
-        binding.panelCentral.toolbar.setNavigationOnClickListener{ binding.overlappingPanels.openStartPanel() }
-        binding.panelCentral.toolbar.setOnMenuItemClickListener {
+        binding.pCentral.toolbar.setNavigationOnClickListener{ binding.overlappingPanels.openStartPanel() }
+        binding.pCentral.toolbar.setOnMenuItemClickListener {
             binding.overlappingPanels.openEndPanel()
             true
         }
 
         //하단 버튼 리스너
-        binding.panelCentral.btnSendChat.setOnClickListener {
+        binding.pCentral.btnSendChat.setOnClickListener {
             val mention = checkMention()
             sendChat(mention)
         }
-        binding.panelCentral.btnSendFile.setOnClickListener { gotoGallery() }
+        binding.pCentral.btnSendFile.setOnClickListener { gotoGallery() }
+        
+        binding.pCentral.rvCentral.setOnTouchListener { v, event -> hideKeyboard(v, event) }
 
 //////////////왼쪽 패널 뷰 설정//////////////////
         //입장한 방 목록 리사이클러뷰
-        binding.panelStart.recyclerPanelStart.adapter =
-            ChattingFragPanelStartAdapter(requireActivity(), this, chattingFragPanelStartItems)
+        binding.pStart.rvStart.adapter =
+            ChatFragStartAdapter(requireActivity(), this, roomItems)
 
         //다른 액티비티로 이동 리스너
-        binding.panelStart.btnRegisterRoom.setOnClickListener {
+        binding.pStart.btnRegisterRoom.setOnClickListener {
             (requireActivity() as AppCompatActivity).startActivity(
                 Intent(activity, NewRoomActivity::class.java)
             )
         }
 //////////////오른쪽 패널 뷰 설정/////////////////
         //방 멤버 목록 리사이클러뷰
-        binding.panelEnd.recyclerPanelEnd.adapter =
-            ChattingFragPanelEndAdapter(requireActivity(), this, ALL.currentRoomMembers)
+        binding.pEnd.rvEnd.adapter =
+            ChatFragEndAdapter(requireActivity(), this, ALL.currentRoomMembers)
 
         getRoom()
 
         //방 알림 (푸시 주제 구독) 리스너
-        binding.panelEnd.btnNoti.setOnClickListener { clickBtnNoti() }
+        binding.pEnd.btnNoti.setOnClickListener { clickBtnNoti() }
 
         //방 설정 리스너
-        binding.panelEnd.btnRoomSetting.setOnClickListener {
+        binding.pEnd.btnRoomSetting.setOnClickListener {
             (requireActivity() as AppCompatActivity).startActivity(
                 Intent(activity, RoomSettingActivity::class.java)
             )
         }
         //초대하기 바텀시트 다이얼로그 리스너
-        binding.panelEnd.btnShowBs.setOnClickListener {
-            val bsDialog = ChattingBSFragment(this)
+        binding.pEnd.btnShowBs.setOnClickListener {
+            val bsDialog = InviteBSFragment(this)
             bsDialog.show(requireActivity().supportFragmentManager, bsDialog.tag)
         }
     }
@@ -123,14 +130,15 @@ class ChattingFragment : Fragment() {
         getRoom()
         if (ALL.currentRoomNo != "") getRoomMember()
     }
+
 //////////////////////////////////////////////////////////////////////////////////
 
     private fun getChat(){
-        binding.panelCentral.toolbar.title = "#${ALL.currentRoomTitle}"
-        binding.panelEnd.tvRoomTitle.text = "#${ALL.currentRoomTitle}"
+        binding.pCentral.toolbar.title = "#${ALL.currentRoomTitle}"
+        binding.pEnd.tvRoomTitle.text = "#${ALL.currentRoomTitle}"
 
-        chattingFragItems.clear()
-        val adapter = binding.panelCentral.recyclerPanelCentral.adapter
+        chatItems.clear()
+        val adapter = binding.pCentral.rvCentral.adapter
         adapter?.notifyDataSetChanged()
 
         val queryMap = mutableMapOf<String, String>()
@@ -145,20 +153,20 @@ class ChattingFragment : Fragment() {
             ) {
                 response.body()?.let {
                     it.forEachIndexed{ i, item ->
-                        chattingFragItems.add(item)
+                        chatItems.add(item)
                         adapter?.notifyItemInserted(i)
-                        binding.panelCentral.recyclerPanelCentral.scrollToPosition(adapter?.itemCount?.minus(1) ?: 0)
+                        binding.pCentral.rvCentral.scrollToPosition(adapter?.itemCount?.minus(1) ?: 0)
                     }
                 }
             }
             override fun onFailure(call: Call<MutableList<ChatItem>>, t: Throwable) {
-                Log.d("CICOCHAT", t.message!!)
+                Log.d("tttGetChat", t.message!!)
             }
         })
     }
 
     private fun checkMention(): String{
-        val message = binding.panelCentral.etMsg.text
+        val message = binding.pCentral.etMsg.text
         var mention = ""
         message?.let {
             ALL.currentRoomMembers.forEach {
@@ -171,11 +179,13 @@ class ChattingFragment : Fragment() {
     }
 
     private fun sendChat(mention:String){
+        if (binding.pCentral.etMsg.text.isNullOrEmpty()) return
+
         val queryMap = mutableMapOf<String, String>()
         queryMap["type"] = "send_chat"
         queryMap["room_no"] = ALL.currentRoomNo
         queryMap["user_no"] = ALL.currentUserNo
-        queryMap["message"] = binding.panelCentral.etMsg.text.toString()
+        queryMap["message"] = binding.pCentral.etMsg.text.toString()
         queryMap["mentioned"] = mention
 
         retrofitService.getToPlain(queryMap).enqueue(object : Callback<String> {
@@ -188,10 +198,10 @@ class ChattingFragment : Fragment() {
                 }
             }
             override fun onFailure(call: Call<String>, t: Throwable) {
-                Log.d("CICO-PanelC-sendChat", t.message!!)
+                Log.d("tttPanelC-sendChat", t.message!!)
             }
         })
-        binding.panelCentral.etMsg.setText("")
+        binding.pCentral.etMsg.setText("")
     }
 
     private fun gotoGallery(){
@@ -211,8 +221,6 @@ class ChattingFragment : Fragment() {
             cursor.moveToFirst()
             imgPath = cursor.getString(columnIndex)
             cursor.close()
-
-            Log.d("CICO-FragC-imgPath", imgPath)
             sendFile()
         }
     }
@@ -237,7 +245,7 @@ class ChattingFragment : Fragment() {
                 }
             }
             override fun onFailure(call: Call<String>, t: Throwable) {
-                Log.d("CICOCHAT", t.message!!)
+                Log.d("tttSendFile", t.message!!)
             }
         })
     }
@@ -255,18 +263,30 @@ class ChattingFragment : Fragment() {
         val userImg = bundle.getString("user_img")
 
         val pushItem = ChatItem(chatNo!!, roomNo!!, userNo!!, message!!, fileUrl!!, mentioned!!, writeDate!!, null, nickname!!, userImg!!)
-        Log.d("CICO-FragC-pushItem", pushItem.toString())
 
-        chattingFragItems.add(pushItem)
-        val recycler = binding.panelCentral.recyclerPanelCentral
-        recycler.adapter?.notifyItemInserted(chattingFragItems.size - 1)
+        chatItems.add(pushItem)
+        val recycler = binding.pCentral.rvCentral
+        recycler.adapter?.notifyItemInserted(chatItems.lastIndex)
         recycler.scrollToPosition(recycler.adapter?.itemCount?.minus(1) ?: 0)
+    }
+
+    private fun hideKeyboard(v:View, event:MotionEvent): Boolean{
+        if (event?.action === MotionEvent.ACTION_DOWN){
+            if (v != binding.pCentral.btnSendChat && v != binding.pCentral.btnSendFile){
+                requireActivity().currentFocus?.let {
+                    val imm: InputMethodManager = requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                    imm.hideSoftInputFromWindow(it.windowToken, 0)
+                    if(it is AppCompatEditText) it.clearFocus()
+                }
+            }
+        }
+        return false
     }
 /////////왼쪽 패널//////////////////////////////////////////////////
 
     private fun getRoom(){
-        chattingFragPanelStartItems.clear()
-        val adapter = binding.panelStart.recyclerPanelStart.adapter
+        roomItems.clear()
+        val adapter = binding.pStart.rvStart.adapter
         adapter?.notifyDataSetChanged()
 
         val queryMap = mutableMapOf<String, String>()
@@ -280,20 +300,20 @@ class ChattingFragment : Fragment() {
             ) {
                 response.body()?.let {
                     it.forEachIndexed{ i, item ->
-                        chattingFragPanelStartItems.add(item)
+                        roomItems.add(item)
                         adapter?.notifyItemInserted(i)
                     }
                 }
             }
             override fun onFailure(call: Call<MutableList<RoomItem>>, t: Throwable) {
-                Log.d("CICOCHAT", t.message!!)
+                Log.d("tttGetRoom", t.message!!)
             }
         })
     }
 
     //어댑터 연동된 리스너 메소드
     fun clickRoom(position:Int) {
-        val item = chattingFragPanelStartItems[position]
+        val item = roomItems[position]
         ALL.currentRoomNo = item.room_no
         ALL.currentRoomTitle = item.room_title
         if (ALL.currentRoomNo != "") {
@@ -309,7 +329,7 @@ class ChattingFragment : Fragment() {
 
     fun getRoomMember(){
         ALL.currentRoomMembers.clear()
-        val adapter = binding.panelEnd.recyclerPanelEnd.adapter
+        val adapter = binding.pEnd.rvEnd.adapter
         adapter?.notifyDataSetChanged()
 
         val queryMap = mutableMapOf<String, String>()
@@ -329,7 +349,7 @@ class ChattingFragment : Fragment() {
                 }
             }
             override fun onFailure(call: Call<MutableList<UserItem>>, t: Throwable) {
-                Log.d("CICOCHAT", t.message!!)
+                Log.d("tttGetRoomMember", t.message!!)
             }
         })
     }
@@ -337,7 +357,7 @@ class ChattingFragment : Fragment() {
     //어댑터 연동된 멤버 상세정보 바텀시트
     fun getProfileBs(position:Int){
         bsd = BottomSheetDialog(requireActivity())
-        bsd.setContentView(layoutInflater.inflate(R.layout.fragment_friends_bs, null))
+        bsd.setContentView(layoutInflater.inflate(R.layout.bs_profile, null))
 
         val tvNick = bsd.findViewById<AppCompatTextView>(R.id.tv_nickname)
         val tvUserNo = bsd.findViewById<AppCompatTextView>(R.id.tv_user_no)
@@ -348,7 +368,7 @@ class ChattingFragment : Fragment() {
         tvNick?.text = ALL.currentRoomMembers[position].nickname
         tvUserNo?.text = "#${ALL.currentRoomMembers[position].user_no}"
 
-        val imgUrl = "${ALL.BASE_URL}CicoChatServer/${ALL.currentRoomMembers[position].user_img}"
+        val imgUrl = "${ALL.BASE_URL}${ALL.currentRoomMembers[position].user_img}"
         Glide.with(requireActivity()).load(imgUrl).error(R.drawable.icons8_monkey_164).into(civUserImg!!)
     }
 

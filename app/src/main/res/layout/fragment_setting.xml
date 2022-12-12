@@ -85,4 +85,13 @@
         android:layout_marginTop="16dp"
         app:drawableStartCompat="@drawable/ic_logout_24" />
 
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/btn_license"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/btn_license"
+        android:textSize="14sp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"/>
+
 </RelativeLayout>

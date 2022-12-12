@@ -7,24 +7,24 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".ChattingFragment">
+    tools:context=".ChatFragment">
 
     <include
-        android:id="@+id/panel_start"
-        layout="@layout/fragment_chatting_panel_start"
+        android:id="@+id/p_start"
+        layout="@layout/fragment_chat_start"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"/>
 
     <include
-        android:id="@+id/panel_central"
-        layout="@layout/fragment_chatting_panel_central"
+        android:id="@+id/p_central"
+        layout="@layout/fragment_chat_central"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 
     <include
-        android:id="@+id/panel_end"
-        layout="@layout/fragment_chatting_panel_end"
+        android:id="@+id/p_end"
+        layout="@layout/fragment_chat_end"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="end"/>

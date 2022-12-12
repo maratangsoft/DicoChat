@@ -83,7 +83,7 @@ class NewRoomActivity : AppCompatActivity() {
                 }
             }
             override fun onFailure(call: Call<String>, t: Throwable) {
-                Log.d("CICOCHAT", t.message!!)
+                Log.d("tttRegisterRoom", t.message!!)
             }
         })
     }

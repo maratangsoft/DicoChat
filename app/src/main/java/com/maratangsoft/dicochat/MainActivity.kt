@@ -7,17 +7,18 @@ import android.graphics.Rect
 import android.os.Build.VERSION
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.MenuItem
 import android.view.MotionEvent
 import android.view.inputmethod.InputMethodManager
+import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.widget.AppCompatEditText
+import androidx.appcompat.widget.AppCompatImageView
 import com.maratangsoft.dicochat.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
     private val binding by lazy { ActivityMainBinding.inflate(layoutInflater) }
-    var fragments = arrayOf(ChattingFragment(), FriendsFragment(), MentionFragment(), SettingFragment())
+    var fragments = arrayOf(ChatFragment(), FriendsFragment(), MentionFragment(), SettingFragment())
     private val manager = supportFragmentManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -47,22 +48,14 @@ class MainActivity : AppCompatActivity() {
     }
 
     //자동 키보드 내리기 콜백메소드
-    override fun dispatchTouchEvent(event: MotionEvent?): Boolean { //해당 뷰 아닌 곳을 터치시 발동
-        if (event?.action === MotionEvent.ACTION_DOWN) { //손가락이 눌렀을 때
-            val view = currentFocus
-            if (view is AppCompatEditText) {
-                val outRect = Rect()
-                view.getGlobalVisibleRect(outRect)
-                if (!outRect.contains(event.rawX.toInt(), event.rawY.toInt())) {
-                    view.clearFocus()
-                    val imm: InputMethodManager =
-                        getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-                    imm.hideSoftInputFromWindow(view.getWindowToken(), 0)
-                }
-            }
-        }
-        return super.dispatchTouchEvent(event)
-    }
+//    override fun dispatchTouchEvent(ev: MotionEvent?): Boolean {
+//        val imm: InputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+//        imm.hideSoftInputFromWindow(currentFocus?.windowToken, 0)
+//        if(currentFocus is AppCompatEditText) {
+//            currentFocus!!.clearFocus()
+//        }
+//        return super.dispatchTouchEvent(ev)
+//    }
 
     private fun checkPermissions(){
         val wes = android.Manifest.permission.WRITE_EXTERNAL_STORAGE    //< 29
@@ -95,7 +88,7 @@ class MainActivity : AppCompatActivity() {
     private val permissionLauncher = registerForActivityResult(
         ActivityResultContracts.RequestMultiplePermissions()) { permissions ->
         if(permissions.entries.all { it.value }){
-            Log.d("CICO-MA", "권한 승인")
+            //Toast.makeText(this, "권한 승인하셨습니다.", Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -103,6 +96,5 @@ class MainActivity : AppCompatActivity() {
         super.onNewIntent(intent)
         val bundle = intent?.getBundleExtra("bundle")
         bundle?.let { manager.setFragmentResult("push_request", it) }
-        Log.d("CICO-ActM-push", bundle.toString())
     }
 }

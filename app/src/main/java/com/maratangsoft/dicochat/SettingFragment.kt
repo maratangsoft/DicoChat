@@ -33,19 +33,16 @@ class SettingFragment : Fragment() {
     private val resultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){ result ->
         if (result.resultCode != Activity.RESULT_CANCELED){
             val uri = result.data?.data
-            Log.d("CICO-FragS-uri", uri.toString())
             Glide.with(requireActivity()).load(uri).into(binding.civUserImg)
 
             val proj = arrayOf(MediaStore.Images.Media.DATA)
             val loader = CursorLoader(requireActivity(), uri!!, proj, null, null, null)
             val cursor = loader.loadInBackground()
-            Log.d("CICO-FragS-cursor", cursor.toString())
             val columnIndex = cursor!!.getColumnIndexOrThrow(MediaStore.Images.Media.DATA)
             cursor.moveToFirst()
             imgPath = cursor.getString(columnIndex)
             cursor.close()
 
-            Log.d("CICO-FragS-imgPath", imgPath)
             setUserImg()
         }
     }
@@ -63,6 +60,7 @@ class SettingFragment : Fragment() {
 
         binding.tvUserNo.text = "#${ALL.currentUserNo}"
         binding.btnLogout.setOnClickListener { logout() }
+        binding.btnLicense.setOnClickListener { showLicense() }
 
         getProfile()
     }
@@ -80,7 +78,7 @@ class SettingFragment : Fragment() {
                 response.body()?.let {
                     binding.tvNickname.text = it[0].nickname
 
-                    val imgUrl = "${ALL.BASE_URL}CicoChatServer/${it[0].user_img}"
+                    val imgUrl = "${ALL.BASE_URL}${it[0].user_img}"
                     Glide.with(requireActivity()).load(imgUrl).error(R.drawable.icons8_monkey_164).into(binding.civUserImg)
 
                     binding.civUserImg.setOnClickListener { goToGallery() }
@@ -88,13 +86,13 @@ class SettingFragment : Fragment() {
                 }
             }
             override fun onFailure(call: Call<MutableList<UserItem>>, t: Throwable) {
-                Log.d("CICO-FragS-getProfile", t.message!!)
+                Log.d("tttGetProfile", t.message!!)
             }
         })
     }
 
     private fun openNickDialog(){
-        val dialog = AlertDialog.Builder(requireActivity()).setView(R.layout.fragment_setting_dialog_change_nick).show()
+        val dialog = AlertDialog.Builder(requireActivity()).setView(R.layout.dialog_change_nick).show()
 
         val et = dialog.findViewById<AppCompatEditText>(R.id.et_change_nickname)
         val btnOk = dialog.findViewById<AppCompatTextView>(R.id.btn_ok)
@@ -124,7 +122,7 @@ class SettingFragment : Fragment() {
                 }
             }
             override fun onFailure(call: Call<String>, t: Throwable) {
-                Log.d("CICO-FragS-setNickname", t.message!!)
+                Log.d("tttSetNickname", t.message!!)
             }
         })
     }
@@ -155,7 +153,7 @@ class SettingFragment : Fragment() {
                 }
             }
             override fun onFailure(call: Call<String>, t: Throwable) {
-                Log.d("CICO-FragSet-setUserImg", t.message!!)
+                Log.d("tttSetUserImg", t.message!!)
             }
         })
     }
@@ -172,5 +170,9 @@ class SettingFragment : Fragment() {
         }
         builder.setNegativeButton(R.string.btn_no, null)
         builder.show()
+    }
+
+    private fun showLicense(){
+        startActivity(Intent(requireActivity(), LicenseActivity::class.java))
     }
 }

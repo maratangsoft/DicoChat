@@ -20,7 +20,7 @@ object RetrofitHelper{
 interface RetrofitService {
     //GET방식, String 리스폰스
     //get_user_no, send_chat, invite_user, get_room_title, set_room_title, get_friend, register_friend, set_nickname
-    @GET("CicoChatServer/GETtoPlain.php")
+    @GET("GETtoPlain.php")
     fun getToPlain(
         @QueryMap queries: MutableMap<String,String>
     ): Call<String>
@@ -28,28 +28,28 @@ interface RetrofitService {
     //POST방식, String 리스폰스
     //send_file, register_room, set_user_img
     @Multipart
-    @POST("CicoChatServer/POSTtoPlain.php")
+    @POST("POSTtoPlain.php")
     fun postToPlain(
         @PartMap dataPart: MutableMap<String,String>, @Part filePart: MultipartBody.Part
     ): Call<String>
 
     //GET방식, MutableList<UserItem> 리스폰스
     //get_room_member, get_friend, get_profile
-    @GET("CicoChatServer/GETtoJSON.php")
+    @GET("GETtoJSON.php")
     fun getToJsonUser(
         @QueryMap queries: MutableMap<String,String>
     ): Call<MutableList<UserItem>>
 
     //GET방식, MutableList<RoomItem> 리스폰스
     //get_room
-    @GET("CicoChatServer/GETtoJSON.php")
+    @GET("GETtoJSON.php")
     fun getToJsonRoom(
         @QueryMap queries: MutableMap<String,String>
     ): Call<MutableList<RoomItem>>
 
     //GET방식, MutableList<ChatItem> 리스폰스
     //get_chat, get_mention
-    @GET("CicoChatServer/GETtoJSON.php")
+    @GET("GETtoJSON.php")
     fun getToJsonChat(
         @QueryMap queries: MutableMap<String,String>
     ): Call<MutableList<ChatItem>>

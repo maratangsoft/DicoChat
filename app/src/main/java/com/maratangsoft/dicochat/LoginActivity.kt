@@ -14,6 +14,7 @@ import com.google.android.gms.common.SignInButton
 import com.google.android.gms.common.api.ApiException
 import com.google.firebase.messaging.FirebaseMessaging
 import com.kakao.sdk.auth.model.OAuthToken
+import com.kakao.sdk.common.util.Utility
 import com.kakao.sdk.user.UserApiClient
 import com.maratangsoft.dicochat.databinding.ActivityLoginBinding
 import retrofit2.Call
@@ -35,15 +36,17 @@ class LoginActivity : AppCompatActivity() {
         binding.btnGoogleLogin.setOnClickListener { authenticateUser(it) }
         binding.btnKakaoLogin.setOnClickListener { authenticateUser(it) }
         binding.btnGuestLogin.setOnClickListener { authenticateUser(it) }
+
+//        val keyHash = Utility.getKeyHash(this)
+//        Log.d("tttKeyHash", keyHash)
     }
 
     private fun getFCMToken(){
         FirebaseMessaging.getInstance().token.addOnCompleteListener {
             if (!it.isSuccessful){
-                Log.i("CICO-ActL-getFCMToken", "FCM 등록 실패")
+                Log.i("ttt-getFCMToken", "FCM 등록 실패")
             }else{
                 fcmToken = it.result
-                Log.i("CICO-ActL-getFCMToken", fcmToken)
                 ALL.currentUserFCMToken = fcmToken
             }
         }
@@ -77,18 +80,16 @@ class LoginActivity : AppCompatActivity() {
     //로그인 성공시 토큰 받아서 유저정보 추출하는 콜백 설계
     private val launcher =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
-            Log.d("CICO-ActL-ActivityResultCallback", it.resultCode.toString())
             if (it.resultCode == Activity.RESULT_OK){
                 val task = GoogleSignIn.getSignedInAccountFromIntent(it.data)
                 try {
                     val account = task.getResult(ApiException::class.java)
-                    Log.d("CICO-ActL-ActivityResultCallback", it.toString())
 
                     ALL.currentUserNo = account.id!!
                     getUserNo()
 
                 }catch (e: ApiException) {
-                    Log.e("CICO-ActL-ActivityResultCallback", e.message.toString())
+                    Log.e("tttActivityResult", e.message.toString())
                 }
             }
     }
@@ -116,7 +117,7 @@ class LoginActivity : AppCompatActivity() {
                 getUserNo()
 
             }else{
-                Log.d("CICO-ActL-loadKakaoUserInfo", error?.message.toString())
+                Log.d("tttLoadKakaoUserInfo", error?.message.toString())
             }
         }
     }
@@ -143,7 +144,7 @@ class LoginActivity : AppCompatActivity() {
                 }
             }
             override fun onFailure(call: Call<String>, t: Throwable) {
-                Log.d("CICOCHAT", t.message!!)
+                Log.d("tttGetUserNo", t.message!!)
             }
         })
     }

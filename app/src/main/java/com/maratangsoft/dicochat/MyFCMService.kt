@@ -15,14 +15,12 @@ class MyFCMService: FirebaseMessagingService() {
     //앱 처음 시작시 신규 토큰 발급받음. 이때 자동 발동하는 콜백
     override fun onNewToken(token: String) {
         super.onNewToken(token)
-        Log.i("CICO-FCM-Token", token)
         ALL.currentUserFCMToken = token
     }
 
     //푸시 받았을 때 자동 발동하는 콜백
     override fun onMessageReceived(msg: RemoteMessage) {
         super.onMessageReceived(msg)
-        Log.i("CICO-FCM-Received", "onMessage Received...")
         val data = msg.data
         if (data.isNotEmpty()){
             val bundle = bundleOf(
@@ -41,7 +39,6 @@ class MyFCMService: FirebaseMessagingService() {
             intent.putExtra("bundle", bundle)
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
             startActivity(intent)
-            Log.d("CICO-FCM-data", msg.data.toString())
         }
 
         //TODO: 현재 푸시가 디바이스 단위로 오는 상황임. 같은 기기로 여러 계정 사용시 푸시 구분이 안됨.

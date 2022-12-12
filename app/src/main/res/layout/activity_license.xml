@@ -5,23 +5,28 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".MentionFragment"
-    android:background="@color/bg_reactive">
+    tools:context=".LicenseActivity">
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="?colorPrimary"
-        app:title="@string/tb_fragM_title"
+        app:title="@string/ActLi_title"
         app:titleTextColor="@color/white"/>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_mention"
+    <TextView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_margin="10dp"
-        android:orientation="vertical"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+        android:layout_height="wrap_content"
+        android:text="@string/license"
+        android:padding="20dp"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/apache_license"/>
+    </ScrollView>
 
 </LinearLayout>

@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="?colorPrimary"
-        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:titleTextColor="@color/white"
         app:menu="@menu/fragment_chatting_opt"
         app:navigationIcon="@drawable/ic_hamburger"
         app:title="@string/room_title" />
@@ -22,13 +22,13 @@
         android:orientation="vertical">
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycler_panel_central"
+            android:id="@+id/rv_central"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
             android:layout_margin="10dp"
             android:orientation="vertical"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
 
         <LinearLayout
             android:id="@+id/bottom_bar"
@@ -41,7 +41,7 @@
                 android:id="@+id/btn_send_file"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:src="@drawable/ic_image_gray"
+                android:src="@drawable/ic_image"
                 android:scaleType="centerInside"
                 android:background="@drawable/bg_circleimageview"/>
 
@@ -56,7 +56,7 @@
                 android:inputType="textMultiLine"
                 android:maxLines="5"
                 android:padding="8dp"
-                android:textSize="16sp" />
+                android:textSize="16sp"/>
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/btn_send_chat"
