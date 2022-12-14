@@ -5,14 +5,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".LicenseActivity">
+    tools:context=".LicenseActivity"
+    tools:viewBindingIgnore="true">
 
     <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="?colorPrimary"
         app:title="@string/ActLi_title"
-        app:titleTextColor="@color/white"/>
+        app:titleTextColor="@color/white"
+        app:navigationIcon="@drawable/ic_cancel"/>
 
     <TextView
         android:layout_width="match_parent"
@@ -23,10 +26,12 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="@string/apache_license"/>
+            android:paddingHorizontal="6dp"
+            android:text="@string/apache_license" />
     </ScrollView>
 
 </LinearLayout>
